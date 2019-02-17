@@ -241,63 +241,102 @@ a:hover {
 
 	window.onload = function(){
 		cal_fuc(now_month);
-		getEventDay();
 	}
 
 	function cal_fuc(input){
-		cal = [];
-		cal[0] = [];
-		var date = input.startOf('month');
-		var dow = date.weekday();
-		var max_days = input.daysInMonth();
-		var str = '';
-		var week = 0;
-		var ss = 4;
-		
-		str += `<tr>`
 
-		for(var i=0; i<dow; i++){
-			cal[week].push('');
-			str += `<td><a href="javascript:void(0);">&nbsp;</a></td>`
-		}
-		
-		for(var j=1; j<=max_days; j++){
-			
-			if(localStorage.getItem(now_month.format('YYYYMM') + j) != undefined && localStorage.getItem(now_month.format('YYYYMM') + j) != ''){
-				
-				str += `<td><a id="day`+j+`" class="schedule" href="javascript:void(0);" onclick="modal(`+j+`);">${j}</a></td>`
-				selected_day = now_month.format('YYYYMM') + j;
-
-				cal[ss] = {'memo': localStorage.getItem(selected_day), 'day': j};
-				
-				cal[week].push(j);
-				
-				console.log(cal[ss]);
-			}else{
-				str += `<td><a id="day`+j+`" href="javascript:void(0);" onclick="modal(`+j+`);">${j}</a></td>`
-				cal[week].push(j);
-			}
-			
-			if(dow % 7 === 6){
-				if(j != max_days || (dow + 1) % 7 != 0){
-					week++;
-					cal[week] = [];
-					
+		$.ajax({
+			url:'https://c97q48g7ui.execute-api.ap-northeast-2.amazonaws.com/dev/apitest',
+			method:'post',
+			dataType:'json',
+			data: JSON.stringify({
+				'url':'http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo',
+				'method':'get',
+				'querystring':{
+					'solYear': input.format('YYYY'),
+					'solMonth': input.format('MM'),
+					'ServiceKey':'lRXTaLfFt0hq2g7EnVQbuGAQ2K9tI7fryCPIuwfp6wkrlTLbHtlk0eISiasOMSNVhS5jMm0gfXmcBdQ0gVPV5A%3D%3D',
+					'_type':'json'
 				}
-				str += `</tr><tr>`
-			}
-			dow++;
-		}
+				
+			}),
+			success: function(data){
 
-		for(var k=dow; k % 7 !== 0; k++){
-			cal[week].push('');
-			str += `<td><a href="javascript:void(0);">&nbsp;</a></td>`
-		}
+				var con = '';
 
-		str += `</tr>`
+				for(var i in data.items.item){
+					con += `<tr>`
+					for(var j in data.items.item[i]){
+						con += `<td>`+ data.items.item[i][j] +`</td>`
+						
+					}
+					con += `</tr>`
+					if(date == data.items.item[i].locdate){
+						console.log(data.items.item[i]);
+					}
+				}
 
-		document.getElementById('calendar2').innerHTML = str;
-		document.getElementById('str_cal').innerHTML = input.format('YYYY년 MMMM');
+				$('#lim_t').html(con);
+
+				cal = [];
+				cal[0] = [];
+				var date = input.startOf('month');
+				var dow = date.weekday();
+				var max_days = input.daysInMonth();
+				var str = '';
+				var week = 0;
+				var ss = 4;
+				
+				str += `<tr>`
+
+				for(var i=0; i<dow; i++){
+					cal[week].push('');
+					str += `<td><a href="javascript:void(0);">&nbsp;</a></td>`
+				}
+				
+				for(var j=1; j<=max_days; j++){
+					
+					if(localStorage.getItem(now_month.format('YYYYMM') + j) != undefined && localStorage.getItem(now_month.format('YYYYMM') + j) != ''){
+						
+						str += `<td><a id="day`+j+`" class="schedule" href="javascript:void(0);" onclick="modal(`+j+`);">${j}</a></td>`
+						selected_day = now_month.format('YYYYMM') + j;
+						
+						cal[week].push( {'memo': localStorage.getItem(selected_day), 'day': j});
+						
+					}else{
+						str += `<td><a id="day`+j+`" href="javascript:void(0);" onclick="modal(`+j+`);">${j}</a></td>`
+						cal[week].push( {'memo': false, 'day': j});
+					}
+					
+					if(dow % 7 === 6){
+						if(j != max_days || (dow + 1) % 7 != 0){
+							week++;
+							cal[week] = [];
+							
+						}
+						str += `</tr><tr>`
+					}
+					dow++;
+				}
+
+				for(var k=dow; k % 7 !== 0; k++){
+					cal[week].push('');
+					str += `<td><a href="javascript:void(0);">&nbsp;</a></td>`
+				}
+
+				str += `</tr>`
+
+				console.log(cal)
+				document.getElementById('calendar2').innerHTML = str;
+				document.getElementById('str_cal').innerHTML = input.format('YYYY년 MMMM');
+
+					},
+					error:function(error){
+						console.log(error);
+					}
+				});
+
+		
 		
 	}
 
@@ -323,74 +362,49 @@ a:hover {
 		
 		$('#modal').show();
 		$schedule.text(localStorage.getItem(selected_day));
-
-		getEventDay(selected_day);
-		console.log(selected_day);
 	}
 
 	function save(){
 		var $schedule = $('#schedule');
-		console.log(selected_day);
 		var $input = $('#input');
+		var set_local = [];
 
-		localStorage.setItem(selected_day, $input.val());
-		$schedule.text(localStorage.getItem(selected_day));
+		if($input.val() == ""){
+			return;
+		}
+
+		if(localStorage.getItem(selected_day) != undefined && localStorage.getItem(selected_day) != ""){
+			set_local = JSON.parse(localStorage.getItem(selected_day));
+			set_local.push($input.val());
+
+		}else{
+			set_local[0] = $input.val();
+		}
+
+
+		localStorage.setItem(selected_day, JSON.stringify(set_local));
+		// $schedule.text(localStorage.getItem(selected_day));
 		$input.val('');
 
-		console.log('day' + selected_day.substr(6, 2));
-		$('#day'+ selected_day.substr(6, 2)).addClass('schedule');
+		// console.log('day' + selected_day.substr(6, 2));
+
+		var day_for_class =  selected_day.substr(6, 1) == '0' ?  selected_day.substr(7, 1) : selected_day.substr(6, 2);
+		$('#day'+ day_for_class).addClass('schedule');
 	}
 
 	function sDelete(){
 		var $schedule = $('#schedule');
 		var $input = $('#input');
-		
-		localStorage.setItem(selected_day, $input.val());
-		$schedule.text('일정');
+
 		$input.val('');
+		localStorage.removeItem(selected_day);
+		$schedule.text('일정');
+		
 		$('#day'+ selected_day.substr(6, 2)).removeClass('schedule');
 	}
 
-	function getEventDay(date){
-		$.ajax({
-			url:'https://c97q48g7ui.execute-api.ap-northeast-2.amazonaws.com/dev/apitest',
-			method:'post',
-			dataType:'json',
-			data: JSON.stringify({
-				'url':'http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo',
-				'method':'get',
-				'querystring':{
-					'solYear':'2019',
-					'solMonth':'02',
-					'ServiceKey':'lRXTaLfFt0hq2g7EnVQbuGAQ2K9tI7fryCPIuwfp6wkrlTLbHtlk0eISiasOMSNVhS5jMm0gfXmcBdQ0gVPV5A%3D%3D',
-					'_type':'json'
-				}
-				
-			}),
-			success: function(data){
 
-				var con = '';
 
-				for(var i in data.items.item){
-					con += `<tr>`
-					for(var j in data.items.item[i]){
-						con += `<td>`+ data.items.item[i][j] +`</td>`
-						
-					}
-					con += `</tr>`
-					if(date == data.items.item[i].locdate){
-						console.log(data.items.item[i]);
-					}
-				}
-
-				$('#lim_t').html(con);
-
-			},
-			error:function(error){
-				console.log(error);
-			}
-		});
-	}
 
 </script>
 </head>
