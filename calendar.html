@@ -285,7 +285,6 @@ a:hover {
 				var max_days = input.daysInMonth();
 				var str = '';
 				var week = 0;
-				var ss = 4;
 				
 				str += `<tr>`
 
@@ -295,11 +294,17 @@ a:hover {
 				}
 				
 				for(var j=1; j<=max_days; j++){
-					
-					if(localStorage.getItem(now_month.format('YYYYMM') + j) != undefined && localStorage.getItem(now_month.format('YYYYMM') + j) != ''){
+
+					var inputF = input.format('YYYYMM') + j;
+
+					if(inputF.substr(6, 2) < 10){
+						inputF = input.format('YYYYMM') + '0' + j;
+					}
+
+					if(localStorage.getItem(inputF) != undefined && localStorage.getItem(inputF) != ''){
 						
 						str += `<td><a id="day`+j+`" class="schedule" href="javascript:void(0);" onclick="modal(`+j+`);">${j}</a></td>`
-						selected_day = now_month.format('YYYYMM') + j;
+						selected_day = inputF;
 						
 						cal[week].push( {'memo': localStorage.getItem(selected_day), 'day': j});
 						
@@ -330,12 +335,11 @@ a:hover {
 				document.getElementById('calendar2').innerHTML = str;
 				document.getElementById('str_cal').innerHTML = input.format('YYYY년 MMMM');
 
-					},
-					error:function(error){
-						console.log(error);
-					}
-				});
-
+			},
+			error:function(error){
+				console.log(error);
+			}
+		});
 		
 		
 	}
@@ -362,6 +366,8 @@ a:hover {
 		
 		$('#modal').show();
 		$schedule.text(localStorage.getItem(selected_day));
+
+		console.log(selected_day);
 	}
 
 	function save(){
@@ -376,7 +382,7 @@ a:hover {
 		if(localStorage.getItem(selected_day) != undefined && localStorage.getItem(selected_day) != ""){
 			set_local = JSON.parse(localStorage.getItem(selected_day));
 			set_local.push($input.val());
-
+			console.log(set_local);
 		}else{
 			set_local[0] = $input.val();
 		}
@@ -390,6 +396,7 @@ a:hover {
 
 		var day_for_class =  selected_day.substr(6, 1) == '0' ?  selected_day.substr(7, 1) : selected_day.substr(6, 2);
 		$('#day'+ day_for_class).addClass('schedule');
+		console.log(day_for_class);
 	}
 
 	function sDelete(){
@@ -400,11 +407,9 @@ a:hover {
 		localStorage.removeItem(selected_day);
 		$schedule.text('일정');
 		
-		$('#day'+ selected_day.substr(6, 2)).removeClass('schedule');
+		var day_for_class =  selected_day.substr(6, 1) == '0' ?  selected_day.substr(7, 1) : selected_day.substr(6, 2);
+		$('#day'+ day_for_class).removeClass('schedule');
 	}
-
-
-
 
 </script>
 </head>
