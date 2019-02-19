@@ -392,9 +392,29 @@ a:hover {
 
 		console.log('day' + selected_day.substr(6, 2));
 
-		var day_for_class =  selected_day.substr(6, 1) == '0' ?  selected_day.substr(7, 1) : selected_day.substr(6, 2);
+		var day_for_class = selected_day.substr(6, 1) == '0' ? selected_day.substr(7, 1) : selected_day.substr(6, 2);
 		$('#day'+ day_for_class).addClass('schedule');
 		//console.log(day_for_class);
+	}
+
+	function inDelete(){
+		var $schedule = $('#schedule');
+		var $input = $('#input');
+		var set_local = [];
+
+		if(set_local == 0){
+			$schedule.text('일정');
+		}
+
+		set_local = JSON.parse(localStorage.getItem(selected_day));
+		set_local.pop(localStorage.removeItem(selected_day));
+		console.log(set_local);
+
+		localStorage.setItem(selected_day, JSON.stringify(set_local));
+		$schedule.text(localStorage.getItem(selected_day));
+		
+		var day_for_class = selected_day.substr(6, 1) == '0' ? selected_day.substr(7, 1) : selected_day.substr(6, 2);
+		$('#day'+ day_for_class).removeClass('schedule');
 	}
 
 	function sDelete(){
@@ -405,7 +425,7 @@ a:hover {
 		localStorage.removeItem(selected_day);
 		$schedule.text('일정');
 		
-		var day_for_class =  selected_day.substr(6, 1) == '0' ?  selected_day.substr(7, 1) : selected_day.substr(6, 2);
+		var day_for_class = selected_day.substr(6, 1) == '0' ? selected_day.substr(7, 1) : selected_day.substr(6, 2);
 		$('#day'+ day_for_class).removeClass('schedule');
 	}
 
@@ -435,7 +455,8 @@ a:hover {
 	<div id="schedule"></div>
 	<div><input type="text" id="input"></div>
 	<div><button type="button" onclick="save()">저장</button></div>
-	<div><button type="button" onclick="sDelete()">삭제</button></div>
+	<div><button type="button" onclick="inDelete()">삭제</button></div>
+	<div><button type="button" onclick="sDelete()">모두삭제</button></div>
 </div>
 
 <table id="lim_t">
