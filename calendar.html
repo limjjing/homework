@@ -341,7 +341,6 @@ a:hover {
 			}
 		});
 		
-		
 	}
 
 	function upmonth(){
@@ -387,16 +386,15 @@ a:hover {
 			set_local[0] = $input.val();
 		}
 
-
 		localStorage.setItem(selected_day, JSON.stringify(set_local));
-		// $schedule.text(localStorage.getItem(selected_day));
+		$schedule.text(localStorage.getItem(selected_day));
 		$input.val('');
 
-		// console.log('day' + selected_day.substr(6, 2));
+		console.log('day' + selected_day.substr(6, 2));
 
 		var day_for_class =  selected_day.substr(6, 1) == '0' ?  selected_day.substr(7, 1) : selected_day.substr(6, 2);
 		$('#day'+ day_for_class).addClass('schedule');
-		console.log(day_for_class);
+		//console.log(day_for_class);
 	}
 
 	function sDelete(){
