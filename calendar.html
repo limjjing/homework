@@ -10,7 +10,8 @@
       v2.0 | 20110126
       License: none (public domain)
    */
-   html, body, div, span, applet, object, iframe,  h1, h2, h3, h4, h5, h6, p, blockquote, pre,  a, abbr, acronym, address, big, cite, code,  del, dfn, em, img, ins, kbd, q, s, samp,  small, strike, strong, sub, sup, tt, var,  b, u, i, center,  dl, dt, dd, ol, ul, li,  fieldset, form, label, legend,  table, caption, tbody, tfoot, thead, tr, th, td,  article, aside, canvas, details, embed,  figure, figcaption, footer, header, hgroup,  menu, nav, output, ruby, section, summary,  time, mark, audio, video {
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -18,7 +19,7 @@
 	font: inherit;
 	vertical-align: baseline;
 }
-article, aside, details, figcaption, figure,  footer, header, hgroup, menu, nav, section {
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
@@ -30,7 +31,7 @@ ol, ul {
 blockquote, q {
 	quotes: none;
 }
-blockquote:before, blockquote:after,  q:before, q:after {
+blockquote:before, blockquote:after, q:before, q:after {
 	content: '';
 	content: none;
 }
@@ -67,167 +68,168 @@ a:hover {
 /* ========================================================
       Calendar
       ===================================================== */
-   .cal {
-	display: block;
-	width: 216px;
-	-webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+
+.noselect {
+	-webkit-user-select: none;
+	/* Chrome/Safari */
+	-moz-user-select: none;
+	/* Firefox */
+	-ms-user-select: none;/* IE10+ */
 }
-.cal a:hover {
-	text-decoration: none;
-}
-.cal caption {
-	display: block;
-	line-height: 32px;
+.cal1 {width:400px;}
+.cal1 .clndr .clndr-controls {
+	position: relative;
+	color: #e66b6b;
+	font-size: 1.2em;
+	text-transform: uppercase;
+	padding: 20px 0 0 0;
 	text-align: center;
-	color: #e2e2e2;
-	font-weight: bold;
-	text-shadow: 0 -1px black;
-	background: #333;
-	background: rgba(0, 0, 0, 0.35);
-	border-top: 1px solid #333;
-	border-bottom: 1px solid #313131;
-	-webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.04);
-	box-shadow: inset 0 1px rgba(255, 255, 255, 0.04);
+	background: #ffffff;
+	min-height: 78px;
 }
-.cal caption a {
-	display: block;
-	line-height: 32px;
-	padding: 0 10px;
-	color: #e2e2e2;
+.cal1 .clndr .clndr-controls .month {
+	padding: 15px 0 0 0;
+	text-align: center;
+	color: #C3C3E5;
+	font-size: 24px;
+}
+.cal1 .clndr .clndr-controls .clndr-control-button .clndr-next-button {
+	position: absolute;
+	right: 30px;
+	top: 29px;
+	width: 30px;
+	height: 43px;
+	text-indent: -4000px;
+	background: url(images/arrows.png) no-repeat -30px 0px;
+	cursor: pointer;
+	-webkit-user-select: none;
+	/* Chrome/Safari */
+	-moz-user-select: none;
+	/* Firefox */
+	-ms-user-select: none;/* IE10+ */
+}
+.cal1 .clndr .clndr-controls .clndr-control-button .clndr-next-button.inactive:hover {
+	cursor: default;
+}
+.cal1 .clndr .clndr-controls .clndr-control-button .clndr-previous-button {
+	position: absolute;
+	left: 30px;
+	top: 29px;
+	width: 30px;
+	height: 43px;
+	text-indent: -4000px;
+	background: url(images/arrows.png) no-repeat -1px 0px;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+.cal1 .clndr .clndr-controls .clndr-control-button .clndr-previous-button.inactive:hover {
+	cursor: default;
+}
+.cal1 .clndr .clndr-table {
+	table-layout: fixed;
+	width: 100%;
+	height: 300px;
+	margin: 0 auto;
+	background: #ffffff;
+}
+.cal1 .clndr .clndr-table .header-days {
+	font-size: 0.85em;
+	font-weight: 600;
+}
+.cal1 .clndr .clndr-table .header-days .header-day {
+	vertical-align: middle;
+	text-align: center;
+	color: #C3C3E5;
+	font-size: 16px;
+}
+.cal1 .clndr .clndr-table tr {
+	height: 45px;
+}
+.cal1 .clndr .clndr-table tr td {
+	vertical-align: top;
+	text-align: center;
+}
+.cal1 .clndr .clndr-table tr .day {
+	width: 100%;
+	height: inherit;
+	color: #3a3b36;
+	vertical-align: middle;
+}
+.cal1 .clndr .clndr-table tr .day.today {
+	color: #5482AB!important;
+	text-decoration: none;
+	border: 1px solid #5482AB;
+}
+.cal1 .clndr .clndr-table tr .day.today:hover {
+	color: #000;
+}
+.cal1 .clndr .clndr-table tr .day.today.event {
+	background: #3e3e3e;
+	color: #FFF;
+	padding: 0;
+}
+.day.today.event:hover {
+	color: #FFF;
+}
+.cal1 .clndr .clndr-table tr .day .day-contents {
+	box-sizing: border-box;
 	font-size: 15px;
+	
+	cursor: pointer;
+	padding: 10px;
 }
-.cal caption a:hover {
+
+.cal1 .clndr .clndr-table tr .empty, .cal1 .clndr .clndr-table tr .adjacent-month {
+	width: 100%;
+	height: inherit;
+	color: #999;
+}
+#schedule {
 	color: #fff;
 }
-.cal caption .prev {
-	float: left;
-}
-.cal caption .next {
-	float: right;
-}
-.cal th, .cal td {
-	width: 30px;
-	text-align: center;
-	text-shadow: 0 1px rgba(255, 255, 255, 0.8);
-}
-.cal th:first-child, .cal td:first-child {
-	border-left: 0;
-}
-.cal th {
-	font-size: 8px;
-	text-transform: uppercase;
-	color: #696969;
-	line-height: 20px;
-	background: #f3f3f3;
-	border-left: 1px solid #f3f3f3;
-}
-.cal td {
-	font-size: 11px;
-	font-weight: bold;
-	border-top: 1px solid #c2c2c2;
-	border-left: 1px solid #c2c2c2;
-}
-.cal td a {
-	clear: both;
-	display: block;
-	position: relative;
-	color: #666;
-	line-height: 28px;
-	width: 30px;
-	background-color: #eaeaea;
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eaeaea), color-stop(60%, #e5e5e5), color-stop(100%, #d9d9d9));
-	background-image: -webkit-linear-gradient(top, #eaeaea 0%, #e5e5e5 60%, #d9d9d9 100%);
-	background-image: -moz-linear-gradient(top, #eaeaea 0%, #e5e5e5 60%, #d9d9d9 100%);
-	background-image: -ms-linear-gradient(top, #eaeaea 0%, #e5e5e5 60%, #d9d9d9 100%);
-	background-image: -o-linear-gradient(top, #eaeaea 0%, #e5e5e5 60%, #d9d9d9 100%);
-	background-image: linear-gradient(top, #eaeaea 0%, #e5e5e5 60%, #d9d9d9 100%);
-	-webkit-box-shadow: inset 1px 1px rgba(255, 255, 255, 0.5);
-	box-shadow: inset 1px 1px rgba(255, 255, 255, 0.5);
-}
-.cal td a:hover, .cal td.off a {
-	background: #f3f3f3;
-}
-.cal td.off a {
-	color: #b3b3b3;
-}
-.cal td.active a, .cal td a:active {
-	margin: -1px;
-	color: #f3f3f3;
-	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
-	background: #6dafbf;
-	border: 1px solid #598b94;
-	-webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
-	box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
-}
-.cal td.active:first-child a, .cal td:first-child a:active {
-	border-left: 0;
-	margin-left: 0;
-}
-.cal td.active:last-child a, .cal td:last-child a:active {
-	border-right: 0;
-	margin-right: 0;
-}
-.cal tr:last-child td.active a, .cal tr:last-child td a:active {
-	border-bottom: 0;
-	margin-bottom: 0;
-}
-/* ========================================================
-      About
-      ===================================================== */
-   .about {
-	margin: 80px auto;
-	padding: 15px 20px;
+#modal {
+	display: none;
+	position: absolute;
+	top: 300px;
+	left: 450px;
 	width: 300px;
-	text-align: center;
-	color: #aaa;
-	text-shadow: 0 -1px rgba(0, 0, 0, 0.2);
-	background: rgba(0, 0, 0, 0.05);
-	border-radius: 3px;
+	padding-top:20px;
+	background:#fafafa;
+	border: 1px solid #ddd;
 }
-.about a {
-	padding: 1px 3px;
-	margin: 0 -1px;
-	color: #fafafa;
-	text-decoration: none;
-	border-radius: 2px;
-}
-.about a:hover {
-	color: #111;
-	text-shadow: none;
-	background: #fafafa;
-}
-.links {
-	zoom: 1;
-}
-.links:before, .links:after {
-	content: "";
-	display: table;
-}
-.links:after {
-	clear: both;
-}
-.links a {
-	padding: 6px 0;
-	float: left;
-	width: 50%;
-	font-size: 14px;
-}
-.author {
-	margin-top: 15px;
-	font-size: 11px;
+#modal > div {
+	padding-left:10px;
+	margin-bottom: 20px;
 }
 
-#schedule{color:#fff;}
-#modal{display:none;position:absolute;top:300px;left:300px;width:200px;height:200px;border:1px solid #ddd;}
-#modal > div{margin-bottom:20px;}
+#modal #schedule {height:20px; color:#767676;}
 
-#testbox > div{margin-top:10px;}
-.schedule {color: green !important;}
+#modal .input_box {padding:0 32px 0 10px;}
+#modal .input_box input {width:100%; padding:5px 10px; border:1px solid #e5e5e5; color:#707070;}
+#modal .btn_line {overflow:hidden;}
+#modal .btn_line > div {float:left; margin-right:10px;}
+#modal .btn_line > div > button {height:30px; padding:0 10px; font-size:13px; line-height:17px;}
+#modal .btn_line .save button {background:#ec971f; border:1px solid #d58512; color:#fff;}
+#modal .btn_line .in_delete button {background:#df6561; border:1px solid #ba6360; color:#fff;}
+#modal .btn_line .all_delete button {background:#c9302c; border:1px solid #ac2925; color:#fff;}
 
-#lim_t{margin:50px 0 0 20px;}
-#lim_t tr td{padding:5px;border:1px solid #989898;color:#ddd;}
+#testbox > div {
+	margin-top: 10px;
+}
 
+.schedule {
+	color: green !important;
+}
+#lim_t {
+	margin: 50px 0 0 20px;
+}
+#lim_t tr td {
+	padding: 5px;
+	border: 1px solid #989898;
+	color: #ddd;
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"></script>
@@ -290,7 +292,7 @@ a:hover {
 
 				for(var i=0; i<dow; i++){
 					cal[week].push('');
-					str += `<td><a href="javascript:void(0);">&nbsp;</a></td>`
+					str += `<td><div class="day-contents">&nbsp;</div></td>`
 				}
 				
 				for(var j=1; j<=max_days; j++){
@@ -303,13 +305,13 @@ a:hover {
 
 					if(localStorage.getItem(inputF) != undefined && localStorage.getItem(inputF) != ''){
 						
-						str += `<td><a id="day`+j+`" class="schedule" href="javascript:void(0);" onclick="modal(`+j+`);">${j}</a></td>`
+						str += `<td><div id="day`+j+`" class="day-contents schedule" onclick="modal(`+j+`);">${j}</div></td>`
 						selected_day = inputF;
 						
 						cal[week].push( {'memo': localStorage.getItem(selected_day), 'day': j});
 						
 					}else{
-						str += `<td><a id="day`+j+`" href="javascript:void(0);" onclick="modal(`+j+`);">${j}</a></td>`
+						str += `<td><div id="day`+j+`" onclick="modal(`+j+`);">${j}</div></td>`
 						cal[week].push( {'memo': false, 'day': j});
 					}
 					
@@ -432,36 +434,56 @@ a:hover {
 </script>
 </head>
 <body>
-<table id="calendar" class="cal">
-	<caption>
-		<span class="prev"><a href="javascript:void(0);" onclick="downmonth();">←</a></span>
-		<span class="next"><a href="javascript:void(0);" onclick="upmonth();">→</a></span>
-		<span id="str_cal"></span>
-	</caption>
-	<thead>
-		<th>일</th>
-		<th>월</th>
-		<th>화</th>
-		<th>수</th>
-		<th>목</th>
-		<th>금</th>
-		<th>토</th>
-	</thead>
-	<tbody id="calendar2">
-	</tbody>
-</table>
-
+<div class="cal1">
+	<div class="clndr">
+		<div class="clndr-controls">
+			<div class="clndr-control-button">
+				<p class="clndr-previous-button"onclick="downmonth();">previous</p>
+			</div>
+			<div id="str_cal" class="month"></div>
+			<div class="clndr-control-button rightalign">
+				<p class="clndr-next-button" onclick="upmonth();">next</p>
+			</div>
+		</div>
+		<table id="calendar" class="clndr-table">
+			<thead>
+				<tr class="header-days">
+					<th class="header-day">일</th>
+					<th class="header-day">월</th>
+					<th class="header-day">화</th>
+					<th class="header-day">수</th>
+					<th class="header-day">목</th>
+					<th class="header-day">금</th>
+					<th class="header-day">토</th>
+				</tr>
+			</thead>
+			<tbody id="calendar2">
+			</tbody>
+		</table>
+	</div>
+</div>
 <div id="modal">
 	<div id="schedule"></div>
-	<div><input type="text" id="input"></div>
-	<div><button type="button" onclick="save()">저장</button></div>
-	<div><button type="button" onclick="inDelete()">삭제</button></div>
-	<div><button type="button" onclick="sDelete()">모두삭제</button></div>
+	<div class="input_box">
+		<input type="text" id="input">
+	</div>
+
+	<div class="btn_line">
+
+		<div class="save">
+			<button type="button" onclick="save()">저장</button>
+		</div>
+		<div class="in_delete">
+			<button type="button" onclick="inDelete()">삭제</button>
+		</div>
+		<div class="all_delete">
+			<button type="button" onclick="sDelete()">모두삭제</button>
+		</div>
+
+	</div>
+
 </div>
-
 <table id="lim_t">
-	
 </table>
-
 </body>
 </html>
