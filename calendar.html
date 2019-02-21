@@ -210,8 +210,9 @@ a:hover {
 #modal .input_box input {width:100%; padding:5px 10px; border:1px solid #e5e5e5; color:#707070;}
 #modal .btn_line {overflow:hidden;}
 #modal .btn_line > div {float:left; margin-right:10px;}
-#modal .btn_line > div > button {height:30px; padding:0 10px; font-size:13px; line-height:17px;}
+#modal .btn_line > div > button {cursor:pointer; height:30px; padding:0 10px; font-size:13px; line-height:17px;}
 #modal .btn_line .save button {background:#ec971f; border:1px solid #d58512; color:#fff;}
+#modal .btn_line .modify button {background:#2fad7e; border:1px solid #278d67; color:#fff;}
 #modal .btn_line .in_delete button {background:#df6561; border:1px solid #ba6360; color:#fff;}
 #modal .btn_line .all_delete button {background:#c9302c; border:1px solid #ac2925; color:#fff;}
 
@@ -270,7 +271,6 @@ a:hover {
 					con += `<tr>`
 					for(var j in data.items.item[i]){
 						con += `<td>`+ data.items.item[i][j] +`</td>`
-						
 					}
 					con += `</tr>`
 					if(date == data.items.item[i].locdate){
@@ -393,6 +393,31 @@ a:hover {
 		//console.log(day_for_class);
 	}
 
+	function modify(){
+		var $schedule = $('#schedule');
+		var $input = $('#input');
+		var set_local = [];
+
+		set_local = JSON.parse(localStorage.getItem(selected_day));
+		
+		localStorage.setItem(selected_day, JSON.stringify(set_local));
+		
+		$input.val(set_local);
+	}
+
+	function modify_save(){
+		var $schedule = $('#schedule');
+		var $input = $('#input');
+		var set_local = [];
+
+		set_local = JSON.parse(localStorage.getItem(selected_day));
+		localStorage.setItem(selected_day, JSON.stringify(set_local));
+
+		$schedule.text(set_local);
+		console.log(set_local);
+		
+	}
+
 	function inDelete(){
 		var $schedule = $('#schedule');
 		var $input = $('#input');
@@ -459,13 +484,19 @@ a:hover {
 	<div class="btn_line">
 
 		<div class="save">
-			<button type="button" onclick="save()">저장</button>
+			<button type="button" onclick="save();">저장</button>
+		</div>
+		<div class="modify">
+			<button type="button" onclick="modify();">수정</button>
+		</div>
+		<div class="modify_save">
+			<button type="button" onclick="modify_save();">2</button>
 		</div>
 		<div class="in_delete">
-			<button type="button" onclick="inDelete()">삭제</button>
+			<button type="button" onclick="inDelete();">삭제</button>
 		</div>
 		<div class="all_delete">
-			<button type="button" onclick="sDelete()">모두삭제</button>
+			<button type="button" onclick="sDelete();">모두삭제</button>
 		</div>
 
 	</div>
