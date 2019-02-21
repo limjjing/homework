@@ -394,7 +394,6 @@ a:hover {
 	}
 
 	function modify(){
-		var $schedule = $('#schedule');
 		var $input = $('#input');
 		var set_local = [];
 
@@ -405,14 +404,15 @@ a:hover {
 		$input.val(set_local);
 	}
 
-	function modify_save(){
+	function modifySave(){
 		var $schedule = $('#schedule');
 		var $input = $('#input');
 		var set_local = [];
 
 		set_local = JSON.parse(localStorage.getItem(selected_day));
 		localStorage.setItem(selected_day, JSON.stringify(set_local));
-
+		
+		set_local = $input.val();
 		$schedule.text(set_local);
 		console.log(set_local);
 		
@@ -490,7 +490,7 @@ a:hover {
 			<button type="button" onclick="modify();">수정</button>
 		</div>
 		<div class="modify_save">
-			<button type="button" onclick="modify_save();">2</button>
+			<button type="button" onclick="modifySave();">2</button>
 		</div>
 		<div class="in_delete">
 			<button type="button" onclick="inDelete();">삭제</button>
