@@ -173,7 +173,7 @@ a:hover {
 .day.today.event:hover {
 	color: #FFF;
 }
-.cal1 .clndr .clndr-table tr .day .day-contents {
+.cal1 .clndr .clndr-table tr td .day-contents {
 	box-sizing: border-box;
 	font-size: 15px;
 	
@@ -220,7 +220,7 @@ a:hover {
 }
 
 .schedule {
-	color: green !important;
+	color: #0cbf00 !important;
 }
 #lim_t {
 	margin: 50px 0 0 20px;
@@ -311,7 +311,7 @@ a:hover {
 						cal[week].push( {'memo': localStorage.getItem(selected_day), 'day': j});
 						
 					}else{
-						str += `<td><div id="day`+j+`" onclick="modal(`+j+`);">${j}</div></td>`
+						str += `<td><div id="day`+j+`" class="day-contents" onclick="modal(`+j+`);">${j}</div></td>`
 						cal[week].push( {'memo': false, 'day': j});
 					}
 					
@@ -328,7 +328,7 @@ a:hover {
 
 				for(var k=dow; k % 7 !== 0; k++){
 					cal[week].push('');
-					str += `<td><a href="javascript:void(0);">&nbsp;</a></td>`
+					str += `<td><div class="day-contents">&nbsp;</div></td>`
 				}
 
 				str += `</tr>`
@@ -376,10 +376,6 @@ a:hover {
 		var $input = $('#input');
 		var set_local = [];
 
-		if($input.val() == ""){
-			return;
-		}
-
 		if(localStorage.getItem(selected_day) != undefined && localStorage.getItem(selected_day) != ""){
 			set_local = JSON.parse(localStorage.getItem(selected_day));
 			set_local.push($input.val());
@@ -392,8 +388,6 @@ a:hover {
 		$schedule.text(localStorage.getItem(selected_day));
 		$input.val('');
 
-		console.log('day' + selected_day.substr(6, 2));
-
 		var day_for_class = selected_day.substr(6, 1) == '0' ? selected_day.substr(7, 1) : selected_day.substr(6, 2);
 		$('#day'+ day_for_class).addClass('schedule');
 		//console.log(day_for_class);
@@ -404,10 +398,6 @@ a:hover {
 		var $input = $('#input');
 		var set_local = [];
 
-		if(set_local == 0){
-			$schedule.text('일정');
-		}
-
 		set_local = JSON.parse(localStorage.getItem(selected_day));
 		set_local.pop(localStorage.removeItem(selected_day));
 		console.log(set_local);
@@ -415,8 +405,6 @@ a:hover {
 		localStorage.setItem(selected_day, JSON.stringify(set_local));
 		$schedule.text(localStorage.getItem(selected_day));
 		
-		var day_for_class = selected_day.substr(6, 1) == '0' ? selected_day.substr(7, 1) : selected_day.substr(6, 2);
-		$('#day'+ day_for_class).removeClass('schedule');
 	}
 
 	function sDelete(){
