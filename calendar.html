@@ -410,10 +410,10 @@ a:hover {
 		var set_local = [];
 
 		set_local = JSON.parse(localStorage.getItem(selected_day));
+
 		localStorage.setItem(selected_day, JSON.stringify(set_local));
+		$schedule.text(localStorage.getItem(selected_day));
 		
-		set_local = $input.val();
-		$schedule.text(set_local);
 		console.log(set_local);
 		
 	}
