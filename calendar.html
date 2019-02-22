@@ -194,7 +194,7 @@ a:hover {
 	position: absolute;
 	top: 300px;
 	left: 450px;
-	width: 300px;
+	width: 350px;
 	padding-top:20px;
 	background:#fafafa;
 	border: 1px solid #ddd;
@@ -356,7 +356,6 @@ a:hover {
 	}
 
 	function modal(day){
-
 		if(day < 10){
 			day = '0' + day;
 		}
@@ -384,7 +383,9 @@ a:hover {
 			set_local[0] = $input.val();
 		}
 
-		localStorage.setItem(selected_day, JSON.stringify(set_local));
+		// localStorage.setItem(selected_day, JSON.stringify(set_local));
+		// $schedule.text(localStorage.getItem(selected_day));
+		localStorage.setItem(selected_day, $input.val());
 		$schedule.text(localStorage.getItem(selected_day));
 		$input.val('');
 
@@ -394,14 +395,10 @@ a:hover {
 	}
 
 	function modify(){
+		var $schedule = $('#schedule');
 		var $input = $('#input');
-		var set_local = [];
 
-		set_local = JSON.parse(localStorage.getItem(selected_day));
-		
-		localStorage.setItem(selected_day, JSON.stringify(set_local));
-		
-		$input.val(set_local);
+		$input.val(localStorage.getItem(selected_day));
 	}
 
 	function modifySave(){
@@ -411,11 +408,12 @@ a:hover {
 
 		set_local = JSON.parse(localStorage.getItem(selected_day));
 
-		localStorage.setItem(selected_day, JSON.stringify(set_local));
+		// localStorage.setItem(selected_day, JSON.stringify(set_local));
+		// $schedule.text(localStorage.getItem(selected_day));
+		localStorage.setItem(selected_day, $input.val());
 		$schedule.text(localStorage.getItem(selected_day));
 		
 		console.log(set_local);
-		
 	}
 
 	function inDelete(){
@@ -429,7 +427,6 @@ a:hover {
 
 		localStorage.setItem(selected_day, JSON.stringify(set_local));
 		$schedule.text(localStorage.getItem(selected_day));
-		
 	}
 
 	function sDelete(){
