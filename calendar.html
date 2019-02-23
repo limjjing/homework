@@ -204,7 +204,7 @@ a:hover {
 	margin-bottom: 20px;
 }
 
-#modal #schedule {height:20px; color:#767676;}
+#modal #schedule {min-height:20px; color:#767676;}
 
 #modal .input_box {padding:0 32px 0 10px;}
 #modal .input_box input {width:100%; padding:5px 10px; border:1px solid #e5e5e5; color:#707070;}
@@ -243,6 +243,10 @@ a:hover {
 	cal[0] = [];
 
 	window.onload = function(){
+		setInterval(()=>{
+			$('#time').text(new Date().toISOString());
+		},1000)
+		
 		cal_fuc(now_month);
 	}
 
@@ -365,7 +369,18 @@ a:hover {
 		var $schedule = $('#schedule');
 		
 		$('#modal').show();
-		$schedule.text(localStorage.getItem(selected_day));
+
+		
+		var text_str = "";
+		if(localStorage.getItem(selected_day) != undefined){
+			var sch_list = JSON.parse(localStorage.getItem(selected_day));
+			for(var i =0; i < sch_list.length; i++){
+				text_str += "<div id='schlist"+i+"'><p > -" + sch_list[i] + "</p><button onclick ='delete_spc_list("+i+")'>삭제</button></div><br>";
+			}
+		}
+ 		
+
+		$schedule.html(text_str);
 
 		console.log(selected_day);
 	}
@@ -383,10 +398,21 @@ a:hover {
 			set_local[0] = $input.val();
 		}
 
-		// localStorage.setItem(selected_day, JSON.stringify(set_local));
+		localStorage.setItem(selected_day, JSON.stringify(set_local));
+
+
+		var text_str = "";
+
+		for(var i =0; i < set_local.length; i++){
+			text_str += "<div id='schlist"+i+"'><p > -" + set_local[i] + "</p><button onclick ='delete_spc_list("+i+")'>삭제</button></div><br>";
+		}
+
+ 		
+
+		$schedule.html(text_str);
 		// $schedule.text(localStorage.getItem(selected_day));
-		localStorage.setItem(selected_day, $input.val());
-		$schedule.text(localStorage.getItem(selected_day));
+		// localStorage.setItem(selected_day, $input.val());
+		// $schedule.text(localStorage.getItem(selected_day));
 		$input.val('');
 
 		var day_for_class = selected_day.substr(6, 1) == '0' ? selected_day.substr(7, 1) : selected_day.substr(6, 2);
@@ -410,6 +436,7 @@ a:hover {
 
 		// localStorage.setItem(selected_day, JSON.stringify(set_local));
 		// $schedule.text(localStorage.getItem(selected_day));
+		
 		localStorage.setItem(selected_day, $input.val());
 		$schedule.text(localStorage.getItem(selected_day));
 		
@@ -439,6 +466,36 @@ a:hover {
 		
 		var day_for_class = selected_day.substr(6, 1) == '0' ? selected_day.substr(7, 1) : selected_day.substr(6, 2);
 		$('#day'+ day_for_class).removeClass('schedule');
+	}
+
+	function delete_spc_list(number){
+		var set_local = [];
+
+		set_local = JSON.parse(localStorage.getItem(selected_day));
+		set_local.splice(number,1);
+		// console.log(set_local);
+
+		localStorage.setItem(selected_day, JSON.stringify(set_local));
+
+		$('#schlist'+number).remove();
+		// console.log(number);
+	}
+
+	function update_spc_list(number){
+		var $input = $('#input');
+		var set_local = [];
+
+		set_local = JSON.parse(localStorage.getItem(selected_day));
+		$input.val(set_local[number]);
+
+
+
+		set_local = JSON.parse(localStorage.getItem(selected_day));
+		set_local[number] = $input.val();
+		localStorage.setItem(selected_day, JSON.stringify(set_local));
+
+		$('#schlist'+number+" p").text( $input.val());
+		// console.log(number);
 	}
 
 </script>
@@ -498,7 +555,12 @@ a:hover {
 
 	</div>
 
+
+	
+
 </div>
+
+<div id="time" style="width: 300px;height: 200px;background-color: red"></div>
 <table id="lim_t">
 </table>
 </body>
