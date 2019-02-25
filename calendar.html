@@ -11,49 +11,31 @@
       License: none (public domain)
    */
 
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after, q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-body {
-	background: #444444;
-	color: #404040;
-	font-family: 'Lucida Grande', Verdana, sans-serif;
-	font-size: 13px;
-	font-weight: normal;
-	line-height: 20px;
-}
-a {
-	color: #1e7ad3;
-	text-decoration: none;
-}
-a:hover {
-	text-decoration: underline;
-}
+body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, p, button, select, input, textarea, th, td {margin:0; padding:0;}
+
+body {background: #444444; font-family:'Lucida Grande', Verdana, sans-serif; font-size:12px; color:#464646;}
+
+img {border:none; vertical-align:top;}
+
+ul li , ol li {list-style:none;}
+
+fieldset {border:none;}
+
+table {border-collapse:collapse;}
+caption {display:none;}
+
+img, fieldset, button {border:0; padding:0px;}
+button {background:none;}
+input, select {vertical-align:middle;}
+legend {width:0; height:0; font-size:0; position:absolute; overflow:hidden;} 
+
+a {color:#464646; text-decoration:none; cursor:pointer;}
+a:link {color:#464646;}
+a:visited {color:#464646;}
+a:active {color:#464646;}
+a:hover {color:#464646;}
+
+
 .container, .main {
 	width: 640px;
 	margin-left: auto;
@@ -194,7 +176,7 @@ a:hover {
 	position: absolute;
 	top: 300px;
 	left: 450px;
-	width: 350px;
+	width: 300px;
 	padding-top:20px;
 	background:#fafafa;
 	border: 1px solid #ddd;
@@ -204,17 +186,21 @@ a:hover {
 	margin-bottom: 20px;
 }
 
-#modal #schedule {min-height:20px; color:#767676;}
+#schedule {min-height:20px; color:#767676;}
 
-#modal .input_box {padding:0 32px 0 10px;}
-#modal .input_box input {width:100%; padding:5px 10px; border:1px solid #e5e5e5; color:#707070;}
-#modal .btn_line {overflow:hidden;}
-#modal .btn_line > div {float:left; margin-right:10px;}
-#modal .btn_line > div > button {cursor:pointer; height:30px; padding:0 10px; font-size:13px; line-height:17px;}
-#modal .btn_line .save button {background:#ec971f; border:1px solid #d58512; color:#fff;}
-#modal .btn_line .modify button {background:#2fad7e; border:1px solid #278d67; color:#fff;}
-#modal .btn_line .in_delete button {background:#df6561; border:1px solid #ba6360; color:#fff;}
-#modal .btn_line .all_delete button {background:#c9302c; border:1px solid #ac2925; color:#fff;}
+.input_box {padding:0 32px 0 10px;}
+.input_box input {width:100%; padding:5px 10px; border:1px solid #e5e5e5; color:#707070;}
+
+.btn_line {overflow:hidden;}
+.btn_line > div {float:left; margin-right:10px;}
+.btn_line > div > button {height:30px; padding:0 10px; font-size:13px; line-height:17px;}
+.btn_line .save button {background:#ec971f; border:1px solid #d58512; color:#fff;}
+.btn_line .modify button {background:#2fad7e; border:1px solid #278d67; color:#fff;}
+.btn_line .in_delete button {background:#df6561; border:1px solid #ba6360; color:#fff;}
+.btn_line .all_delete button {background:#c9302c; border:1px solid #ac2925; color:#fff;}
+
+.btn_ml {overflow:hidden; margin-top:10px;}
+.btn_ml button {display:block; float:left; height:18px; padding:0 5px; margin-right:5px; background:#dedede; border:1px solid #ddd; font-size:11px; line-height:12px; color:#4f4f4f;}
 
 #testbox > div {
 	margin-top: 10px;
@@ -243,9 +229,9 @@ a:hover {
 	cal[0] = [];
 
 	window.onload = function(){
-		setInterval(()=>{
-			$('#time').text(new Date().toISOString());
-		},1000)
+		// setInterval(()=>{
+		// 	$('#time').text(new Date().toISOString());
+		// },1000)
 		
 		cal_fuc(now_month);
 	}
@@ -274,7 +260,7 @@ a:hover {
 				for(var i in data.items.item){
 					con += `<tr>`
 					for(var j in data.items.item[i]){
-						con += `<td>`+ data.items.item[i][j] +`</td>`
+						con += `<td>${data.items.item[i][j]}</td>`
 					}
 					con += `</tr>`
 					if(date == data.items.item[i].locdate){
@@ -309,13 +295,13 @@ a:hover {
 
 					if(localStorage.getItem(inputF) != undefined && localStorage.getItem(inputF) != ''){
 						
-						str += `<td><div id="day`+j+`" class="day-contents schedule" onclick="modal(`+j+`);">${j}</div></td>`
+						str += `<td><div id="day${j}" class="day-contents schedule" onclick="modal(${j});">${j}</div></td>`
 						selected_day = inputF;
 						
 						cal[week].push( {'memo': localStorage.getItem(selected_day), 'day': j});
 						
 					}else{
-						str += `<td><div id="day`+j+`" class="day-contents" onclick="modal(`+j+`);">${j}</div></td>`
+						str += `<td><div id="day${j}" class="day-contents" onclick="modal(${j});">${j}</div></td>`
 						cal[week].push( {'memo': false, 'day': j});
 					}
 					
@@ -369,17 +355,22 @@ a:hover {
 		var $schedule = $('#schedule');
 		
 		$('#modal').show();
-
 		
-		var text_str = "";
+		var text_str = '';
 		if(localStorage.getItem(selected_day) != undefined){
 			var sch_list = JSON.parse(localStorage.getItem(selected_day));
 			for(var i =0; i < sch_list.length; i++){
-				text_str += "<div id='schlist"+i+"'><p > -" + sch_list[i] + "</p><button onclick ='delete_spc_list("+i+")'>삭제</button></div><br>";
+				text_str += `<div id="schlist${i}">`
+					text_str += `<p>- ${sch_list[i]}</p>`
+					text_str += `<div class="btn_ml">`
+						text_str += `<button type="button" onclick ="delete_spc_list(${i})">삭제</button>`
+						text_str += `<button type="button" onclick="modify_spc_list(${i})">수정</button>`
+						text_str += `<button type="button" onclick="">저장</button>`
+					text_str += `</div>`
+				text_str += `</div>`;
 			}
 		}
  		
-
 		$schedule.html(text_str);
 
 		console.log(selected_day);
@@ -390,7 +381,7 @@ a:hover {
 		var $input = $('#input');
 		var set_local = [];
 
-		if(localStorage.getItem(selected_day) != undefined && localStorage.getItem(selected_day) != ""){
+		if(localStorage.getItem(selected_day) != undefined && localStorage.getItem(selected_day) != ''){
 			set_local = JSON.parse(localStorage.getItem(selected_day));
 			set_local.push($input.val());
 			console.log(set_local);
@@ -400,15 +391,19 @@ a:hover {
 
 		localStorage.setItem(selected_day, JSON.stringify(set_local));
 
+		var text_str = '';
 
-		var text_str = "";
-
-		for(var i =0; i < set_local.length; i++){
-			text_str += "<div id='schlist"+i+"'><p > -" + set_local[i] + "</p><button onclick ='delete_spc_list("+i+")'>삭제</button></div><br>";
+		for(var i=0; i < set_local.length; i++){
+			text_str += `<div id="schlist${i}">`
+				text_str += `<p>- ${set_local[i]}</p>`
+				text_str += `<div class="btn_ml">`
+					text_str += `<button type="button" onclick ="delete_spc_list(${i})">삭제</button>`
+					text_str += `<button type="button" onclick="modify_spc_list(${i})">수정</button>`
+					text_str += `<button type="button" onclick="">저장</button>`
+				text_str += `</div>`
+			text_str += `</div>`;
 		}
-
  		
-
 		$schedule.html(text_str);
 		// $schedule.text(localStorage.getItem(selected_day));
 		// localStorage.setItem(selected_day, $input.val());
@@ -420,15 +415,8 @@ a:hover {
 		//console.log(day_for_class);
 	}
 
-	function modify(){
-		var $schedule = $('#schedule');
-		var $input = $('#input');
-
-		$input.val(localStorage.getItem(selected_day));
-	}
-
 	function modifySave(){
-		var $schedule = $('#schedule');
+		var $schedule = $('#schedule'); 
 		var $input = $('#input');
 		var set_local = [];
 
@@ -441,19 +429,6 @@ a:hover {
 		$schedule.text(localStorage.getItem(selected_day));
 		
 		console.log(set_local);
-	}
-
-	function inDelete(){
-		var $schedule = $('#schedule');
-		var $input = $('#input');
-		var set_local = [];
-
-		set_local = JSON.parse(localStorage.getItem(selected_day));
-		set_local.pop(localStorage.removeItem(selected_day));
-		console.log(set_local);
-
-		localStorage.setItem(selected_day, JSON.stringify(set_local));
-		$schedule.text(localStorage.getItem(selected_day));
 	}
 
 	function sDelete(){
@@ -472,16 +447,16 @@ a:hover {
 		var set_local = [];
 
 		set_local = JSON.parse(localStorage.getItem(selected_day));
-		set_local.splice(number,1);
-		// console.log(set_local);
+		set_local.splice(number, 1);
+		console.log(set_local);
 
 		localStorage.setItem(selected_day, JSON.stringify(set_local));
 
-		$('#schlist'+number).remove();
+		$('#schlist'+ number).remove();
 		// console.log(number);
 	}
 
-	function update_spc_list(number){
+	function modify_spc_list(number){
 		var $input = $('#input');
 		var set_local = [];
 
@@ -489,13 +464,16 @@ a:hover {
 		$input.val(set_local[number]);
 
 
-
 		set_local = JSON.parse(localStorage.getItem(selected_day));
 		set_local[number] = $input.val();
 		localStorage.setItem(selected_day, JSON.stringify(set_local));
 
-		$('#schlist'+number+" p").text( $input.val());
+		$('#schlist'+ number +' p').text( $input.val());
 		// console.log(number);
+	}
+
+	function modifySave(){
+		
 	}
 
 </script>
@@ -543,24 +521,16 @@ a:hover {
 		<div class="modify">
 			<button type="button" onclick="modify();">수정</button>
 		</div>
-		<div class="modify_save">
-			<button type="button" onclick="modifySave();">2</button>
-		</div>
-		<div class="in_delete">
-			<button type="button" onclick="inDelete();">삭제</button>
-		</div>
+
 		<div class="all_delete">
 			<button type="button" onclick="sDelete();">모두삭제</button>
 		</div>
 
 	</div>
-
-
 	
-
 </div>
 
-<div id="time" style="width: 300px;height: 200px;background-color: red"></div>
+<div id="time" style="width:300px; height:200px; background-color: #747474"></div>
 <table id="lim_t">
 </table>
 </body>
