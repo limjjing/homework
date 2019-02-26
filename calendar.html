@@ -298,7 +298,7 @@ a:hover {color:#464646;}
 						str += `<td><div id="day${j}" class="day-contents schedule" onclick="modal(${j});">${j}</div></td>`
 						selected_day = inputF;
 						
-						cal[week].push( {'memo': localStorage.getItem(selected_day), 'day': j});
+						cal[week].push({'memo': localStorage.getItem(selected_day), 'day': j});
 						
 					}else{
 						str += `<td><div id="day${j}" class="day-contents" onclick="modal(${j});">${j}</div></td>`
@@ -363,9 +363,9 @@ a:hover {color:#464646;}
 				text_str += `<div id="schlist${i}">`
 					text_str += `<p>- ${sch_list[i]}</p>`
 					text_str += `<div class="btn_ml">`
-						text_str += `<button type="button" onclick ="delete_spc_list(${i})">삭제</button>`
-						text_str += `<button type="button" onclick="modify_spc_list(${i})">수정</button>`
-						text_str += `<button type="button" onclick="">저장</button>`
+						text_str += `<button type="button" onclick ="delete_spc_list(${i});">삭제</button>`
+						text_str += `<button type="button" onclick="modify_spc_list(${i});">수정</button>`
+						text_str += `<button type="button" onclick="modifySave(${i});">저장</button>`
 					text_str += `</div>`
 				text_str += `</div>`;
 			}
@@ -397,38 +397,20 @@ a:hover {color:#464646;}
 			text_str += `<div id="schlist${i}">`
 				text_str += `<p>- ${set_local[i]}</p>`
 				text_str += `<div class="btn_ml">`
-					text_str += `<button type="button" onclick ="delete_spc_list(${i})">삭제</button>`
-					text_str += `<button type="button" onclick="modify_spc_list(${i})">수정</button>`
-					text_str += `<button type="button" onclick="">저장</button>`
+					text_str += `<button type="button" onclick ="delete_spc_list(${i});">삭제</button>`
+					text_str += `<button type="button" onclick="modify_spc_list(${i});">수정</button>`
+					text_str += `<button type="button" onclick="modifySave(${i});">저장</button>`
 				text_str += `</div>`
 			text_str += `</div>`;
 		}
- 		
+
 		$schedule.html(text_str);
-		// $schedule.text(localStorage.getItem(selected_day));
-		// localStorage.setItem(selected_day, $input.val());
-		// $schedule.text(localStorage.getItem(selected_day));
+
 		$input.val('');
 
 		var day_for_class = selected_day.substr(6, 1) == '0' ? selected_day.substr(7, 1) : selected_day.substr(6, 2);
 		$('#day'+ day_for_class).addClass('schedule');
 		//console.log(day_for_class);
-	}
-
-	function modifySave(){
-		var $schedule = $('#schedule'); 
-		var $input = $('#input');
-		var set_local = [];
-
-		set_local = JSON.parse(localStorage.getItem(selected_day));
-
-		// localStorage.setItem(selected_day, JSON.stringify(set_local));
-		// $schedule.text(localStorage.getItem(selected_day));
-		
-		localStorage.setItem(selected_day, $input.val());
-		$schedule.text(localStorage.getItem(selected_day));
-		
-		console.log(set_local);
 	}
 
 	function sDelete(){
@@ -463,17 +445,20 @@ a:hover {color:#464646;}
 		set_local = JSON.parse(localStorage.getItem(selected_day));
 		$input.val(set_local[number]);
 
+		//$('#schlist'+ number +' p').text($input.val());
+		// console.log(number);
+	}
+
+	function modifySave(number){
+		var $input = $('#input');
+		var set_local = [];
 
 		set_local = JSON.parse(localStorage.getItem(selected_day));
 		set_local[number] = $input.val();
 		localStorage.setItem(selected_day, JSON.stringify(set_local));
 
-		$('#schlist'+ number +' p').text( $input.val());
-		// console.log(number);
-	}
-
-	function modifySave(){
-		
+		$('#schlist'+ number).find('p').text('- '+ $input.val());
+		console.log(set_local[number]);
 	}
 
 </script>
@@ -527,7 +512,7 @@ a:hover {color:#464646;}
 		</div>
 
 	</div>
-	
+
 </div>
 
 <div id="time" style="width:300px; height:200px; background-color: #747474"></div>
