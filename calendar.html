@@ -232,10 +232,28 @@ a:hover {color:#464646;}
 	cal[0] = [];
 
 	window.onload = function(){
-		// setInterval(()=>{
-		// 	$('#time').text(new Date().toISOString());
-		// },1000)
-		
+
+
+		setInterval(()=>{
+			var time = moment();
+			$('#time').text(time.format('LTS'));
+
+
+			// var alarm = JSON.parse(localStorage.getItem('alarm'));
+			// for(var i=0; alarm.length; i++ ){
+				
+			// 	// var test = moment('2019-03-02 14:51:00');
+			// 	var test =  moment(alarm[i]);
+			// 	if(test != null && test.isBefore(time)){
+			// 		alarm.splice(i, 1);
+			// 		alert("알림!!! ");
+			// 	}
+			// }
+				
+				
+		},1000)
+
+		$input = $('#input');
 		cal_fuc(now_month);
 	}
 
@@ -309,7 +327,7 @@ a:hover {color:#464646;}
 					}
 					
 					if(dow % 7 === 6){
-						if(j != max_days || (dow + 1) % 7 != 0){
+						if(j != max_days ){ //|| (dow + 1) % 7 != 0
 							week++;
 							cal[week] = [];
 							
@@ -325,6 +343,7 @@ a:hover {color:#464646;}
 				}
 
 				str += `</tr>`
+
 
 				document.getElementById('calendar2').innerHTML = str;
 				document.getElementById('str_cal').innerHTML = input.format('YYYY년 MMMM');
@@ -380,7 +399,7 @@ a:hover {color:#464646;}
 	}
 
 	function save(){
-		$input = $('#input');
+		// $input = $('#input');
 		var set_local = [];
 
 		var local_gs = localStorage.getItem(selected_day);
@@ -436,7 +455,7 @@ a:hover {color:#464646;}
 	}
 
 	function modify_spc_list(number){
-		$input = $('#input');
+		// $input = $('#input');
 
 		set_local = JSON.parse(localStorage.getItem(selected_day));
 		$input.val(set_local[number]);
