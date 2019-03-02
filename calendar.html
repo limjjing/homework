@@ -226,6 +226,8 @@ a:hover {color:#464646;}
 	//.format('YYYY-MM-DD hh:mm');
 	var now_month = moment();
 	var selected_day = '';
+	var $schedule;
+	var $input;
 	var cal = [];
 	cal[0] = [];
 
@@ -257,15 +259,16 @@ a:hover {color:#464646;}
 			success: function(data){
 
 				var con = '';
+				var diI = data.items.item;
 
-				for(var i in data.items.item){
+				for(var i in diI){
 					con += `<tr>`
-					for(var j in data.items.item[i]){
-						con += `<td>${data.items.item[i][j]}</td>`
+					for(var j in diI[i]){
+						con += `<td>${diI[i][j]}</td>`
 					}
 					con += `</tr>`
-					if(date == data.items.item[i].locdate){
-						console.log(data.items.item[i]);
+					if(date == diI[i].locdate){
+						console.log(diI[i]);
 					}
 				}
 
@@ -294,12 +297,11 @@ a:hover {color:#464646;}
 						inputF = input.format('YYYYMM') + '0' + j;
 					}
 
-					if(localStorage.getItem(inputF) != undefined && localStorage.getItem(inputF) != ''){
-						
+					var loca_inF = localStorage.getItem(inputF);
+
+					if(loca_inF != undefined && loca_inF != ''){
 						str += `<td><div id="day${j}" class="day-contents schedule" onclick="modal(${j});">${j}</div></td>`
-						selected_day = inputF;
-						
-						cal[week].push({'memo': localStorage.getItem(selected_day), 'day': j});
+						cal[week].push({'memo': loca_inF, 'day': j});
 						
 					}else{
 						str += `<td><div id="day${j}" class="day-contents" onclick="modal(${j});">${j}</div></td>`
@@ -324,7 +326,6 @@ a:hover {color:#464646;}
 
 				str += `</tr>`
 
-				console.log(cal)
 				document.getElementById('calendar2').innerHTML = str;
 				document.getElementById('str_cal').innerHTML = input.format('YYYY년 MMMM');
 
@@ -347,24 +348,25 @@ a:hover {color:#464646;}
 	}
 
 	function modal(day){
+		$schedule = $('#schedule');
+
 		if(day < 10){
 			day = '0' + day;
 		}
 		
 		selected_day = now_month.format('YYYYMM') + day;
 		
-		var $schedule = $('#schedule');
-		
 		$('#modal').show();
 		
 		var text_str = '';
-		if(localStorage.getItem(selected_day) != undefined){
-			var sch_list = JSON.parse(localStorage.getItem(selected_day));
+		var local_gs = localStorage.getItem(selected_day);
+		if(local_gs != undefined){
+			var sch_list = JSON.parse(local_gs);
 			for(var i =0; i < sch_list.length; i++){
 				text_str += `<div id="schlist${i}">`
 					text_str += `<p>- ${sch_list[i]}</p>`
 					text_str += `<div class="btn_ml">`
-						text_str += `<button type="button" onclick ="delete_spc_list(${i});">삭제</button>`
+						text_str += `<button type="button" onclick="delete_spc_list(${i});">삭제</button>`
 						text_str += `<button type="button" onclick="modify_spc_list(${i});">수정</button>`
 						text_str += `<button type="button" onclick="modifySave(${i});">저장</button>`
 					text_str += `</div>`
@@ -378,12 +380,12 @@ a:hover {color:#464646;}
 	}
 
 	function save(){
-		var $schedule = $('#schedule');
-		var $input = $('#input');
+		$input = $('#input');
 		var set_local = [];
 
-		if(localStorage.getItem(selected_day) != undefined && localStorage.getItem(selected_day) != ''){
-			set_local = JSON.parse(localStorage.getItem(selected_day));
+		var local_gs = localStorage.getItem(selected_day);
+		if(local_gs != undefined && local_gs != ''){
+			set_local = JSON.parse(local_gs);
 			set_local.push($input.val());
 			console.log(set_local);
 		}else{
@@ -398,7 +400,7 @@ a:hover {color:#464646;}
 			text_str += `<div id="schlist${i}">`
 				text_str += `<p>- ${set_local[i]}</p>`
 				text_str += `<div class="btn_ml">`
-					text_str += `<button type="button" onclick ="delete_spc_list(${i});">삭제</button>`
+					text_str += `<button type="button" onclick="delete_spc_list(${i});">삭제</button>`
 					text_str += `<button type="button" onclick="modify_spc_list(${i});">수정</button>`
 					text_str += `<button type="button" onclick="modifySave(${i});">저장</button>`
 				text_str += `</div>`
@@ -415,20 +417,14 @@ a:hover {color:#464646;}
 	}
 
 	function sDelete(){
-		var $schedule = $('#schedule');
-		var $input = $('#input');
-
-		$input.val('');
 		localStorage.removeItem(selected_day);
-		$schedule.text('일정');
+		$schedule.text('');
 		
 		var day_for_class = selected_day.substr(6, 1) == '0' ? selected_day.substr(7, 1) : selected_day.substr(6, 2);
 		$('#day'+ day_for_class).removeClass('schedule');
 	}
 
 	function delete_spc_list(number){
-		var set_local = [];
-
 		set_local = JSON.parse(localStorage.getItem(selected_day));
 		set_local.splice(number, 1);
 		console.log(set_local);
@@ -440,26 +436,18 @@ a:hover {color:#464646;}
 	}
 
 	function modify_spc_list(number){
-		var $input = $('#input');
-		var set_local = [];
+		$input = $('#input');
 
 		set_local = JSON.parse(localStorage.getItem(selected_day));
 		$input.val(set_local[number]);
-
-		//$('#schlist'+ number +' p').text($input.val());
-		// console.log(number);
 	}
 
 	function modifySave(number){
-		var $input = $('#input');
-		var set_local = [];
-
 		set_local = JSON.parse(localStorage.getItem(selected_day));
 		set_local[number] = $input.val();
 		localStorage.setItem(selected_day, JSON.stringify(set_local));
 
 		$('#schlist'+ number).find('p').text('- '+ $input.val());
-		console.log(set_local[number]);
 	}
 
 </script>
@@ -503,9 +491,6 @@ a:hover {color:#464646;}
 
 		<div class="save">
 			<button type="button" onclick="save();">저장</button>
-		</div>
-		<div class="modify">
-			<button type="button" onclick="modify();">수정</button>
 		</div>
 
 		<div class="all_delete">
