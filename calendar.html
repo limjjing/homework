@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>calendar</title>
 <style>
+
 /* http://meyerweb.com/eric/tools/css/reset/
       v2.0 | 20110126
       License: none (public domain)
@@ -232,26 +233,33 @@ a:hover {color:#464646;}
 	cal[0] = [];
 
 	window.onload = function(){
-
-
+		
 		setInterval(()=>{
 			var time = moment();
-			$('#time').text(time.format('LTS'));
+			var select_time = '';
+			var alarm = [];
+			
+			select_time = time.format('LTS');
 
-
-			// var alarm = JSON.parse(localStorage.getItem('alarm'));
-			// for(var i=0; alarm.length; i++ ){
+			$('#a_time').text(select_time);
+			
+			alarm = JSON.parse(localStorage.getItem(select_time));
+			
+			localStorage.setItem(select_time, JSON.stringify(alarm));
+			
+			for(var i=0; alarm.length; i++){
+				alert("알림!!! ");
+				// var test = moment('2019-03-02 14:51:00');
+				var test =  moment(alarm[i]);
 				
-			// 	// var test = moment('2019-03-02 14:51:00');
-			// 	var test =  moment(alarm[i]);
-			// 	if(test != null && test.isBefore(time)){
-			// 		alarm.splice(i, 1);
-			// 		alert("알림!!! ");
-			// 	}
-			// }
+				if(test != null && test.isBefore(time)){
+					alarm.splice(i, 1);
+					alert("알림!!! ");
+				}
 				
-				
-		},1000)
+			}
+			
+		},2000)
 
 		$input = $('#input');
 		cal_fuc(now_month);
@@ -343,7 +351,6 @@ a:hover {color:#464646;}
 				}
 
 				str += `</tr>`
-
 
 				document.getElementById('calendar2').innerHTML = str;
 				document.getElementById('str_cal').innerHTML = input.format('YYYY년 MMMM');
@@ -520,7 +527,17 @@ a:hover {color:#464646;}
 
 </div>
 
-<div id="time" style="width:300px; height:200px; background-color: #747474"></div>
+<div id="alarm" style="width:300px; height:200px; background-color: #747474">
+	<div id="a_time"></div>
+	<div id="alarm_list">
+		<ul></ul>
+	</div>
+	<div id="a_input_line">
+		<input id="a_input" type="text">
+		<button type="button" id="ai_btn">저장</button>
+	</div>
+</div>
+
 <table id="lim_t">
 </table>
 </body>
