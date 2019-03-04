@@ -234,32 +234,32 @@ a:hover {color:#464646;}
 
 	window.onload = function(){
 		
-		setInterval(()=>{
-			var time = moment();
-			var select_time = '';
-			var alarm = [];
+		// setInterval(()=>{
+		// 	var time = moment();
+		// 	var select_time = '';
+		// 	var alarm = [];
 			
-			select_time = time.format('LTS');
+		// 	select_time = time.format('LTS');
 
-			$('#a_time').text(select_time);
+		// 	$('#a_time').text(select_time);
 			
-			alarm = JSON.parse(localStorage.getItem(select_time));
+		// 	alarm = JSON.parse(localStorage.getItem(select_time));
 			
-			localStorage.setItem(select_time, JSON.stringify(alarm));
+		// 	localStorage.setItem(select_time, JSON.stringify(alarm));
 			
-			for(var i=0; alarm.length; i++){
-				alert("알림!!! ");
-				// var test = moment('2019-03-02 14:51:00');
-				var test =  moment(alarm[i]);
+		// 	for(var i=0; alarm.length; i++){
+		// 		alert("알림!!! ");
+		// 		// var test = moment('2019-03-02 14:51:00');
+		// 		var test =  moment(alarm[i]);
 				
-				if(test != null && test.isBefore(time)){
-					alarm.splice(i, 1);
-					alert("알림!!! ");
-				}
+		// 		if(test != null && test.isBefore(time)){
+		// 			alarm.splice(i, 1);
+		// 			alert("알림!!! ");
+		// 		}
 				
-			}
+		// 	}
 			
-		},2000)
+		// },2000)
 
 		$input = $('#input');
 		cal_fuc(now_month);
@@ -283,84 +283,86 @@ a:hover {color:#464646;}
 				
 			}),
 			success: function(data){
-
-				var con = '';
-				var diI = data.items.item;
-
-				for(var i in diI){
-					con += `<tr>`
-					for(var j in diI[i]){
-						con += `<td>${diI[i][j]}</td>`
-					}
-					con += `</tr>`
-					if(date == diI[i].locdate){
-						console.log(diI[i]);
-					}
-				}
-
-				$('#lim_t').html(con);
-
-				cal = [];
-				cal[0] = [];
-				var date = input.startOf('month');
-				var dow = date.weekday();
-				var max_days = input.daysInMonth();
-				var str = '';
-				var week = 0;
-				
-				str += `<tr>`
-
-				for(var i=0; i<dow; i++){
-					cal[week].push('');
-					str += `<td><div class="day-contents">&nbsp;</div></td>`
-				}
-				
-				for(var j=1; j<=max_days; j++){
-
-					var inputF = input.format('YYYYMM') + j;
-
-					if(inputF.substr(6, 2) < 10){
-						inputF = input.format('YYYYMM') + '0' + j;
-					}
-
-					var loca_inF = localStorage.getItem(inputF);
-
-					if(loca_inF != undefined && loca_inF != ''){
-						str += `<td><div id="day${j}" class="day-contents schedule" onclick="modal(${j});">${j}</div></td>`
-						cal[week].push({'memo': loca_inF, 'day': j});
-						
-					}else{
-						str += `<td><div id="day${j}" class="day-contents" onclick="modal(${j});">${j}</div></td>`
-						cal[week].push( {'memo': false, 'day': j});
-					}
-					
-					if(dow % 7 === 6){
-						if(j != max_days ){ //|| (dow + 1) % 7 != 0
-							week++;
-							cal[week] = [];
-							
-						}
-						str += `</tr><tr>`
-					}
-					dow++;
-				}
-
-				for(var k=dow; k % 7 !== 0; k++){
-					cal[week].push('');
-					str += `<td><div class="day-contents">&nbsp;</div></td>`
-				}
-
-				str += `</tr>`
-
-				document.getElementById('calendar2').innerHTML = str;
-				document.getElementById('str_cal').innerHTML = input.format('YYYY년 MMMM');
-
+				data_view(data, input);
 			},
 			error:function(error){
 				console.log(error);
 			}
 		});
 		
+	}
+
+	function data_view(data, input) {
+		var con = '';
+		var diI = data.items.item;
+
+		for(var i in diI){
+			con += `<tr>`
+			for(var j in diI[i]){
+				con += `<td>${diI[i][j]}</td>`
+			}
+			con += `</tr>`
+			if(date == diI[i].locdate){
+				console.log(diI[i]);
+			}
+		}
+
+		$('#lim_t').html(con);
+
+		cal = [];
+		cal[0] = [];
+		var date = input.startOf('month');
+		var dow = date.weekday();
+		var max_days = input.daysInMonth();
+		var str = '';
+		var week = 0;
+		
+		str += `<tr>`
+
+		for(var i=0; i<dow; i++){
+			cal[week].push('');
+			str += `<td><div class="day-contents">&nbsp;</div></td>`
+		}
+		
+		for(var j=1; j<=max_days; j++){
+
+			var inputF = input.format('YYYYMM') + j;
+
+			if(inputF.substr(6, 2) < 10){
+				inputF = input.format('YYYYMM') + '0' + j;
+			}
+
+			var loca_inF = localStorage.getItem(inputF);
+
+			if(loca_inF != undefined && loca_inF != ''){
+				str += `<td><div id="day${j}" class="day-contents schedule" onclick="modal(${j});">${j}</div></td>`
+				cal[week].push({'memo': loca_inF, 'day': j});
+				
+			}else{
+				str += `<td><div id="day${j}" class="day-contents" onclick="modal(${j});">${j}</div></td>`
+				cal[week].push( {'memo': false, 'day': j});
+			}
+			
+			if(dow % 7 === 6){
+				if(j != max_days ){ //|| (dow + 1) % 7 != 0
+					week++;
+					cal[week] = [];
+					
+				}
+				str += `</tr><tr>`
+			}
+			dow++;
+		}
+
+		for(var k=dow; k % 7 !== 0; k++){
+			cal[week].push('');
+			str += `<td><div class="day-contents">&nbsp;</div></td>`
+		}
+
+		str += `</tr>`
+
+		document.getElementById('calendar2').innerHTML = str;
+		document.getElementById('str_cal').innerHTML = input.format('YYYY년 MMMM');
 	}
 
 	function upmonth(){
