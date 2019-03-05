@@ -234,38 +234,37 @@ a:hover {color:#464646;}
 
 	window.onload = function(){
 		
-		// setInterval(()=>{
-		// 	var time = moment();
-		// 	var select_time = '';
-		// 	var alarm = [];
+		setInterval(()=>{
+			var time = moment();
+			var select_time = '';
+			var alarm = [];
 			
-		// 	select_time = time.format('LTS');
+			select_time = time.format('LTS');
 
-		// 	$('#a_time').text(select_time);
+			$('#a_time').text(select_time);
 			
-		// 	alarm = JSON.parse(localStorage.getItem(select_time));
+			alarm = JSON.parse(localStorage.getItem(select_time));
+			localStorage.setItem(select_time, JSON.stringify(alarm));
 			
-		// 	localStorage.setItem(select_time, JSON.stringify(alarm));
-			
-		// 	for(var i=0; alarm.length; i++){
-		// 		alert("알림!!! ");
-		// 		// var test = moment('2019-03-02 14:51:00');
-		// 		var test =  moment(alarm[i]);
+			for(var i=0; alarm.length; i++){
+				alert("알림!!! ");
+				// var test = moment('2019-03-02 14:51:00');
+				var test = moment(alarm[i]);
 				
-		// 		if(test != null && test.isBefore(time)){
-		// 			alarm.splice(i, 1);
-		// 			alert("알림!!! ");
-		// 		}
+				if(test != null && test.isBefore(time)){
+					alarm.splice(i, 1);
+					alert("알림!!! ");
+				}
 				
-		// 	}
+			}
 			
-		// },2000)
+		},2000);
 
 		$input = $('#input');
 		cal_fuc(now_month);
 	}
 
-	function cal_fuc(input){
+	function cal_fuc(calf){
 
 		$.ajax({
 			url:'https://c97q48g7ui.execute-api.ap-northeast-2.amazonaws.com/dev/apitest',
@@ -275,15 +274,16 @@ a:hover {color:#464646;}
 				'url':'http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo',
 				'method':'get',
 				'querystring':{
-					'solYear': input.format('YYYY'),
-					'solMonth': input.format('MM'),
+					'solYear': calf.format('YYYY'),
+					'solMonth': calf.format('MM'),
 					'ServiceKey':'lRXTaLfFt0hq2g7EnVQbuGAQ2K9tI7fryCPIuwfp6wkrlTLbHtlk0eISiasOMSNVhS5jMm0gfXmcBdQ0gVPV5A%3D%3D',
 					'_type':'json'
 				}
 				
 			}),
 			success: function(data){
-				data_view(data, input);
+				data_view(calf);
+				holy_day(data);
 			},
 			error:function(error){
 				console.log(error);
@@ -292,9 +292,9 @@ a:hover {color:#464646;}
 		
 	}
 
-	function data_view(data, input) {
+	function holy_day(holy){
 		var con = '';
-		var diI = data.items.item;
+		var diI = holy.items.item;
 
 		for(var i in diI){
 			con += `<tr>`
@@ -302,13 +302,14 @@ a:hover {color:#464646;}
 				con += `<td>${diI[i][j]}</td>`
 			}
 			con += `</tr>`
-			if(date == diI[i].locdate){
-				console.log(diI[i]);
-			}
 		}
 
 		$('#lim_t').html(con);
 
+	}
+
+	function data_view(input){
+		
 		cal = [];
 		cal[0] = [];
 		var date = input.startOf('month');
@@ -459,7 +460,21 @@ a:hover {color:#464646;}
 
 		localStorage.setItem(selected_day, JSON.stringify(set_local));
 
-		$('#schlist'+ number).remove();
+		var text_str = '';
+
+		for(var i=0; i < set_local.length; i++){
+			text_str += `<div id="schlist${i}">`
+				text_str += `<p>- ${set_local[i]}</p>`
+				text_str += `<div class="btn_ml">`
+					text_str += `<button type="button" onclick="delete_spc_list(${i});">삭제</button>`
+					text_str += `<button type="button" onclick="modify_spc_list(${i});">수정</button>`
+					text_str += `<button type="button" onclick="modifySave(${i});">저장</button>`
+				text_str += `</div>`
+			text_str += `</div>`;
+		}
+
+		$schedule.html(text_str);
+
 		// console.log(number);
 	}
 
