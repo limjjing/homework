@@ -239,6 +239,7 @@ a:hover {color:#464646;}
 			var select_time = '';
 			var alarm = [];
 			var $aInput = $('#a_input');
+			var $alarmList = $('#alarm_list');
 			
 			select_time = time.format('LTS');
 
@@ -246,6 +247,12 @@ a:hover {color:#464646;}
 			
 			alarm = JSON.parse(localStorage.getItem(select_time));
 			localStorage.setItem(select_time, JSON.stringify(alarm));
+
+			var al_str = '';
+
+			al_str += `<li></li>`
+
+			$alarmList.text();
 
 			console.log(alarm);
 
