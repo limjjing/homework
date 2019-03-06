@@ -238,6 +238,7 @@ a:hover {color:#464646;}
 			var time = moment();
 			var select_time = '';
 			var alarm = [];
+			var $aInput = $('#a_input');
 			
 			select_time = time.format('LTS');
 
@@ -245,20 +246,22 @@ a:hover {color:#464646;}
 			
 			alarm = JSON.parse(localStorage.getItem(select_time));
 			localStorage.setItem(select_time, JSON.stringify(alarm));
-			
+
+			console.log(alarm);
+
 			for(var i=0; alarm.length; i++){
-				alert("알림!!! ");
+				alert("알림!!!");
 				// var test = moment('2019-03-02 14:51:00');
 				var test = moment(alarm[i]);
 				
 				if(test != null && test.isBefore(time)){
 					alarm.splice(i, 1);
-					alert("알림!!! ");
+					alert("알림!!!");
 				}
 				
 			}
 			
-		},2000);
+		}, 5000);
 
 		$input = $('#input');
 		cal_fuc(now_month);
@@ -341,7 +344,7 @@ a:hover {color:#464646;}
 				
 			}else{
 				str += `<td><div id="day${j}" class="day-contents" onclick="modal(${j});">${j}</div></td>`
-				cal[week].push( {'memo': false, 'day': j});
+				cal[week].push({'memo': false, 'day': j});
 			}
 			
 			if(dow % 7 === 6){
@@ -359,7 +362,7 @@ a:hover {color:#464646;}
 			cal[week].push('');
 			str += `<td><div class="day-contents">&nbsp;</div></td>`
 		}
-
+ 
 		str += `</tr>`
 
 		document.getElementById('calendar2').innerHTML = str;
@@ -399,12 +402,11 @@ a:hover {color:#464646;}
 						text_str += `<button type="button" onclick="modify_spc_list(${i});">수정</button>`
 						text_str += `<button type="button" onclick="modifySave(${i});">저장</button>`
 					text_str += `</div>`
-				text_str += `</div>`;
+				text_str += `</div>`
 			}
 		}
  		
 		$schedule.html(text_str);
-
 		console.log(selected_day);
 	}
 
@@ -433,7 +435,7 @@ a:hover {color:#464646;}
 					text_str += `<button type="button" onclick="modify_spc_list(${i});">수정</button>`
 					text_str += `<button type="button" onclick="modifySave(${i});">저장</button>`
 				text_str += `</div>`
-			text_str += `</div>`;
+			text_str += `</div>`
 		}
 
 		$schedule.html(text_str);
@@ -470,7 +472,7 @@ a:hover {color:#464646;}
 					text_str += `<button type="button" onclick="modify_spc_list(${i});">수정</button>`
 					text_str += `<button type="button" onclick="modifySave(${i});">저장</button>`
 				text_str += `</div>`
-			text_str += `</div>`;
+			text_str += `</div>`
 		}
 
 		$schedule.html(text_str);
