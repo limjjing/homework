@@ -232,46 +232,106 @@ a:hover {color:#464646;}
 	var cal = [];
 	cal[0] = [];
 
+	var select_time = '';
+	var $alarmList;
+
 	window.onload = function(){
-		
 		setInterval(()=>{
-			var time = moment();
-			var select_time = '';
-			var alarm = [];
-			var $aInput = $('#a_input');
-			var $alarmList = $('#alarm_list');
 			
-			select_time = time.format('LTS');
-
-			$('#a_time').text(select_time);
-			
-			alarm = JSON.parse(localStorage.getItem(select_time));
-			localStorage.setItem(select_time, JSON.stringify(alarm));
-
-			var al_str = '';
-
-			al_str += `<li></li>`
-
-			$alarmList.text();
-
-			console.log(alarm);
-
-			for(var i=0; alarm.length; i++){
-				alert("알림!!!");
-				// var test = moment('2019-03-02 14:51:00');
-				var test = moment(alarm[i]);
+			// for(var i=0; alarm.length; i++){
+			// 	// var test = moment('2019-03-02 14:51:00');
+			// 	var test = moment(alarm[i]);
 				
-				if(test != null && test.isBefore(time)){
-					alarm.splice(i, 1);
-					alert("알림!!!");
-				}
+			// 	if(test != null && test.isBefore(time)){
+			// 		alarm.splice(i, 1);
+			// 		console.log("알림!!!");
+			// 	}
 				
-			}
+			// }
+			a_time();
 			
-		}, 5000);
+		}, 1000);
 
 		$input = $('#input');
+		$alarmList = $('#alarm_list');
+
+		alarm_fuc();
 		cal_fuc(now_month);
+	}
+
+	function a_time(){
+		var time = moment();
+		var localSt = localStorage.getItem('alram');
+
+		alarm = JSON.parse(localSt);
+		select_time = time.format('LTS');
+		$('#a_time').text(select_time);
+		
+		var al_str = '';
+
+		if(localSt != undefined && localSt != ''){
+			for(var j=0; j<alarm.length; j++){
+				al_str += `<li>${alarm[j]}</li>`
+				if(alarm[j] == select_time){
+					alert('alram');
+					alarm.splice(j, 1);
+				}
+			}
+			localStorage.setItem('alram', JSON.stringify(alarm));
+		}
+		$alarmList.html(al_str);
+
+	}
+
+	function alarm_fuc(){
+		var time = moment();
+		var $ai_btn = $('#ai_btn');
+		var localSt = localStorage.getItem('alram');
+		
+		select_time = time.format('LTS');
+
+		$('#a_time').text(select_time);
+
+		$ai_btn.on('click', function(){
+			alarm_save();
+		});
+
+		alarm = JSON.parse(localSt);
+
+		var al_str = '';
+
+		if(localSt != undefined && localSt != ''){
+			for(var j=0; j<alarm.length; j++){
+				al_str += `<li>${alarm[j]}</li>`
+			}
+		}
+		
+		$alarmList.html(al_str);
+	}
+
+	function alarm_save(){
+		var alarm = [];
+		var $aInput = $('#a_input');
+		var localSt = localStorage.getItem('alram');
+		
+		if(localSt != undefined && localSt != ''){
+			alarm = JSON.parse(localSt);
+			alarm.push($aInput.val());
+		}else{
+			alarm[0] = $aInput.val();
+		}
+		
+		localStorage.setItem('alram', JSON.stringify(alarm));
+
+		var al_str = '';
+
+		for(var j=0; j<alarm.length; j++){
+			al_str += `<li>${alarm[j]}</li>`
+		}
+
+		$alarmList.html(al_str);
+		console.log(alarm);
+		
 	}
 
 	function cal_fuc(calf){
@@ -369,7 +429,7 @@ a:hover {color:#464646;}
 			cal[week].push('');
 			str += `<td><div class="day-contents">&nbsp;</div></td>`
 		}
- 
+
 		str += `</tr>`
 
 		document.getElementById('calendar2').innerHTML = str;
@@ -414,7 +474,7 @@ a:hover {color:#464646;}
 		}
  		
 		$schedule.html(text_str);
-		console.log(selected_day);
+		console.log(sch_list);
 	}
 
 	function save(){
