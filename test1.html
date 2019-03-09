@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<style>
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script>
+			function submit(){
+
+				window.open('https://search.naver.com/search.naver?sm=top_hty&fbm=0&ie=utf8&query='+$('#search').val());
+
+				window.open('https://www.google.com/search?source=hp&ei=0FSDXIm0K-HFmAXWl6mYDw&q='+$('#search').val()+'&btnK=Google+%EA%B2%80%EC%83%89&oq=asdfs&gs_l=psy-ab.3..0l3j0i10j0j0i10j0j0i10l3.1691.1905..2419...0.0..0.94.459.5......0....1..gws-wiz.....0..0i131.u6wLm_caTKg');
+
+			}
+
+			$(()=>{
+				$('#search').keydown((e)=>{
+					console.log(e.keyCode);
+				})
+			})
+		
+
+		</script>
+	</head>
+	<body>
+		<input type="checkbox" name="test">1
+		<input type="checkbox" name="test">2
+		<input type="checkbox" name="test">3
+
+		<input type="text" name="search" id="search">
+		<button onclick="submit()">열기</button>
+	</body>
+</html>
+
+
+

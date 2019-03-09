@@ -20,8 +20,11 @@
 
 	var select_time = '';
 	var $alarmList;
+	var localSt = localStorage.getItem('alram');
 
 	window.onload = function(){
+
+
 		setInterval(()=>{
 			
 			// for(var i=0; alarm.length; i++){
@@ -47,32 +50,40 @@
 
 	function a_time(){
 		var time = moment();
-		var localSt = localStorage.getItem('alram');
-
+		
 		alarm = JSON.parse(localSt);
 		select_time = time.format('LTS');
 		$('#a_time').text(select_time);
 		
 		var al_str = '';
+		var change_flag = false;
 
 		if(localSt != undefined && localSt != ''){
 			for(var j=0; j<alarm.length; j++){
-				al_str += `<li>${alarm[j]}</li>`
 				if(alarm[j] == select_time){
 					alert('alram');
 					alarm.splice(j, 1);
+					change_flag = true;
 				}
 			}
-			localStorage.setItem('alram', JSON.stringify(alarm));
 		}
-		$alarmList.html(al_str);
+		if(change_flag){
+			localStorage.setItem('alram', JSON.stringify(alarm));
+			localSt =JSON.stringify(alarm);
+			for(var j=0; j<alarm.length; j++){
+				al_str += `<li>${alarm[j]}</li>`
+			}
+
+			$alarmList.html(al_str);
+		}
+		
+	
 
 	}
 
 	function alarm_fuc(){
 		var time = moment();
 		var $ai_btn = $('#ai_btn');
-		var localSt = localStorage.getItem('alram');
 		
 		select_time = time.format('LTS');
 
@@ -98,7 +109,6 @@
 	function alarm_save(){
 		var alarm = [];
 		var $aInput = $('#a_input');
-		var localSt = localStorage.getItem('alram');
 		
 		if(localSt != undefined && localSt != ''){
 			alarm = JSON.parse(localSt);
@@ -108,6 +118,7 @@
 		}
 		
 		localStorage.setItem('alram', JSON.stringify(alarm));
+		localSt =JSON.stringify(alarm);
 
 		var al_str = '';
 
@@ -243,23 +254,29 @@
 		
 		$('#modal').show();
 		
-		var text_str = '';
+		// var text_str = '';
 		var local_gs = localStorage.getItem(selected_day);
+
+		drawing_list(sch_list);
+
+
 		if(local_gs != undefined){
 			var sch_list = JSON.parse(local_gs);
-			for(var i =0; i < sch_list.length; i++){
-				text_str += `<div id="schlist${i}">`
-					text_str += `<p>- ${sch_list[i]}</p>`
-					text_str += `<div class="btn_ml">`
-						text_str += `<button type="button" onclick="delete_spc_list(${i});">삭제</button>`
-						text_str += `<button type="button" onclick="modify_spc_list(${i});">수정</button>`
-						text_str += `<button type="button" onclick="modifySave(${i});">저장</button>`
-					text_str += `</div>`
-				text_str += `</div>`
-			}
+			drawing_list(sch_list);
+
+			// for(var i =0; i < sch_list.length; i++){
+			// 	text_str += `<div id="schlist${i}">`
+			// 		text_str += `<p>- ${sch_list[i]}</p>`
+			// 		text_str += `<div class="btn_ml">`
+			// 			text_str += `<button type="button" onclick="delete_spc_list(${i});">삭제</button>`
+			// 			text_str += `<button type="button" onclick="modify_spc_list(${i});">수정</button>`
+			// 			text_str += `<button type="button" onclick="modifySave(${i});">저장</button>`
+			// 		text_str += `</div>`
+			// 	text_str += `</div>`
+			// }
 		}
  		
-		$schedule.html(text_str);
+		// $schedule.html(text_str);
 		console.log(sch_list);
 	}
 
@@ -278,20 +295,21 @@
 
 		localStorage.setItem(selected_day, JSON.stringify(set_local));
 
-		var text_str = '';
+		drawing_list(set_local);
+		// var text_str = '';
 
-		for(var i=0; i < set_local.length; i++){
-			text_str += `<div id="schlist${i}">`
-				text_str += `<p>- ${set_local[i]}</p>`
-				text_str += `<div class="btn_ml">`
-					text_str += `<button type="button" onclick="delete_spc_list(${i});">삭제</button>`
-					text_str += `<button type="button" onclick="modify_spc_list(${i});">수정</button>`
-					text_str += `<button type="button" onclick="modifySave(${i});">저장</button>`
-				text_str += `</div>`
-			text_str += `</div>`
-		}
+		// for(var i=0; i < set_local.length; i++){
+		// 	text_str += `<div id="schlist${i}">`
+		// 		text_str += `<p>- ${set_local[i]}</p>`
+		// 		text_str += `<div class="btn_ml">`
+		// 			text_str += `<button type="button" onclick="delete_spc_list(${i});">삭제</button>`
+		// 			text_str += `<button type="button" onclick="modify_spc_list(${i});">수정</button>`
+		// 			text_str += `<button type="button" onclick="modifySave(${i});">저장</button>`
+		// 		text_str += `</div>`
+		// 	text_str += `</div>`
+		// }
 
-		$schedule.html(text_str);
+		// $schedule.html(text_str);
 
 		$input.val('');
 
@@ -315,20 +333,22 @@
 
 		localStorage.setItem(selected_day, JSON.stringify(set_local));
 
-		var text_str = '';
 
-		for(var i=0; i < set_local.length; i++){
-			text_str += `<div id="schlist${i}">`
-				text_str += `<p>- ${set_local[i]}</p>`
-				text_str += `<div class="btn_ml">`
-					text_str += `<button type="button" onclick="delete_spc_list(${i});">삭제</button>`
-					text_str += `<button type="button" onclick="modify_spc_list(${i});">수정</button>`
-					text_str += `<button type="button" onclick="modifySave(${i});">저장</button>`
-				text_str += `</div>`
-			text_str += `</div>`
-		}
+		drawing_list(set_local);
+		// var text_str = '';
 
-		$schedule.html(text_str);
+		// for(var i=0; i < set_local.length; i++){
+		// 	text_str += `<div id="schlist${i}">`
+		// 		text_str += `<p>- ${set_local[i]}</p>`
+		// 		text_str += `<div class="btn_ml">`
+		// 			text_str += `<button type="button" onclick="delete_spc_list(${i});">삭제</button>`
+		// 			text_str += `<button type="button" onclick="modify_spc_list(${i});">수정</button>`
+		// 			text_str += `<button type="button" onclick="modifySave(${i});">저장</button>`
+		// 		text_str += `</div>`
+		// 	text_str += `</div>`
+		// }
+
+		// $schedule.html(text_str);
 
 		// console.log(number);
 	}
@@ -346,6 +366,23 @@
 		localStorage.setItem(selected_day, JSON.stringify(set_local));
 
 		$('#schlist'+ number).find('p').text('- '+ $input.val());
+	}
+
+	function drawing_list(list){
+		var text_str = '';
+
+		for(var i=0; i < list.length; i++){
+			text_str += `<div id="schlist${i}">`
+				text_str += `<p>- ${list[i]}</p>`
+				text_str += `<div class="btn_ml">`
+					text_str += `<button type="button" onclick="delete_spc_list(${i});">삭제</button>`
+					text_str += `<button type="button" onclick="modify_spc_list(${i});">수정</button>`
+					text_str += `<button type="button" onclick="modifySave(${i});">저장</button>`
+				text_str += `</div>`
+			text_str += `</div>`
+		}
+
+		$schedule.html(text_str);
 	}
 
 </script>
