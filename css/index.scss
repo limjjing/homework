@@ -16,12 +16,13 @@ $middle:middle;
 
 @mixin cBtn {
 	position: $absolute;
-	top: 29px;
-	width: 12px;
-	height: 27px;
+	top: 47px;
+	width: 10px;
+	height: 21px;
 	text-indent: -4000px;
 	background-image: url(../images/arrows.png);
 	background-repeat: no-repeat;
+	background-size: 30px 21px;
 	cursor: pointer;
 	filter: brightness(0) invert(1);
 	-webkit-user-select: $none;
@@ -88,14 +89,14 @@ a {
 				.clndr-next-button {
 					@include cBtn;
 					right: 0;
-					background-position: -30px 0px;
+					background-position: -20px 0px;
 				}
 				.clndr-next-button.inactive:hover {
 					cursor: default;
 				}
 				.clndr-previous-button {
 					@include cBtn;
-					right: 50px;
+					right: 37px;
 				}
 				.clndr-previous-button.inactive:hover {
 					cursor: default;
@@ -110,6 +111,7 @@ a {
 			margin: 0 auto;
 			background: $whiteColor;
 			thead {
+				padding:0 10px;
 				box-shadow: 0 0.1em 1em 0 rgba(0, 0, 0, 0.25), 0 0.1em 0.5em 1px rgba(0, 0, 0, 0.35), 0 1em 2em 1px rgba(0, 0, 0, 0.15);
 				.header-day {
 					vertical-align: $middle;
@@ -125,6 +127,8 @@ a {
 			}
 
 			tbody{
+				padding:0 10px;
+				box-shadow: 0 0.1em 1em 0 rgba(0, 0, 0, 0.25), 0 0.1em 0.5em 1px rgba(0, 0, 0, 0.35), 0 1em 2em 1px rgba(0, 0, 0, 0.15);
 				tr:first-child {
 					td {
 						padding: 20px 10px 10px 10px;
