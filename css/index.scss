@@ -30,11 +30,12 @@ $middle:middle;
 	-ms-user-select: $none;
 }
 
-html, body {height:100%;}
-
 body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, p, button, select, input, textarea, th, td {margin:0; padding:0;}
 
+html, body {height:100%;}
+
 body {
+	/*background:rgb(43, 43, 43);*/
 	background-image: linear-gradient(135deg, #FF5572, #FF7555);
 	/*font: 12px 'Lucida Grande', Verdana, sans-serif;*/
 	font: {
@@ -66,8 +67,9 @@ a {
 }
 
 .cal1 {
+	overflow:hidden;
 	.clndr {
-		width:400px; margin:100px auto 0;
+		position:relative; width:400px; margin:100px auto 0;
 		.clndr-controls {
 			position: relative;
 			color: $whiteColor;
@@ -190,8 +192,8 @@ a {
 #modal {
 	display: $none;
 	position: $absolute;
-	top: 550px;
-	left: 400px;
+	top: 257px;
+	left: 410px;
 	width: 300px;
 	padding-top:20px;
 	background:#fafafa;
@@ -241,8 +243,18 @@ a {
 #alarm {
 	width:300px; 
 	height:200px; 
-	margin-top:60px; 
-	background-color: #f6a89b;}
+	margin:60px auto 0; 
+	background-color: #f6a89b;
+	#a_time {
+		text-align:center;
+		margin-bottom:20px;
+		font: {
+			family:'Playfair Display'; 
+			size:20px; 
+			weight:bold;
+		}
+	}
+}
 
 #lim_t {
 	margin: 50px 0 0 20px;

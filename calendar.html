@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>calendar</title>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Playfair+Display" />
@@ -389,66 +389,76 @@
 </script>
 </head>
 <body>
-<div class="cal1">
-	<div class="clndr">
-		<div class="clndr-controls">
-			<div class="clndr-control-button">
-				<p class="clndr-previous-button"onclick="downmonth();">previous</p>
+<div class="wrap">
+	<div class="cal1">
+		<div class="clndr">
+			<div class="clndr-controls">
+				<div class="clndr-control-button">
+					<p class="clndr-previous-button"onclick="downmonth();">previous</p>
+				</div>
+				<div id="str_cal" class="month"></div>
+				<div class="clndr-control-button rightalign">
+					<p class="clndr-next-button" onclick="upmonth();">next</p>
+				</div>
 			</div>
-			<div id="str_cal" class="month"></div>
-			<div class="clndr-control-button rightalign">
-				<p class="clndr-next-button" onclick="upmonth();">next</p>
+			<table id="calendar" class="clndr-table">
+				<thead>
+					<tr class="header-days">
+						<th class="header-day">Sun</th>
+						<th class="header-day">Mon</th>
+						<th class="header-day">Tue</th>
+						<th class="header-day">Wed</th>
+						<th class="header-day">Thu</th>
+						<th class="header-day">Fri</th>
+						<th class="header-day">Sat</th>
+					</tr>
+				</thead>
+				<tbody id="calendar2">
+				</tbody>
+			</table>
+
+			<div id="modal">
+				<div id="schedule"></div>
+				<div class="input_box">
+					<input type="text" id="input">
+				</div>
+			
+				<div class="btn_line">
+			
+					<div class="save">
+						<button type="button" onclick="save();">저장</button>
+					</div>
+			
+					<div class="all_delete">
+						<button type="button" onclick="sDelete();">모두삭제</button>
+					</div>
+			
+				</div>
+			
 			</div>
+
 		</div>
-		<table id="calendar" class="clndr-table">
-			<thead>
-				<tr class="header-days">
-					<th class="header-day">Sun</th>
-					<th class="header-day">Mon</th>
-					<th class="header-day">Tue</th>
-					<th class="header-day">Wed</th>
-					<th class="header-day">Thu</th>
-					<th class="header-day">Fri</th>
-					<th class="header-day">Sat</th>
-				</tr>
-			</thead>
-			<tbody id="calendar2">
-			</tbody>
-		</table>
-	</div>
-</div>
-<div id="modal">
-	<div id="schedule"></div>
-	<div class="input_box">
-		<input type="text" id="input">
 	</div>
 
-	<div class="btn_line">
 
-		<div class="save">
-			<button type="button" onclick="save();">저장</button>
+	<div id="alarm">
+		<div id="a_time"></div>
+		<div id="alarm_list">
+			<ul></ul>
 		</div>
-
-		<div class="all_delete">
-			<button type="button" onclick="sDelete();">모두삭제</button>
+		<div id="a_input_line">
+			<select id="ampm">
+				<option>오전</option>
+				<option>오후</option>
+			</select>
+			<select id="hours"></select>
+			<select id="minutes"></select>
+			<button type="button" id="ai_btn">저장</button>
 		</div>
-
 	</div>
 
+	<table id="lim_t">
+	</table>
 </div>
-
-<div id="alarm">
-	<div id="a_time"></div>
-	<div id="alarm_list">
-		<ul></ul>
-	</div>
-	<div id="a_input_line">
-		<input id="a_input" type="text">
-		<button type="button" id="ai_btn">저장</button>
-	</div>
-</div>
-
-<table id="lim_t">
-</table>
 </body>
 </html>
