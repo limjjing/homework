@@ -75,8 +75,6 @@
 
 			$alarmList.html(al_str);
 		}
-		
-	
 
 	}
 
@@ -93,6 +91,18 @@
 		});
 
 		alarm = JSON.parse(localSt);
+
+		var al_num = '';
+
+		for(var i=0; i<60; i++){
+			if(i < 10){
+				i = '0' + i;
+			}
+			al_str += `<option>${i}</option>`
+		}
+
+		$('#hours').html(al_str);
+		$('#minutes').html(al_str);
 
 		var al_str = '';
 
@@ -256,10 +266,7 @@
 		// var text_str = '';
 		var local_gs = localStorage.getItem(selected_day);
 
-		drawing_list(sch_list);
-
-
-		if(local_gs != undefined){
+		if(local_gs != undefined && local_gs != ''){
 			var sch_list = JSON.parse(local_gs);
 			drawing_list(sch_list);
 
@@ -370,7 +377,7 @@
 	function drawing_list(list){
 		var text_str = '';
 
-		for(var i=0; i < list.length; i++){
+		for(var i=0; i<list.length; i++){
 			text_str += `<div id="schlist${i}">`
 				text_str += `<p>- ${list[i]}</p>`
 				text_str += `<div class="btn_ml">`

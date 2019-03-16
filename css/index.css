@@ -58,6 +58,10 @@ legend {
   overflow: hidden;
 }
 
+button, input[type="button"], input[type="submit"], input[type="image"] {
+  cursor: pointer;
+}
+
 a {
   color: #464646;
   text-decoration: none;
@@ -78,10 +82,6 @@ a:active {
 
 a:hover {
   color: #464646;
-}
-
-.cal1 {
-  overflow: hidden;
 }
 
 .cal1 .clndr {
@@ -247,7 +247,7 @@ a:hover {
 #modal {
   display: none;
   position: absolute;
-  top: 257px;
+  top: 82px;
   left: 410px;
   width: 300px;
   padding-top: 20px;
@@ -343,10 +343,24 @@ a:hover {
 
 #alarm #a_time {
   text-align: center;
-  margin-bottom: 20px;
+  padding: 20px 0;
   font-family: 'Playfair Display';
   font-size: 20px;
   font-weight: bold;
+}
+
+#alarm #a_input_line {
+  text-align: center;
+}
+
+#alarm #a_input_line #ai_btn {
+  height: 30px;
+  padding: 0 10px;
+  background: #ec971f;
+  border: 1px solid #d58512;
+  color: #fff;
+  font-size: 13px;
+  line-height: 17px;
 }
 
 #lim_t {
