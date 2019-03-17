@@ -6,11 +6,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 	function submit(){
-
 		window.open('https://search.naver.com/search.naver?sm=top_hty&fbm=0&ie=utf8&query='+$('#search').val());
 
 		window.open('https://www.google.com/search?source=hp&ei=0FSDXIm0K-HFmAXWl6mYDw&q='+$('#search').val()+'&btnK=Google+%EA%B2%80%EC%83%89&oq=asdfs&gs_l=psy-ab.3..0l3j0i10j0j0i10j0j0i10l3.1691.1905..2419...0.0..0.94.459.5......0....1..gws-wiz.....0..0i131.u6wLm_caTKg');
-
 	}
 
 	$(()=>{
@@ -18,18 +16,28 @@
 			console.log(e.keyCode);
 		})
 	})
-
-
 </script>
 </head>
 <body>
-	<input type="checkbox" name="test">1
-	<input type="checkbox" name="test">2
-	<input type="checkbox" name="test">3
-
-	<div class="search_wrap">
-		<div class="input_b"><input type="text" name="search" id="search"></div>
-		<button type="submit" onclick="submit()"><span></span></button>
+	<div class="wrap">
+		<div id="header">
+			<ul class="h_util">
+				<li>
+					<button type="button"><span>메뉴</span></button>
+					<div class="menu_icon">
+						<ul>
+							<li><a href="javascript:vold(0);">calendar</a></li>
+							<li><a href="javascript:vold(0);">alarm</a></li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+			<div class="search_wrap">
+				<div class="input_b"><input type="text" name="search" id="search"></div>
+				<button type="submit" onclick="submit()"><span></span></button>
+			</div>
+		
 	</div>
 </body>
 </html>

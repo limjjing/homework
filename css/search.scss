@@ -30,11 +30,63 @@ a:hover {color:$baseColor;}
 
 body {background:#dedede;}
 
+#header {
+	&:after {
+		display:block;
+		content:'';
+		clear:both;
+	}
+	ul.h_util {
+		float:right;
+		margin:15px 15px 0 0;
+		li {
+			position:relative;
+			float:left;
+			button {
+				width:26px;
+				height:26px;
+				span {
+					display:block;
+					width:16px;
+					height:16px;
+					margin:0 auto;
+					background: {
+						image:url(../images/menu.png);
+						repeat:no-repeat;
+						size:16px 16px;
+					}
+					text-indent:-9999px;
+					opacity:0.6;
+				}
+				&:hover{
+					span {
+						opacity:1;
+					}
+				}
+			}
+			.menu_icon {
+				display:none;
+				position:absolute;
+				top:30px;
+				right:0;
+				width:250px;
+				background:#fff;
+				ul {
+					overflow:hidden;
+					li {
+						float:left;
+					}
+				}
+			}
+		}
+	}
+}
+
 .search_wrap {
 	position:relative;
 	width: 350px;
 	height: 40px;
-	margin:50px 0 0 100px;
+	margin:200px auto 0;
 	border-radius: 40px;
 	box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 	background: #fff;
@@ -54,20 +106,21 @@ body {background:#dedede;}
 	button {
 		display:block;
 		position:absolute;
-		top:10px;
-		right:15px;
-		width:20px;
-		height:20px;
+		top:0;
+		right:5px;
+		width:40px;
+		height:40px;
 		background:none;
 		border:none;
 		span {
 			display:block;
-			width:20px;
-			height:20px;
+			width:18px;
+			height:18px;
+			margin:0 auto;
 			background: {
 				image:url(../images/search.png);
 				repeat:no-repeat;
-				size:20px 20px;
+				size:18px 18px;
 			}
 		}
 	}
