@@ -1,0 +1,68 @@
+@charset "utf-8";
+
+$baseColor:#464646;
+
+body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, p, button, select, input, textarea, th, td {margin:0; padding:0;}
+
+body {font-family:AppleSDGothicNeo-Regular,'Malgun Gothic','맑은 고딕',dotum,'돋움',sans-serif; font-size:12px; color:$baseColor;}
+
+img {border:none; vertical-align:top;}
+
+ul li , ol li {list-style:none;}
+
+fieldset {border:none;}
+
+table {border-collapse:collapse;}
+caption {display:none;}
+
+img, fieldset, button {border:0; padding:0px;}
+button {background:none;}
+input, select {vertical-align:middle;}
+legend {width:0; height:0; font-size:0; position:absolute; overflow:hidden;} 
+button, input, textarea {outline:none;}
+button, input[type="button"], input[type="submit"], input[type="image"] {cursor:pointer;}
+
+a {color:$baseColor; text-decoration:none; cursor:pointer;}
+a:link {color:$baseColor;}
+a:visited {color:$baseColor;}
+a:active {color:$baseColor;}
+a:hover {color:$baseColor;}
+
+body {background:#333;}
+
+#alarm {
+	position:absolute;
+	top:50%;
+	left:0;
+	right:0;
+	text-align:center;
+	margin-top:-100px;
+	#a_time {
+		font: {
+			family:'Orbitron', sans-serif;
+			size:60px;
+			weight:bold;
+		}
+		color:#fff;
+	}
+	#a_input_line {
+		margin:40px 0 20px 0;
+		select {
+			height:25px;
+			margin:0 1px;
+		}
+	}
+	.b_btn {
+		button {
+			cursor: pointer;
+			margin: 0 5px;
+			padding: 10px 30px;
+			background: transparent;
+			border: 1px solid #ccc;
+			border-radius: 8px;
+			outline: 0;
+			color: #fff;
+			transition: all ease 300ms;
+		}
+	}
+}
