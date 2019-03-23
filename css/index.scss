@@ -68,9 +68,9 @@ a {
 }
 
 .cal1 {
-	
+	overflow:hidden;
 	.clndr {
-		position:relative; width:400px; margin:100px auto 0;
+		position:absolute; top:50%; left:0; right:0; width:400px; margin:-255px auto 0;
 		.clndr-controls {
 			position: relative;
 			color: $whiteColor;

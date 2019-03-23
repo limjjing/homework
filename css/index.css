@@ -84,10 +84,17 @@ a:hover {
   color: #464646;
 }
 
+.cal1 {
+  overflow: hidden;
+}
+
 .cal1 .clndr {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
   width: 400px;
-  margin: 100px auto 0;
+  margin: -255px auto 0;
 }
 
 .cal1 .clndr .clndr-controls {

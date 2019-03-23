@@ -11,126 +11,112 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/locale/ko.js"></script>
 <script>
 
-	var select_time = '';
+var selected = '';
+	var $aTime;
 	var $alarmList;
-	var localSt = localStorage.getItem('alram');
 
 	window.onload = function(){
+		$aTime = $('#a_time');
+		$alarmList = $('#alarm_list ul');
+
+		al_fuc();
+
 		setInterval(()=>{
-			
-			// for(var i=0; alarm.length; i++){
-			// 	// var test = moment('2019-03-02 14:51:00');
-			// 	var test = moment(alarm[i]);
-				
-			// 	if(test != null && test.isBefore(time)){
-			// 		alarm.splice(i, 1);
-			// 		console.log("알림!!!");
-			// 	}
-				
-			// }
 			a_time();
-			
 		}, 1000);
-
-		$input = $('#input');
-		$alarmList = $('#alarm_list');
-
-		alarm_fuc();
-		cal_fuc(now_month);
 	}
 
 	function a_time(){
 		var time = moment();
+		var localF = localStorage.getItem('alarm');
+		var al_check = false;
+		selected = time.format('LTS');
+		alArr = JSON.parse(localF);
 		
-		alarm = JSON.parse(localSt);
-		select_time = time.format('LTS');
-		$('#a_time').text(select_time);
-		
-		var al_str = '';
-		var change_flag = false;
+		$aTime.text(selected);
 
-		if(localSt != undefined && localSt != ''){
-			for(var j=0; j<alarm.length; j++){
-				if(alarm[j] == select_time){
-					alert('alram');
-					alarm.splice(j, 1);
-					change_flag = true;
+		if(localF != undefined && localF != ''){
+			for(var i=0; i<alArr.length; i++){
+				if(alArr[i] == selected){
+					alert('alarm');
+					alArr.splice(i, 1);
+					al_check = true;
 				}
 			}
+			localStorage.setItem('alarm', JSON.stringify(alArr));
 		}
-		if(change_flag){
-			localStorage.setItem('alram', JSON.stringify(alarm));
-			localSt = JSON.stringify(alarm);
-			for(var j=0; j<alarm.length; j++){
-				al_str += `<li>${alarm[j]}</li>`
-			}
-
-			$alarmList.html(al_str);
+		
+		if(al_check){
+			al_data(alArr);
 		}
-
+		
 	}
 
-	function alarm_fuc(){
+	function al_fuc(){
 		var time = moment();
-		var $ai_btn = $('#ai_btn');
-		
-		select_time = time.format('LTS');
+		selected = time.format('LTS');
+		var localF = localStorage.getItem('alarm');
+		alArr = JSON.parse(localF);
 
-		$('#a_time').text(select_time);
+		$aTime.text(selected);
 
-		$ai_btn.on('click', function(){
-			alarm_save();
+		$('#ai_btn').on('click', function(){
+			al_save();
 		});
 
-		alarm = JSON.parse(localSt);
-
-		var al_num = '';
-
-		for(var i=0; i<60; i++){
-			if(i < 10){
-				i = '0' + i;
-			}
-			al_str += `<option>${i}</option>`
+		if(localF != undefined && localF != ''){
+			al_data(alArr);
 		}
 
-		$('#hours').html(al_str);
-		$('#minutes').html(al_str);
-		$('#second').html(al_str);
+		var alOp = '';
+		var alOp2 = '';
 
-		var al_str = '';
-
-		if(localSt != undefined && localSt != ''){
-			for(var j=0; j<alarm.length; j++){
-				al_str += `<li>${alarm[j]}</li>`
-			}
+		for(var i=1; i<=12; i++){
+			alOp += `<option>${i}</option>`
 		}
+
+		for(var j=0; j<60; j++){
+			if(j < 10){
+				j = '0' + j;
+			}
+			alOp2 += `<option>${j}</option>`
+		}
+
+		$('#hours').html(alOp);
+		$('#minutes').html(alOp2);
+		$('#seconds').html(alOp2);
 		
-		$alarmList.html(al_str);
 	}
 
-	function alarm_save(){
-		var alarm = [];
-		var $aInput = $('#a_input');
+	function al_save(){
+		var alArr = [];
+		var localF = localStorage.getItem('alarm');
+		var selectVal = $('#ampm').val() + ' ' + $('#hours').val() + ':' + $('#minutes').val() + ':' + $('#seconds').val();
 		
-		if(localSt != undefined && localSt != ''){
-			alarm = JSON.parse(localSt);
-			alarm.push($aInput.val());
+		if(localF != undefined && localF != ''){
+			alArr = JSON.parse(localF);
+			alArr.push(selectVal);
 		}else{
-			alarm[0] = $aInput.val();
+			//alArr[0] = $aInput.val();
+			alArr[0] = selectVal;
 		}
-		
-		localStorage.setItem('alram', JSON.stringify(alarm));
-		localSt = JSON.stringify(alarm);
 
-		var al_str = '';
+		console.log(alArr);
 
-		for(var j=0; j<alarm.length; j++){
-			al_str += `<li>${alarm[j]}</li>`
+		localStorage.setItem('alarm', JSON.stringify(alArr));
+
+		al_data(alArr);
+
+	}
+
+	function al_data(data){
+		al_str = '';
+
+		for(var i=0; i<data.length; i++){
+			al_str += `<li>${data[i]}</li>`
 		}
 
 		$alarmList.html(al_str);
-		console.log(alarm);
-		
 	}
 
 </script>
@@ -149,7 +135,7 @@
 			</select>
 			<select id="hours"></select>
 			<select id="minutes"></select>
-			<select id="second"></select>
+			<select id="seconds"></select>
 		</div>
 		<div class="b_btn">
 			<button type="button" id="ai_btn">Set Alarm</button>
