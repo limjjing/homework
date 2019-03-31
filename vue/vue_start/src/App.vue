@@ -1,12 +1,14 @@
 <template>
   <div id="app">
-    <div id="nav">
+	  <headNavi></headNavi>
+	  <leftNavi></leftNavi>
+	  <container></container>
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <router-view/>
+    <router-view/> -->
   </div>
-  
 </template>
 
 <style>
@@ -32,7 +34,14 @@
 </style>
 
 <script>
-// @ is an alias to /src
-
+import headNavi from '@/components/header.vue'
+import leftNavi from '@/components/leftNavi.vue'
+import container from '@/components/container.vue'
+export default {
+	components:{
+		headNavi,
+		leftNavi,
+		container
+	}
+}
 </script>
-
