@@ -6,28 +6,28 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-	<div class="wrap">
-		<div id="header">
-			<ul class="h_util">
-				<li class="menulist">
-					<button type="button" class="app_btn"><span>메뉴</span></button>
-					<div class="menu_icon">
-						<ul>
-							<li><a href="calendar.html">calendar</a></li>
-							<li><a href="alarm.html">alarm</a></li>
-						</ul>
-					</div>
-				</li>
-			</ul>
-		</div>
-			<div class="search_wrap">
-				<div class="input_b"><input type="text" name="search" id="search"></div>
-				<button type="submit" onclick="submit()"><span></span></button>
-			</div>
-		
+<div class="wrap">
+	<div id="header">
+		<ul class="h_util">
+			<li class="menulist">
+				<button type="button" class="app_btn"><span>메뉴</span></button>
+				<div class="menu_icon">
+					<ul>
+						<li><a href="calendar.html">calendar</a></li>
+						<li><a href="alarm.html">alarm</a></li>
+					</ul>
+				</div>
+			</li>
+		</ul>
 	</div>
-
-	<script>
+	<div class="search_wrap">
+		<div class="input_b">
+			<input type="text" name="search" id="search">
+		</div>
+		<button type="submit" onClick="submit()"><span></span></button>
+	</div>
+</div>
+<script>
 		function submit(){
 			window.open('https://search.naver.com/search.naver?sm=top_hty&fbm=0&ie=utf8&query='+$('#search').val());
 	
@@ -56,6 +56,3 @@
 	</script>
 </body>
 </html>
-
-
-

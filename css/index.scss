@@ -4,18 +4,13 @@ $linkColor:#464646;
 $whiteColor:#fff;
 $color1:#C3C3E5;
 $color2:#ddd;
-$center:center;
-$absolute:absolute;
-$none:none;
-$hidden:hidden;
-$middle:middle;
 
 @mixin lColor {
 	color:$linkColor;
 }
 
 @mixin cBtn {
-	position: $absolute;
+	position: absolute;
 	top: 47px;
 	width: 10px;
 	height: 21px;
@@ -25,9 +20,9 @@ $middle:middle;
 	background-size: 30px 21px;
 	cursor: pointer;
 	filter: brightness(0) invert(1);
-	-webkit-user-select: $none;
-	-moz-user-select: $none;
-	-ms-user-select: $none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 }
 
 body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, p, button, select, input, textarea, th, td {margin:0; padding:0;}
@@ -45,20 +40,20 @@ body {
 	@include lColor;
 }
 
-img {border:$none; vertical-align:top;}
-ul li , ol li {list-style:$none;}
-fieldset {border:$none;}
+img {border:none; vertical-align:top;}
+ul li , ol li {list-style:none;}
+fieldset {border:none;}
 table {border-collapse:collapse;}
-caption {display:$none;}
+caption {display:none;}
 img, fieldset, button {border:0; padding:0;}
-button {background:$none;}
-input, select {vertical-align:$middle;}
-legend {width:0; height:0; font-size:0; position:$absolute; overflow:$hidden;} 
+button {background:none;}
+input, select {vertical-align:middle;}
+legend {width:0; height:0; font-size:0; position:absolute; overflow:hidden;} 
 button, input[type="button"], input[type="submit"], input[type="image"] {cursor:pointer;}
 
 a {
 	@include lColor;
-	text-decoration:$none;
+	text-decoration:none;
 	cursor:pointer;
 	
 	&:link {@include lColor;}
@@ -117,8 +112,8 @@ a {
 				padding:0 10px;
 				box-shadow: 0 0.1em 1em 0 rgba(0, 0, 0, 0.25), 0 0.1em 0.5em 1px rgba(0, 0, 0, 0.35), 0 1em 2em 1px rgba(0, 0, 0, 0.15);
 				.header-day {
-					vertical-align: $middle;
-					text-align: $center;
+					vertical-align: middle;
+					text-align: center;
 					background: #404040;
 					color: $whiteColor;
 					font: {
@@ -143,7 +138,7 @@ a {
 				height: 45px;
 				td {
 					vertical-align: top;
-					text-align: $center;
+					text-align: center;
 					.day-contents {
 						box-sizing: border-box;
 						font-size: 15px;
@@ -158,11 +153,11 @@ a {
 					width: 100%;
 					height: inherit;
 					color: #3a3b36;
-					vertical-align: $middle;
+					vertical-align: middle;
 				}
 				.day.today {
 					color: #5482AB!important;
-					text-decoration: $none;
+					text-decoration: none;
 					border: 1px solid #5482AB;
 				}
 				.day.today:hover {
@@ -191,8 +186,8 @@ a {
 }
 
 #modal {
-	display: $none;
-	position: $absolute;
+	display: none;
+	position: absolute;
 	top: 82px;
 	left: 410px;
 	width: 300px;
@@ -206,7 +201,7 @@ a {
 	#schedule {
 		min-height:20px; color:#767676;
 		.btn_ml {
-			overflow:$hidden; margin-top:10px;
+			overflow:hidden; margin-top:10px;
 			button {
 				display:block; float:left; height:18px; padding:0 5px; margin-right:5px; background:#dedede; border:1px solid $color2; font-size:11px; line-height:12px; color:#4f4f4f;
 			}
@@ -219,7 +214,7 @@ a {
 		}
 	}
 	.btn_line {
-		overflow:$hidden;
+		overflow:hidden;
 		div {
 			float:left; margin-right:10px;
 			button {
