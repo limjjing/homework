@@ -1,11 +1,13 @@
 <template>
 	<div id="leftNavi">
-
+		<a href="javascript:void(0);">테스트</a>
 	</div>
 </template>
 
-<style scoped>
-	#leftNavi {float:left;width:300px; height:600px; background:#ddd;}
+<style lang="scss" scoped>
+	#leftNavi {position:absolute; width:240px; height:600px; background:#ddd;
+		a{color:#ddd;}
+	}
 </style>
 
 <script>

@@ -11,9 +11,21 @@
 	</div>
 </template>
 
-<style scoped>
-	#header {background:red;}
-	.l_menu , .logo{float:left;}
+<style lang="scss" scoped>
+	#header {
+		height:56px;
+		background:#282828;
+		.l_menu {
+			float:left;
+			button {
+				width:40px;
+				height:40px;
+				color:#fff;
+			}
+		}
+		.logo {float:left;}
+	}
+	
 </style>
 
 <script>
