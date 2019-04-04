@@ -32,13 +32,17 @@
 		.h_inner {
 			display:flex;
 			flex-direction:row;
+			-webkit-align-items:center;
+			align-items:center;
+			-webkit-justify-content:space-between;
+			justify-content:space-between;
 			.h_l {
 				display:flex;
 				flex-direction:row;
 				.l_menu {
-					float:left;
-					margin-top:10px;
+					margin:8px 16px 0 0;
 					button {
+						display:block;
 						width:40px; 
 						height:40px; 
 						color:#fff;
@@ -52,8 +56,7 @@
 					}
 				}
 				.logo {
-					float:left;
-					margin:19px 0 0 0;
+					
 					a {
 						display:block; 
 						width:96px; 
@@ -67,7 +70,7 @@
 				flex-direction:row;
 				justify-content:center;
 				flex:1;
-				margin:13px 40px 0 40px;
+				margin:0 40px;
 				.s_inner {
 					position:relative;
 					width:100%;
@@ -88,14 +91,24 @@
 				}
 			}
 			.h_util {
-				
+				display:flex;
+				flex-direction:row;
 				ul {
+					display: -webkit-box;
+					display: -moz-box;
+					display: -ms-flexbox;
+					display: -webkit-flex;
+					display: flex;
+					-webkit-flex-flow: row wrap;
+					justify-content: space-around;
 					li {
-						float:left;
+						
 						a {
 							display:block;
+							overflow:hidden;
 							width:24px; 
 							height:24px;
+							padding:8px;
 							span.ic_sp {
 								display:block;
 								width:16px;
@@ -103,14 +116,10 @@
 							}
 							
 						}
-
-						@for $i from 1 through 4 {
-							&:nth-child(#{$i}) a span.ic_sp {
-								background-position:-23px 0;
-							}
-						}
-
-						
+						&:nth-child(1) a span.ic_sp {margin:6px auto 0 auto;}
+						&:nth-child(2) a span.ic_sp {margin:4px auto 0 auto; background-position:-23px 0;}
+						&:nth-child(3) a span.ic_sp {margin:4px auto 0 auto; background-position:-46px 0;}
+						&:nth-child(4) a span.ic_sp {margin:4px auto 0 auto; background-position:-69px 0;}
 					}
 				}
 			}
