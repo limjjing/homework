@@ -10,7 +10,7 @@
 		.c_inner {
 			min-height:800px; 
 			margin:0 30px;
-			background:green;
+			background:#eee;
 		}
 	}
 </style>

@@ -33,6 +33,8 @@ button {background:none;}
 input, select {vertical-align:middle;}
 legend {width:0; height:0; font-size:0; position:absolute; overflow:hidden;} 
 
+button, input[type="button"], input[type="submit"], input[type="image"] {cursor:pointer; outline:none;}
+
 a {color:$linkColor; text-decoration:none; cursor:pointer;
 	&:link {color:$linkColor;}
 	&:visited {color:$linkColor;}

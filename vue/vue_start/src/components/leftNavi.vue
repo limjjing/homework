@@ -5,7 +5,7 @@
 </template>
 
 <style lang="scss" scoped>
-	#leftNavi {position:absolute; width:240px; height:600px; background:#ddd;
+	#leftNavi {position:absolute; width:240px; height:600px; background:#f5f5f5;
 		a{color:#ddd;}
 	}
 </style>
