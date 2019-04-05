@@ -1,13 +1,11 @@
 <template>
 	<div id="header">
 		<div class="h_inner">
-			<div class="h_l">
-				<div class="l_menu"><button type="button" v-on:click="test"><span class="ic_sp"></span></button></div>
-				<div class="logo"><a href="javascript:void(0);"></a></div>
-			</div>
+			<div class="l_menu"><button type="button" v-on:click="test"><span class="ic_sp"></span></button></div>
+			<div class="logo"><a href="javascript:void(0);"></a></div>
 			<div class="search">
 				<div class="s_inner">
-					<input type="text" id="" name="">
+					<div class="input_b"><input type="text" id="" name=""></div>
 					<button type="submit"></button>
 				</div>
 			</div>
@@ -24,89 +22,113 @@
 </template>
 
 <style lang="scss" scoped>
+
+	@mixin flexRow {
+		display:flex;
+		-ms-flex-direction:row;
+		-webkit-flex-direction:row;
+		flex-direction:row;
+	}
+
 	.ic_sp {background:url(../images/ic_sp.png) no-repeat;}
 
-	#header {
-		height:56px; 
-		padding:0 16px;
+	#header { 
+		position:fixed;
+		top:0;
+		left:0;
+		right:0;
+		z-index:1000;
+		&:after {
+			content:"";
+			position:absolute;
+			bottom:-5px;
+			left:0;
+			right:0;
+			width:100%;
+			height:5px;
+			box-shadow:inset 0px 4px 8px -3px rgba(17, 17, 17, .06);
+			opacity:1;
+		}
 		.h_inner {
-			display:flex;
-			flex-direction:row;
+			@include flexRow;
+			-ms-flex-align:center;
 			-webkit-align-items:center;
 			align-items:center;
+			-ms-flex-pack:justify;
 			-webkit-justify-content:space-between;
 			justify-content:space-between;
-			.h_l {
-				display:flex;
-				flex-direction:row;
-				.l_menu {
-					margin:8px 16px 0 0;
-					button {
+			height:56px;
+			padding:0 16px;
+			.l_menu {
+				margin-right:16px;
+				button {
+					display:block;
+					width:40px;
+					height:40px;
+					color:#fff;
+					span.ic_sp {
 						display:block;
-						width:40px; 
-						height:40px; 
-						color:#fff;
-						span.ic_sp {
-							display:block; 
-							width:18px; 
-							height:12px; 
-							margin:0 auto; 
-							background-position:-94px -2px;
-						}
-					}
-				}
-				.logo {
-					
-					a {
-						display:block; 
-						width:96px; 
-						height:24px; 
-						background:#ffa4a4;
+						width:18px;
+						height:12px;
+						margin:0 auto;
+						background-position:-94px -2px;
 					}
 				}
 			}
+			.logo {
+				a {
+					display:block;
+					width:96px;
+					height:24px;
+					background:#ffa4a4;
+				}
+			}
+			
 			.search {
-				display:flex;
-				flex-direction:row;
+				@include flexRow;
 				justify-content:center;
 				flex:1;
 				margin:0 40px;
 				.s_inner {
-					position:relative;
+					@include flexRow;
 					width:100%;
 					max-width:640px;
-					input {
-						width:100%; 
-						height:28px; 
-						border:1px solid #ccc;
+					.input_b {
+						@include flexRow;
+						-webkit-flex:1;
+						flex:1;
+						input {
+							display:block;
+							width:100%;
+							height:28px;
+							border:1px solid #ccc;
+						}
 					}
+					
 					button {
-						position:absolute; 
-						top:0; 
-						right:-2px; 
-						width:65px; 
-						height:30px; 
+						display:block;
+						width:65px;
+						height:30px;
 						background:#d3d3d3;
 					}
 				}
 			}
 			.h_util {
-				display:flex;
-				flex-direction:row;
+				@include flexRow;
 				ul {
-					display: -webkit-box;
-					display: -moz-box;
-					display: -ms-flexbox;
-					display: -webkit-flex;
-					display: flex;
-					-webkit-flex-flow: row wrap;
-					justify-content: space-around;
+					display:-webkit-box;
+					display:-moz-box;
+					display:-ms-flexbox;
+					display:-webkit-flex;
+					display:flex;
+					-webkit-flex-flow:row wrap;
+					justify-content:space-around;
 					li {
-						
+						margin-left:8px;
 						a {
 							display:block;
 							overflow:hidden;
-							width:24px; 
+							width:24px;
 							height:24px;
 							padding:8px;
 							span.ic_sp {
