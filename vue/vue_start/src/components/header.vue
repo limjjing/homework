@@ -59,6 +59,7 @@
 			justify-content:space-between;
 			height:56px;
 			padding:0 16px;
+			background:#fff;
 			.l_menu {
 				margin-right:16px;
 				button {
