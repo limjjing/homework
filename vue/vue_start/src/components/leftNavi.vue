@@ -170,22 +170,8 @@ export default {
   
   data: ()=>{
 	  return{
-		toggle: "true"
+		
 	  }
-  },
-  created(){
-	this.eventBus.$on('leftToggle', function(flag) {
-    	this.toggle = flag;
-	});
-  },
-  watch: {
-    toggle: function (val) {
-      if(val){
-		  console.log("left nav on");
-	  }else{
-		  console.log("left nav false");
-	  }
-    }
   },
   methods: {
 	  test: ()=>{
