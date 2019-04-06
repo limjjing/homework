@@ -1,12 +1,12 @@
 <template>
 	<div id="header">
 		<div class="h_inner">
-			<div class="l_menu"><button type="button" v-on:click="test"><span class="ic_sp"></span></button></div>
+			<div class="l_menu"><button type="button" v-on:click="leftToggle"><span class="ic_sp"></span></button></div>
 			<div class="logo"><a href="javascript:void(0);"></a></div>
 			<div class="search">
 				<div class="s_inner">
-					<div class="input_b"><input type="text" id="" name=""></div>
-					<button type="submit"></button>
+					<div class="input_b"><input type="text" id="" name=""  v-model="search_text" v-on:keypress.enter="search" placeholder="검색어를 입력해주세요"></div>
+					<button v-on:click="search"></button>
 				</div>
 			</div>
 			<div class="h_util">
@@ -152,17 +152,35 @@
 
 <script>
 
+import { secret } from "../../secret.js";
+
 export default {
   name: 'heheadNavi',
   
   data: ()=>{
 	  return{
-		
+		search_text : "",
+		left_nav : true
 	  }
   },
   methods: {
-	  test: ()=>{
-		  console.log('asdfasdf');
+	  search(){
+		  console.log("start search!!");
+
+		  this.apiCall(this.search_text);
+	  },
+	  apiCall(search_text){
+		this.$http.get('https://www.googleapis.com/youtube/v3/search?key='+secret.youtubeKey+'&q='+search_text + '&type=video&part=snippet&maxResults=5')
+        .then(function(res) {
+          console.log(res);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+	  },
+	  leftToggle(){
+		  this.left_nav = !this.left_nav;
+		  this.eventBus.$emit('leftToggle', this.left_nav);
 	  }
   },
   
