@@ -87,12 +87,8 @@ body {
 }
 
 #alarm {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
   text-align: center;
-  margin-top: -100px;
+  margin-top: 150px;
 }
 
 #alarm #a_time {
@@ -100,6 +96,16 @@ body {
   font-size: 60px;
   font-weight: bold;
   color: #fff;
+}
+
+#alarm #alarm_list {
+  margin-top: 20px;
+}
+
+#alarm #alarm_list ul li {
+  color: #8c8c8c;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 #alarm #a_input_line {
@@ -113,8 +119,9 @@ body {
 
 #alarm .b_btn button {
   cursor: pointer;
+  width: 120px;
   margin: 0 5px;
-  padding: 10px 30px;
+  padding: 10px 0;
   background: transparent;
   border: 1px solid #ccc;
   border-radius: 8px;
