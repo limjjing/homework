@@ -11,7 +11,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/locale/ko.js"></script>
 <script>
 
-var selected = '';
+	var selected = '';
 	var $aTime;
 	var $alarmList;
 
@@ -49,7 +49,6 @@ var selected = '';
 		if(al_check){
 			al_data(alArr);
 		}
-		
 	}
 
 	function al_fuc(){
@@ -62,6 +61,10 @@ var selected = '';
 
 		$('#ai_btn').on('click', function(){
 			al_save();
+		});
+
+		$('#de_btn').on('click', function(){
+			al_delete();
 		});
 
 		if(localF != undefined && localF != ''){
@@ -85,7 +88,6 @@ var selected = '';
 		$('#hours').html(alOp);
 		$('#minutes').html(alOp2);
 		$('#seconds').html(alOp2);
-		
 	}
 
 	function al_save(){
@@ -102,11 +104,13 @@ var selected = '';
 		}
 
 		console.log(alArr);
-
 		localStorage.setItem('alarm', JSON.stringify(alArr));
-
 		al_data(alArr);
+	}
 
+	function al_delete(){
+		localStorage.removeItem('alarm');
+		$alarmList.html('');
 	}
 
 	function al_data(data){
@@ -139,6 +143,7 @@ var selected = '';
 		</div>
 		<div class="b_btn">
 			<button type="button" id="ai_btn">Set Alarm</button>
+			<button type="button" id="de_btn">Delete Alarm</button>
 		</div>
 	</div>
 </div>

@@ -8,6 +8,7 @@ html, body {
 }
 
 body {
+  overflow: hidden;
   /*background:rgb(43, 43, 43);*/
   background-image: linear-gradient(135deg, #FF5572, #FF7555);
   /*font: 12px 'Lucida Grande', Verdana, sans-serif;*/
@@ -84,17 +85,10 @@ a:hover {
   color: #464646;
 }
 
-.cal1 {
-  overflow: hidden;
-}
-
 .cal1 .clndr {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
+  position: relative;
   width: 400px;
-  margin: -255px auto 0;
+  margin: 70px auto 0;
 }
 
 .cal1 .clndr .clndr-controls {
@@ -211,7 +205,13 @@ a:hover {
 }
 
 .cal1 .clndr .clndr-table tr td .schedule {
-  color: #ff5c6c !important;
+  color: #00ad7d !important;
+  font-weight: bold;
+}
+
+.cal1 .clndr .clndr-table tr td .holiday {
+  color: #ff5868 !important;
+  font-weight: bold;
 }
 
 .cal1 .clndr .clndr-table tr .day {
