@@ -5,10 +5,6 @@ $whiteColor:#fff;
 $color1:#C3C3E5;
 $color2:#ddd;
 
-@mixin lColor {
-	color:$linkColor;
-}
-
 @mixin cBtn {
 	position: absolute;
 	top: 47px;
@@ -25,11 +21,17 @@ $color2:#ddd;
 	-ms-user-select: none;
 }
 
+@mixin tableDesign {
+	padding:0 10px;
+	box-shadow: 0 0.1em 1em 0 rgba(0, 0, 0, 0.25), 0 0.1em 0.5em 1px rgba(0, 0, 0, 0.35), 0 1em 2em 1px rgba(0, 0, 0, 0.15);
+}
+
 body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, p, button, select, input, textarea, th, td {margin:0; padding:0;}
 
 html, body {height:100%;}
 
 body {
+	overflow:hidden;
 	/*background:rgb(43, 43, 43);*/
 	background-image: linear-gradient(135deg, #FF5572, #FF7555);
 	/*font: 12px 'Lucida Grande', Verdana, sans-serif;*/
@@ -37,7 +39,7 @@ body {
 		family:'Lucida Grande', Verdana, sans-serif; 
 		size:12px; 
 	}
-	@include lColor;
+	color:$linkColor;
 }
 
 img {border:none; vertical-align:top;}
@@ -52,20 +54,19 @@ legend {width:0; height:0; font-size:0; position:absolute; overflow:hidden;}
 button, input[type="button"], input[type="submit"], input[type="image"] {cursor:pointer;}
 
 a {
-	@include lColor;
+	color:$linkColor;
 	text-decoration:none;
 	cursor:pointer;
 	
-	&:link {@include lColor;}
-	&:visited {@include lColor;}
-	&:active {@include lColor;}
-	&:hover {@include lColor;}
+	&:link {color:$linkColor;}
+	&:visited {color:$linkColor;}
+	&:active {color:$linkColor;}
+	&:hover {color:$linkColor;}
 }
 
 .cal1 {
-	overflow:hidden;
 	.clndr {
-		position:absolute; top:50%; left:0; right:0; width:400px; margin:-255px auto 0;
+		position:relative; width:400px; margin:70px auto 0;
 		.clndr-controls {
 			position: relative;
 			color: $whiteColor;
@@ -109,8 +110,7 @@ a {
 			margin: 0 auto;
 			background: $whiteColor;
 			thead {
-				padding:0 10px;
-				box-shadow: 0 0.1em 1em 0 rgba(0, 0, 0, 0.25), 0 0.1em 0.5em 1px rgba(0, 0, 0, 0.35), 0 1em 2em 1px rgba(0, 0, 0, 0.15);
+				@include tableDesign;
 				.header-day {
 					vertical-align: middle;
 					text-align: center;
@@ -125,8 +125,7 @@ a {
 			}
 
 			tbody{
-				padding:0 10px;
-				box-shadow: 0 0.1em 1em 0 rgba(0, 0, 0, 0.25), 0 0.1em 0.5em 1px rgba(0, 0, 0, 0.35), 0 1em 2em 1px rgba(0, 0, 0, 0.15);
+				@include tableDesign;
 				tr:first-child {
 					td {
 						padding: 20px 10px 10px 10px;
@@ -146,7 +145,12 @@ a {
 						padding: 10px;
 					}
 					.schedule {
-						color: #ff5c6c !important;
+						color: #00ad7d !important;
+						font-weight:bold;
+					}
+					.holiday {
+						color:#ff5868 !important;
+						font-weight:bold;
 					}
 				}
 				.day {

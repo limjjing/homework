@@ -10,23 +10,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/locale/ko.js"></script>
 <script>
-	//.format('YYYY-MM-DD hh:mm');
+
 	var now_month = moment();
 	var selected_day = '';
 	var $schedule;
 	var $input;
 	var cal = [];
 	cal[0] = [];
-	
-	window.onload = function(){
+
+	$(()=>{
 		$schedule = $('#schedule');
 		$input = $('#input');
 
 		cal_fuc(now_month);
-	}
+	});
 	
 	function cal_fuc(calf){
-
 		$.ajax({
 			url:'https://c97q48g7ui.execute-api.ap-northeast-2.amazonaws.com/dev/apitest',
 			method:'post',
@@ -40,35 +39,17 @@
 					'ServiceKey':'lRXTaLfFt0hq2g7EnVQbuGAQ2K9tI7fryCPIuwfp6wkrlTLbHtlk0eISiasOMSNVhS5jMm0gfXmcBdQ0gVPV5A%3D%3D',
 					'_type':'json'
 				}
-				
 			}),
 			success: function(data){
-				data_view(calf);
-				holi_day(data);
+				data_view(calf, data);
 			},
 			error:function(error){
 				console.log(error);
 			}
 		});
-		
 	}
 
-	function holi_day(holy){
-		var con = '';
-		var diI = holy.items.item;
-
-		for(var i in diI){
-			con += `<tr>`
-			for(var j in diI[i]){
-				con += `<td>${diI[i][j]}</td>`
-			}
-			con += `</tr>`
-		}
-
-		$('#lim_t').html(con);
-	}
-
-	function data_view(input){
+	function data_view(input, holi){
 		cal = [];
 		cal[0] = [];
 		var date = input.startOf('month');
@@ -96,11 +77,10 @@
 			var locaInF = localStorage.getItem(inputF);
 
 			if(locaInF != undefined && locaInF != ''){
-				str += `<td><div id="day${j}" class="day-contents schedule" onclick="modal(${j});">${j}</div></td>`
+				str += `<td><div id="day${inputF.substr(6, 2)}" class="day-contents schedule" onclick="modal(${j});">${j}</div></td>`
 				cal[week].push({'memo': locaInF, 'day': j});
-				
 			}else{
-				str += `<td><div id="day${j}" class="day-contents" onclick="modal(${j});">${j}</div></td>`
+				str += `<td><div id="day${inputF.substr(6, 2)}" class="day-contents" onclick="modal(${j});">${j}</div></td>`
 				cal[week].push({'memo': false, 'day': j});
 			}
 			
@@ -108,7 +88,6 @@
 				if(j != max_days ){ //|| (dow + 1) % 7 !== 0
 					week++;
 					cal[week] = [];
-					
 				}
 				str += `</tr><tr>`
 			}
@@ -124,6 +103,20 @@
 
 		$('#calendar2').html(str);
 		$('#str_cal').html(input.format('YYYY MM'));
+
+		var holiDay = holi.items.item;
+		
+		if(holiDay == undefined){
+			console.log("nothing");
+		}else{
+			if(holiDay.dateKind == undefined){
+				for(var i in holiDay){
+					$('#day' + holiDay[i].locdate.toString().substr(6, 2)).addClass('holiday').attr('title', holiDay[i].dateName);
+				}
+			}else{
+				$('#day' + holiDay.locdate.toString().substr(6, 2)).addClass('holiday').attr('title', holiDay.dateName);
+			}
+		}
 	}
 
 	function downmonth(){
@@ -142,52 +135,44 @@
 		}
 		
 		selected_day = now_month.format('YYYYMM') + day;
-		
 		$('#modal').show();
-		
+		$schedule.html('');
 		var local_gs = localStorage.getItem(selected_day);
 
 		if(local_gs != undefined && local_gs != ''){
-			var sch_list = JSON.parse(local_gs);
-			sc_list(sch_list);
+			set_local = JSON.parse(local_gs);
+			sc_list(set_local);
 		}
 	}
 
 	function save(){
 		var set_local = [];
-
 		var local_gs = localStorage.getItem(selected_day);
+
 		if(local_gs != undefined && local_gs != ''){
 			set_local = JSON.parse(local_gs);
 			set_local.push($input.val());
-			console.log(set_local);
 		}else{
 			set_local[0] = $input.val();
 		}
 
-
 		localStorage.setItem(selected_day, JSON.stringify(set_local));
+		$input.val('');
+		$('#day' + selected_day.substr(6, 2)).addClass('schedule');
 
 		sc_list(set_local);
-		
-		$input.val('');
-
-		var day_for_class = selected_day.substr(6, 1) == '0' ? selected_day.substr(7, 1) : selected_day.substr(6, 2);
-		$('#day'+ day_for_class).addClass('schedule');
 	}
 
 	function sDelete(){
 		localStorage.removeItem(selected_day);
 		$schedule.text('');
 		
-		var day_for_class = selected_day.substr(6, 1) == '0' ? selected_day.substr(7, 1) : selected_day.substr(6, 2);
-		$('#day'+ day_for_class).removeClass('schedule');
+		$('#day' + selected_day.substr(6, 2)).removeClass('schedule');
 	}
 
 	function delete_spc_list(number){
 		set_local = JSON.parse(localStorage.getItem(selected_day));
 		set_local.splice(number, 1);
-		console.log(set_local);
 
 		localStorage.setItem(selected_day, JSON.stringify(set_local));
 
@@ -205,6 +190,7 @@
 		localStorage.setItem(selected_day, JSON.stringify(set_local));
 
 		$('#schlist'+ number).find('p').text('- '+ $input.val());
+		$input.val('');
 	}
 
 	function sc_list(sclist){
@@ -270,7 +256,6 @@
 			</div>
 		</div>
 	</div>
-
 </div>
 </body>
 </html>
