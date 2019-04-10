@@ -99,7 +99,6 @@
 			background:#f5f5f5;
 			.ln_lb {
 				padding:8px 0;
-				
 				border-bottom:1px solid #dcdcdc;
 				p {
 					padding:8px 24px;

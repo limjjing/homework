@@ -155,18 +155,17 @@
 import { secret } from "../../secret.js";
 
 export default {
-  name: 'heheadNavi',
+  name: 'headNavi',
   
   data: ()=>{
 	  return{
 		search_text : "",
-		left_nav : true
+		left_nav : true,
 	  }
   },
   methods: {
 	  search(){
 		  console.log("start search!!");
-
 		  this.apiCall(this.search_text);
 	  },
 	  apiCall(search_text){
@@ -176,13 +175,32 @@ export default {
         })
         .catch(function(err) {
           console.log(err);
-        });
+		});
+		
+		var value = search_text;
+		var splitData = value.split(' ');
+
+		console.log(splitData);
+
 	  },
 	  leftToggle(){
 		  this.left_nav = !this.left_nav;
 		  this.eventBus.$emit('leftToggle', this.left_nav);
+	  },
+	  toggleClick: function () {
+		this.active = !this.active;
+		this.text = this.active ? '已点击' : '未点击'
 	  }
   },
+  render: function(h) {
+	return h(
+		'button', {
+			attrs: { class: this.active ? 'active' : ''},
+			on: { click: this.toggleClick}
+		},
+		[ this.text ]
+	)
+  }
   
 }
 </script>
