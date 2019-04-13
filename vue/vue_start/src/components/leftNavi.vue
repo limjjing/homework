@@ -18,7 +18,7 @@
 				</ul>
 			</div>
 			<div class="ln_lb">
-				<p><a href="javascript:void(0);">구독</a></p>
+				<p><a ref="buttontest">구독</a></p>
 				<ul>
 					<li><a href="javascript:void(0);"><span class="ln_ic"></span><span class="ln_text">YouTube 인기</span></a></li>
 					<li><a href="javascript:void(0);"><span class="ln_ic"></span><span class="ln_text">음악</span></a></li>
@@ -167,28 +167,26 @@
 export default {
   name: 'leftNavi',
   
-  data: ()=>{
-	  return{
-		toggle: "true"
-	  }
+  data: function (){
+	return{
+		toggle: true,
+	}
   },
-  created(){
+  mounted(){
+	var self = this;
 	this.eventBus.$on('leftToggle', function(flag) {
-    	this.toggle = flag;
+		self.toggle = flag;
 	});
   },
   watch: {
+    // 질문이 변경될 때 마다 이 기능이 실행됩니다.
     toggle: function (val) {
-      if(val){
-		  console.log("left nav on");
-	  }else{
-		  console.log("left nav false");
-	  }
+		console.log(this.$refs.buttontest.style.color = "red");
     }
   },
   methods: {
-	  test: ()=>{
-		  console.log('asdfasdf');
+	  test: function (){
+
 	  }
   },
   
