@@ -155,34 +155,62 @@
 import { secret } from "../../secret.js";
 
 export default {
-  name: 'heheadNavi',
+  name: 'headNavi',
   
   data: ()=>{
 	  return{
 		search_text : "",
-		left_nav : true
+		left_nav : true,
 	  }
   },
   methods: {
 	  search(){
-		  console.log("start search!!");
+			console.log("start search!!");
+			
+			var value = this.search_text;
+			var splitData = value.split('//');
+			var call_list = [];
 
-		  this.apiCall(this.search_text);
+			for(var k in splitData){
+				call_list.push(this.apiCall(splitData[k]));
+			}
+
+			Promise.all(call_list).then((res)=>{
+				console.log(res);
+				this.eventBus.$emit('succesSearch', res);
+			}).catch((err)=>{
+				console.log(err);
+			})
 	  },
 	  apiCall(search_text){
-		this.$http.get('https://www.googleapis.com/youtube/v3/search?key='+secret.youtubeKey+'&q='+search_text + '&type=video&part=snippet&maxResults=5')
-        .then(function(res) {
-          console.log(res);
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
+			return new Promise ((resolve,reject)=>{
+				this.$http.get('https://www.googleapis.com/youtube/v3/search?key='+secret.youtubeKey+'&q='+search_text + '&type=video&part=snippet&maxResults=5')
+						.then(function(res) {
+							resolve(res);
+						})
+						.catch(function(err) {
+							reject(err);
+				});
+			})
 	  },
 	  leftToggle(){
 		  this.left_nav = !this.left_nav;
 		  this.eventBus.$emit('leftToggle', this.left_nav);
+	  },
+	  toggleClick: function () {
+		this.active = !this.active;
+		this.text = this.active ? '已点击' : '未点击'
 	  }
   },
+  render: function(h) {
+	return h(
+		'button', {
+			attrs: { class: this.active ? 'active' : ''},
+			on: { click: this.toggleClick}
+		},
+		[ this.text ]
+	)
+  }
   
 }
 </script>
