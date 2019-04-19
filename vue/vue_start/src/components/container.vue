@@ -1,5 +1,5 @@
 <template>
-	<div id="container">
+	<div id="container" :class="{c_on: toggle}">
 		<div class="c_inner">
 
 			<div class="main_visual">
@@ -558,8 +558,11 @@
 
 	#container {
 		overflow:hidden;
-		margin:56px 0 0 240px;
+		margin:56px 0 0 0;
 		background:#fafafa;
+		&.c_on {
+			margin:56px 0 0 240px;
+		}
 		.c_inner {
 			width:1284px;
 			min-height:800px;
@@ -666,26 +669,33 @@
 			}
 		}
 	}
-	#container.c_none {
-		margin:56px 0 0 0;
-	}
+	
 </style>
 
 <script>
 
 export default {
-  name: 'container',
+	name: 'container',
   
-  data: ()=>{
-	  return{
-		
-	  }
-  },
-  methods: {
-	  test: ()=>{
-		  console.log('asdfasdf');
-	  }
-  },
-  
+	data: ()=>{
+		return{
+			toggle: true
+		}
+	},
+	mounted(){
+		var self = this;
+		this.eventBus.$on('leftToggle', function(flag) {
+			self.toggle = flag;
+		});
+	},
+	watch: {
+		toggle: function (val) {
+			if(val){
+				console.log('on');
+			}else{
+				console.log('off');
+			}
+		}
+	}
 }
 </script>
