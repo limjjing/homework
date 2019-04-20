@@ -176,7 +176,7 @@ export default {
 			}
 
 			Promise.all(call_list).then((res)=>{
-				console.log(res);
+				// console.log(res);
 				this.eventBus.$emit('succesSearch', res);
 			}).catch((err)=>{
 				console.log(err);
