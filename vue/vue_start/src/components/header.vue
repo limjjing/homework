@@ -176,7 +176,7 @@ export default {
 			}
 
 			Promise.all(call_list).then((res)=>{
-				console.log(res);
+				// console.log(res);
 				this.eventBus.$emit('succesSearch', res);
 			}).catch((err)=>{
 				console.log(err);
@@ -185,10 +185,10 @@ export default {
 	  apiCall(search_text){
 			return new Promise ((resolve,reject)=>{
 				this.$http.get('https://www.googleapis.com/youtube/v3/search?key='+secret.youtubeKey+'&q='+search_text + '&type=video&part=snippet&maxResults=5')
-						.then(function(res) {
+						.then((res)=>{
 							resolve(res);
 						})
-						.catch(function(err) {
+						.catch((err)=>{
 							reject(err);
 				});
 			})
@@ -197,12 +197,12 @@ export default {
 		  this.left_nav = !this.left_nav;
 		  this.eventBus.$emit('leftToggle', this.left_nav);
 	  },
-	  toggleClick: function () {
+	  toggleClick: ()=>{
 		this.active = !this.active;
 		this.text = this.active ? '已点击' : '未点击'
 	  }
   },
-  render: function(h) {
+  render: (h)=>{
 	return h(
 		'button', {
 			attrs: { class: this.active ? 'active' : ''},

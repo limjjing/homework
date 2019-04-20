@@ -1,5 +1,5 @@
 <template>
-	<div id="leftNavi">
+	<div id="leftNavi" :class="{l_on: toggle}">
 		<div class="ln_blank"></div>
 		<div class="ln_inner">
 			<div class="ln_lb ln_1">
@@ -84,11 +84,15 @@
 
 	#leftNavi {
 		@include flexColumn;
+		visibility:hidden;
 		position:fixed;
 		top:0;
 		left:0;
 		width:240px;
 		height:100%;
+		&.l_on{
+			visibility:visible;
+		}
 		.ln_blank {
 			margin-top:56px;
 		}
@@ -165,30 +169,27 @@
 <script>
 
 export default {
-  name: 'leftNavi',
+	name: 'leftNavi',
   
-  data: function (){
-	return{
-		toggle: true,
+	data: ()=>{
+		return{
+			toggle: true,
+		}
+	},
+	mounted(){
+		var self = this;
+		this.eventBus.$on('leftToggle', (flag)=>{
+			self.toggle = flag;
+		});
+	},
+	watch: {
+		toggle: (val)=>{
+			if(val){
+				console.log('on');
+			}else{
+				console.log('off');
+			}
+		}
 	}
-  },
-  mounted(){
-	var self = this;
-	this.eventBus.$on('leftToggle', function(flag) {
-		self.toggle = flag;
-	});
-  },
-  watch: {
-    // 질문이 변경될 때 마다 이 기능이 실행됩니다.
-    toggle: function (val) {
-		console.log(this.$refs.buttontest.style.color = "red");
-    }
-  },
-  methods: {
-	  test: function (){
-
-	  }
-  },
-  
 }
 </script>
