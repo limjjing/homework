@@ -617,19 +617,19 @@ export default {
 		this.eventBus.$on('succesSearch', (res)=>{
 			self.data_list = res;
 		});
-		this.eventBus.$on('leftToggle', function(flag) {
+		this.eventBus.$on('leftToggle', (flag)=>{
 			self.toggle = flag;
 		});
 	},
 	watch: {
-		toggle: function (val) {
+		toggle: (val)=>{
 			if(val){
 				console.log('on');
 			}else{
 				console.log('off');
 			}
 		},
-		data_list : function (val) {
+		data_list : (val)=>{
 			console.dir(JSON.parse(JSON.stringify(val)));
 			
 		}	

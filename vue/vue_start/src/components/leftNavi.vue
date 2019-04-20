@@ -171,19 +171,19 @@
 export default {
 	name: 'leftNavi',
   
-	data: function (){
+	data: ()=>{
 		return{
 			toggle: true,
 		}
 	},
 	mounted(){
 		var self = this;
-		this.eventBus.$on('leftToggle', function(flag) {
+		this.eventBus.$on('leftToggle', (flag)=>{
 			self.toggle = flag;
 		});
 	},
 	watch: {
-		toggle: function (val) {
+		toggle: (val)=>{
 			if(val){
 				console.log('on');
 			}else{

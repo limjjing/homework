@@ -30,7 +30,7 @@ export default {
         console.log(this.media_data);
     },
   
-	data: function (){
+	data: ()=>{
         return{
 
 	    }
