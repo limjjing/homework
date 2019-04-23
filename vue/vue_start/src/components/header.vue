@@ -102,7 +102,10 @@
 							display:block;
 							width:100%;
 							height:28px;
+							padding:0 6px;
 							border:1px solid #ccc;
+							font-size:15px;
+							line-height:20px;
 						}
 					}
 					

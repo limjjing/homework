@@ -2,7 +2,7 @@
   <div id="app">
 	  <headNavi></headNavi>
 	  <leftNavi></leftNavi>
-	  <container></container>
+	  <search></search>
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -48,11 +48,13 @@ a {color:$linkColor; text-decoration:none; cursor:pointer;
 import headNavi from '@/components/header.vue'
 import leftNavi from '@/components/leftNavi.vue'
 import container from '@/components/container.vue'
+import search from '@/components/search.vue'
 export default {
 	components:{
 		headNavi,
 		leftNavi,
-		container
+		container,
+		search
 	}
 }
 </script>
