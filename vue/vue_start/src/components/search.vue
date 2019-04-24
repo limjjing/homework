@@ -7,7 +7,10 @@
 				
 				<div class="s_filter">
 					<div class="f_btn">
-						<button type="button">필터</button>
+						<button type="button">
+							<span class="sf_sp"></span>
+							<span class="fb_t">필터</span>
+						</button>
 					</div>
 					<div class="fl_wrap">
 						<div class="f_list">
@@ -199,17 +202,22 @@
 
 $nmColor:#606060;
 
+.sf_sp {background:url(../images/sf_sp.png) no-repeat;}
+
 #container {
 	overflow:hidden;
 	margin:56px 0 0 0;
-	background:#fafafa;
 	&.c_on {
 		margin:56px 0 0 240px;
 	}
 	.c_inner {
 		width:1280px;
-		min-height:800px;
 		margin:24px auto 0;
+		&:after {
+			display:block;
+			content:'';
+			clear:both;
+		}
 		.s_section {
 			float:left;
 			width:855px;
@@ -218,8 +226,20 @@ $nmColor:#606060;
 				border-bottom:1px solid #e1e1e1;
 				.f_btn {
 					button {
-						color:$nmColor;
-						font-size:14px;
+						display:block;
+						span {
+							display:block;
+							float:left;
+						}
+						span.sf_sp {
+							width:19px;
+							height:19px;
+						}
+						span.fb_t {
+							margin:0 0 0 10px;
+							color:$nmColor;
+							font-size:14px;
+						}
 					}
 				}
 				.fl_wrap {
@@ -259,28 +279,32 @@ $nmColor:#606060;
 					li {
 						overflow:hidden;
 						margin-bottom:16px;
-						.sl_thumbs {
-							float:left;
-							img {
-								width:246px;
-								height:138px;
-							}
-						}
-						.sl_text {
-							margin:0 0 0 262px;
-							p.sl_title {
-								font-size:18px;
-							}
-							p.sl_info {
-								margin:3px 0 10px 0;
-								color:$nmColor;
-								font-size:13px;
-								span.si_cir {
-									margin:0 4px;
+						a {
+							display:block;
+							height:138px;
+							.sl_thumbs {
+								float:left;
+								img {
+									width:246px;
+									height:138px;
 								}
 							}
-							p.sl_ct {
-								color:$nmColor;
+							.sl_text {
+								margin:0 0 0 262px;
+								p.sl_title {
+									font-size:18px;
+								}
+								p.sl_info {
+									margin:3px 0 10px 0;
+									color:$nmColor;
+									font-size:13px;
+									span.si_cir {
+										margin:0 4px;
+									}
+								}
+								p.sl_ct {
+									color:$nmColor;
+								}
 							}
 						}
 					}

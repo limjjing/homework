@@ -490,8 +490,12 @@
 		}
 		.c_inner {
 			width:1284px;
-			min-height:800px;
 			margin:24px auto 0;
+			&:after {
+				display:block;
+				content:'';
+				clear:both;
+			}
 			.main_visual {
 				overflow:hidden;
 				.mv_v {
