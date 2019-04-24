@@ -1,8 +1,7 @@
 <template>
   <div id="app">
 	  <headNavi></headNavi>
-	  <leftNavi></leftNavi>
-	  <container></container>
+	  <viewV></viewV>
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -17,7 +16,7 @@ $linkColor:#464646;
 
 body, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, p, button, select, input, textarea, th, td {margin:0; padding:0;}
 
-body {font-family:Roboto, Arial, sans-serif; font-size:12px; color:$linkColor;}
+body {background:#fafafa; font-family:Roboto, Arial, sans-serif; font-size:12px; color:$linkColor;}
 
 img {border:none; vertical-align:top;}
 
@@ -48,11 +47,15 @@ a {color:$linkColor; text-decoration:none; cursor:pointer;
 import headNavi from '@/components/header.vue'
 import leftNavi from '@/components/leftNavi.vue'
 import container from '@/components/container.vue'
+import search from '@/components/search.vue'
+import viewV from '@/components/view.vue'
 export default {
 	components:{
 		headNavi,
 		leftNavi,
-		container
+		container,
+		search,
+		viewV
 	}
 }
 </script>

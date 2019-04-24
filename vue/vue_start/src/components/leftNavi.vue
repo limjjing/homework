@@ -101,6 +101,9 @@
 			overflow-y:scroll;
 			height:100%;
 			background:#f5f5f5;
+			&::-webkit-scrollbar{width:8px;}
+			&::-webkit-scrollbar-track{background:#f5f5f5;}
+			&::-webkit-scrollbar-thumb{background:#c9c9c9;}
 			.ln_lb {
 				padding:8px 0;
 				border-bottom:1px solid #dcdcdc;
