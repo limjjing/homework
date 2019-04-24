@@ -322,9 +322,6 @@ $nmColor:#606060;
 </style>
 
 <script>
-<<<<<<< HEAD
-asdf
-=======
 
 export default {
 	name: 'search',
@@ -351,5 +348,4 @@ export default {
 	}
 }
 
->>>>>>> apr3st
 </script>
