@@ -328,13 +328,14 @@ export default {
   
 	data: ()=>{
 		return{
-			toggle: true
+			toggle: true,
+			data_list : []
 		}
 	},
 	mounted(){
 		var self = this;
-		this.eventBus.$on('leftToggle', (flag)=>{
-			self.toggle = flag;
+		this.eventBus.$on('succesSearch', (res)=>{
+			self.data_list = res;
 		});
 	},
 	watch: {
@@ -344,7 +345,10 @@ export default {
 			}else{
 				console.log('off');
 			}
-		}
+		},
+		data_list : (val) => {
+			console.dir(JSON.parse(JSON.stringify(val)));
+		}	
 	}
 }
 

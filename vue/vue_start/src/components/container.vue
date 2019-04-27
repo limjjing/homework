@@ -6,8 +6,8 @@
 				<div class="mv_v"><img src="../images/main_v.png" alt=""></div>
 				<div class="mv_b"><img src="../images/main_banner.png" alt=""></div>
 			</div>
-
-			<!-- <div class="list_line">
+<!-- 
+			<div class="list_line">
 				<div class="lt_line">
 					<p class="ll_title">
 						<span class="lt_1">맞춤 동영상</span>
@@ -604,6 +604,7 @@
 <script>
 
 import mainMedia from '@/components/mainMedia.vue'
+import { secret } from "../../secret.js";
 
 export default {
 	name: 'container',
@@ -618,12 +619,13 @@ export default {
 	},
 	mounted(){
 		var self = this;
-		this.eventBus.$on('succesSearch', (res)=>{
-			self.data_list = res;
-		});
+		// this.eventBus.$on('succesSearch', (res)=>{
+		// 	self.data_list = res;
+		// });
 		this.eventBus.$on('leftToggle', (flag)=>{
 			self.toggle = flag;
 		});
+		this.search();
 	},
 	watch: {
 		toggle: (val)=>{
@@ -633,10 +635,37 @@ export default {
 				console.log('off');
 			}
 		},
-		data_list : (val)=>{
+		data_list : (val) => {
 			console.dir(JSON.parse(JSON.stringify(val)));
-			
 		}	
+	},
+	methods : {
+		search(){
+			console.log("start main");
+			
+			var value = '';
+			var call_list = [];
+
+			call_list.push(this.popularVideos());
+
+			Promise.all(call_list).then((res)=>{
+				console.log(res);
+				this.data_list = res;
+			}).catch((err)=>{
+				console.log(err);
+			})
+		},
+		popularVideos(){
+			return new Promise((resolve,reject)=>{
+				this.$http.get('https://www.googleapis.com/youtube/v3/videos?part=snippet&maxResults=5&chart=mostPopular&regionCode=kr&key='+secret.youtubeKey)
+				.then((res)=>{
+					resolve(res);
+				}).catch((err)=>{
+					reject(err);
+				})
+			})
+		}
+		
 	}
 }
 </script>

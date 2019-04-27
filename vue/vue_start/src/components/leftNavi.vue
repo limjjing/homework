@@ -4,7 +4,7 @@
 		<div class="ln_inner">
 			<div class="ln_lb ln_1">
 				<ul>
-					<li><a href="javascript:void(0);"><span class="ln_ic"></span><span class="ln_text">홈</span></a></li>
+					<li><router-link to="/"><span class="ln_ic"></span><span class="ln_text">홈</span></router-link></li>
 					<li><a href="javascript:void(0);"><span class="ln_ic"></span><span class="ln_text">인기</span></a></li>
 					<li><a href="javascript:void(0);"><span class="ln_ic"></span><span class="ln_text">구독</span></a></li>
 				</ul>
