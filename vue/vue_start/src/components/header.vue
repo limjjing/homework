@@ -102,7 +102,10 @@
 							display:block;
 							width:100%;
 							height:28px;
+							padding:0 6px;
 							border:1px solid #ccc;
+							font-size:15px;
+							line-height:20px;
 						}
 					}
 					
@@ -165,6 +168,7 @@ export default {
   },
   methods: {
 	  search(){
+		  	this.$router.replace('/search');
 			console.log("start search!!");
 			
 			var value = this.search_text;
@@ -178,6 +182,7 @@ export default {
 			Promise.all(call_list).then((res)=>{
 				// console.log(res);
 				this.eventBus.$emit('succesSearch', res);
+
 			}).catch((err)=>{
 				console.log(err);
 			})
@@ -185,11 +190,11 @@ export default {
 	  apiCall(search_text){
 			return new Promise ((resolve,reject)=>{
 				this.$http.get('https://www.googleapis.com/youtube/v3/search?key='+secret.youtubeKey+'&q='+search_text + '&type=video&part=snippet&maxResults=5')
-						.then((res)=>{
-							resolve(res);
-						})
-						.catch((err)=>{
-							reject(err);
+					.then((res)=>{
+						resolve(res);
+					})
+					.catch((err)=>{
+						reject(err);
 				});
 			})
 	  },
