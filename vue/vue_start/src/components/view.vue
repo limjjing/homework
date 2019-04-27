@@ -1,5 +1,4 @@
 <template>
-	
 	<div class="v_container">
 		<div class="v_inner">
 			<div class="v_section">
