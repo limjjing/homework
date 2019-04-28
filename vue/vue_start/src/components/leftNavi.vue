@@ -185,14 +185,6 @@ export default {
 			self.toggle = flag;
 		});
 	},
-	watch: {
-		toggle: (val)=>{
-			if(val){
-				console.log('on');
-			}else{
-				console.log('off');
-			}
-		}
-	}
+
 }
 </script>

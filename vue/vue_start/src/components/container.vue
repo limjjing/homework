@@ -628,13 +628,13 @@ export default {
 		this.search();
 	},
 	watch: {
-		toggle: (val)=>{
-			if(val){
-				console.log('on');
-			}else{
-				console.log('off');
-			}
-		},
+		// toggle: (val)=>{
+		// 	if(val){
+		// 		console.log('on');
+		// 	}else{
+		// 		console.log('off');
+		// 	}
+		// },
 		data_list : (val) => {
 			console.dir(JSON.parse(JSON.stringify(val)));
 		}	

@@ -1,18 +1,15 @@
 <template>
-	
 	<div id="container" :class="{c_on: toggle}">
 		<div class="c_inner">
-
 			<div class="s_section">
-				
 				<div class="s_filter">
 					<div class="f_btn">
-						<button type="button">
+						<button type="button" v-on:click="filterToggle" :class="{fb_on: fbToggle}">
 							<span class="sf_sp"></span>
 							<span class="fb_t">필터</span>
 						</button>
 					</div>
-					<div class="fl_wrap">
+					<div class="fl_wrap" :class="{fw_on: fbToggle}">
 						<div class="f_list">
 							<p>업로드 날짜</p>
 							<ul>
@@ -23,7 +20,6 @@
 								<li><a href="javascript:void(0);">올해</a></li>
 							</ul>
 						</div>
-
 						<div class="f_list">
 							<p>구분</p>
 							<ul>
@@ -34,7 +30,6 @@
 								<li><a href="javascript:void(0);">프로그램</a></li>
 							</ul>
 						</div>
-
 						<div class="f_list">
 							<p>길이</p>
 							<ul>
@@ -42,7 +37,6 @@
 								<li><a href="javascript:void(0);">장편(20분 이상)</a></li>
 							</ul>
 						</div>
-
 						<div class="f_list">
 							<p>기능별</p>
 							<ul>
@@ -59,7 +53,6 @@
 								<li><a href="javascript:void(0);">구입한 항목</a></li>
 							</ul>
 						</div>
-
 						<div class="f_list">
 							<p>정렬기준</p>
 							<ul>
@@ -72,8 +65,7 @@
 					</div>
 				</div>
 
-				<div class="s_list">
-
+				<!-- <div class="s_list">
 					<ul>
 						<li>
 							<a href="javascript:void(0);">
@@ -184,23 +176,38 @@
 							</a>
 						</li>
 					</ul>
-
+				</div> -->
+				<div class="s_list">
+					<ul v-for="n in data_list">
+						<li v-for="item in n.data.items">
+							<searchMedia :media_data = item></searchMedia>
+						</li>
+					</ul>
 				</div>
-
 			</div>
-
-			<div class="s_info">
-				<img src="../images/search_info.png" alt="">
-			</div>
-
 		</div>
 	</div>
-
 </template>
 
 <style lang="scss" scoped>
 
 $nmColor:#606060;
+
+@mixin flex {
+	display:-webkit-box;
+	display:-moz-box;
+	display:-ms-flexbox;
+	display:-webkit-flex;
+	display:flex;
+}
+
+@mixin flexGrid {
+	-webkit-box-flex:1;
+	-moz-box-flex:1;
+	-webkit-flex:1;
+	-ms-flex:1;
+	flex:1;
+}
 
 .sf_sp {background:url(../images/sf_sp.png) no-repeat;}
 
@@ -219,17 +226,15 @@ $nmColor:#606060;
 			clear:both;
 		}
 		.s_section {
-			float:left;
-			width:855px;
+
 			.s_filter {
 				padding-bottom:15px;
 				border-bottom:1px solid #e1e1e1;
 				.f_btn {
 					button {
-						display:block;
+						@include flex;
 						span {
 							display:block;
-							float:left;
 						}
 						span.sf_sp {
 							width:19px;
@@ -243,10 +248,15 @@ $nmColor:#606060;
 					}
 				}
 				.fl_wrap {
+					@include flex;
 					overflow:hidden;
+					height:0;
+					transition: all 1s;
+					&.fw_on {
+						height:auto;
+					}
 					.f_list {
-						float:left;
-						width:139px;
+						@include flexGrid;
 						margin-right:32px;
 						p {
 							padding:15px 0;
@@ -272,50 +282,7 @@ $nmColor:#606060;
 					}
 				}
 			}
-			
-			.s_list {
-				ul {
-					padding-top:16px;
-					li {
-						overflow:hidden;
-						margin-bottom:16px;
-						a {
-							display:block;
-							height:138px;
-							.sl_thumbs {
-								float:left;
-								img {
-									width:246px;
-									height:138px;
-								}
-							}
-							.sl_text {
-								margin:0 0 0 262px;
-								p.sl_title {
-									font-size:18px;
-								}
-								p.sl_info {
-									margin:3px 0 10px 0;
-									color:$nmColor;
-									font-size:13px;
-									span.si_cir {
-										margin:0 4px;
-									}
-								}
-								p.sl_ct {
-									color:$nmColor;
-								}
-							}
-						}
-					}
-				}
-			}
 		}
-		.s_info {
-			float:right;
-			width:385px;
-		}
-		
 	}
 }
 
@@ -323,32 +290,44 @@ $nmColor:#606060;
 
 <script>
 
+import searchMedia from '@/components/searchMedia.vue';
+
 export default {
 	name: 'search',
-  
+
+	components: {
+		searchMedia
+	},
 	data: ()=>{
 		return{
 			toggle: true,
+			fbToggle: false,
 			data_list : []
 		}
 	},
 	mounted(){
 		var self = this;
+
 		this.eventBus.$on('succesSearch', (res)=>{
 			self.data_list = res;
 		});
+		this.eventBus.$on('leftToggle', (flag)=>{
+			self.toggle = flag;
+		});
+		this.eventBus.$on('filterToggle', (fb)=>{
+			self.fbToggle = fb;
+		});
+	},
+	methods: {
+		filterToggle(){
+			this.filterBtn = !this.filterBtn;
+			this.eventBus.$emit('filterToggle', this.filterBtn);
+		}
 	},
 	watch: {
-		toggle: (val)=>{
-			if(val){
-				console.log('on');
-			}else{
-				console.log('off');
-			}
-		},
 		data_list : (val) => {
 			console.dir(JSON.parse(JSON.stringify(val)));
-		}	
+		}
 	}
 }
 
