@@ -4,18 +4,18 @@
 			<li>
 				<a href="javascript:void(0);">
 					<div class="sl_thumbs">
-						<img :src="media_data.snippet.thumbnails.high.url" alt="">
+						<img :src="s_data.snippet.thumbnails.high.url" alt="">
 					</div>
 					<div class="sl_text">
-						<p class="sl_title">{{media_data.snippet.title}}</p>
+						<p class="sl_title">{{s_data.snippet.title}}</p>
 						<p class="sl_info">
-							<span class="si_1">{{media_data.snippet.channelTitle}}</span>
+							<span class="si_1">{{s_data.snippet.channelTitle}}</span>
 							<span class="si_cir">•</span>
 							<span class="si_2">조회수 6.3만회</span>
 							<span class="si_cir">•</span>
 							<span class="si_3">1주 전</span>
 						</p>
-						<p class="sl_ct">{{media_data.snippet.description}}</p>
+						<p class="sl_ct">{{s_data.snippet.description}}</p>
 					</div>
 				</a>
 			</li>
@@ -89,11 +89,11 @@ export default {
 	name: 'searchMedia',
 	
 	props: [
-		'media_data'
+		's_data'
 	],
 
 	beforeMount(){
-		console.log(this.media_data);
+		console.log(this.s_data);
 	},
 
 	data: ()=>{

@@ -608,6 +608,7 @@ import { secret } from "../../secret.js";
 
 export default {
 	name: 'container',
+
 	components:{
 		mainMedia,
 	},
@@ -617,13 +618,9 @@ export default {
 			data_list : []
 		}
 	},
-	mounted(){
-		var self = this;
-		// this.eventBus.$on('succesSearch', (res)=>{
-		// 	self.data_list = res;
-		// });
+	mounted(){		
 		this.eventBus.$on('leftToggle', (flag)=>{
-			self.toggle = flag;
+			this.toggle = flag;
 		});
 		this.search();
 	},
@@ -641,7 +638,6 @@ export default {
 	},
 	methods : {
 		search(){
-			console.log("start main");
 			
 			var value = '';
 			var call_list = [];
@@ -656,8 +652,8 @@ export default {
 			})
 		},
 		popularVideos(){
-			return new Promise((resolve,reject)=>{
-				this.$http.get('https://www.googleapis.com/youtube/v3/videos?part=snippet&maxResults=5&chart=mostPopular&regionCode=kr&key='+secret.youtubeKey)
+			return new Promise((resolve, reject)=>{
+				this.$http.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet&maxResults=5&chart=mostPopular&regionCode=kr&key=${secret.youtubeKey}`)
 				.then((res)=>{
 					resolve(res);
 				}).catch((err)=>{

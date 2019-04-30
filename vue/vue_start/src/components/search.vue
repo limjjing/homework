@@ -180,7 +180,7 @@
 				<div class="s_list">
 					<ul v-for="n in data_list">
 						<li v-for="item in n.data.items">
-							<searchMedia :media_data = item></searchMedia>
+							<searchMedia :s_data = item></searchMedia>
 						</li>
 					</ul>
 				</div>
@@ -314,14 +314,10 @@ export default {
 		this.eventBus.$on('leftToggle', (flag)=>{
 			self.toggle = flag;
 		});
-		this.eventBus.$on('filterToggle', (fb)=>{
-			self.fbToggle = fb;
-		});
 	},
 	methods: {
 		filterToggle(){
-			this.filterBtn = !this.filterBtn;
-			this.eventBus.$emit('filterToggle', this.filterBtn);
+			this.fbToggle = !this.fbToggle;
 		}
 	},
 	watch: {
