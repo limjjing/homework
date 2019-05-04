@@ -614,31 +614,24 @@ export default {
 	},
 	data: ()=>{
 		return{
-			toggle: true,
 			data_list : []
 		}
 	},
+	computed:{
+		toggle(){
+			return this.$store.state.left_toggle;
+		}
+	},
 	mounted(){		
-		this.eventBus.$on('leftToggle', (flag)=>{
-			this.toggle = flag;
-		});
 		this.search();
 	},
 	watch: {
-		// toggle: (val)=>{
-		// 	if(val){
-		// 		console.log('on');
-		// 	}else{
-		// 		console.log('off');
-		// 	}
-		// },
 		data_list : (val) => {
 			console.dir(JSON.parse(JSON.stringify(val)));
 		}	
 	},
 	methods : {
 		search(){
-			
 			var value = '';
 			var call_list = [];
 

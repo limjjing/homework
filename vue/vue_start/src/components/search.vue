@@ -64,119 +64,6 @@
 						</div>
 					</div>
 				</div>
-
-				<!-- <div class="s_list">
-					<ul>
-						<li>
-							<a href="javascript:void(0);">
-								<div class="sl_thumbs">
-									<img src="https://i.ytimg.com/vi/2S24-y0Ij3Y/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&amp;rs=AOn4CLBflB7oI20CSw-XzTB3-Qob95uikQ" alt="">
-								</div>
-								<div class="sl_text">
-									<p class="sl_title">BLACKPINK - 'Kill This Love' M/V</p>
-									<p class="sl_info">
-										<span class="si_1">BLACKPINK</span>
-										<span class="si_cir">•</span>
-										<span class="si_2">조회수 2.3억회</span>
-										<span class="si_cir">•</span>
-										<span class="si_3">2주 전</span>
-									</p>
-									<p class="sl_ct">BLACKPINK - 'Kill This Love' Available on iTunes @ http://smarturl.it/KillThisLove/iTunes Available on Apple Music ...</p>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="javascript:void(0);">
-								<div class="sl_thumbs">
-									<img src="https://i.ytimg.com/vi/bkGSf9VeWTE/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLBzl4346KvkWJeW8b6pKrJjxrTDoQ" alt="">
-								</div>
-								<div class="sl_text">
-									<p class="sl_title">블랙핑크(BLACKPINK) - Kill This Love 교차편집(Stage mix)</p>
-									<p class="sl_info">
-										<span class="si_1">탱</span>
-										<span class="si_cir">•</span>
-										<span class="si_2">조회수 142만회</span>
-										<span class="si_cir">•</span>
-										<span class="si_3">1주 전</span>
-									</p>
-									<p class="sl_ct">BLACKPINK#KillThisLove#Stagemix 저 너무 못만드는 것 같아서...편집 공부 좀 하고 다시올게요.</p>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="javascript:void(0);">
-								<div class="sl_thumbs">
-									<img src="https://i.ytimg.com/vi/XjyBzxYtfQs/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLD9WS_FzbiSG-RCLLWn-r_92lrl2w" alt="">
-								</div>
-								<div class="sl_text">
-									<p class="sl_title">[전곡 듣기/Full Album] BLACKPINK(블랙핑크) 2nd Mini Album [KILL THIS LOVE]</p>
-									<p class="sl_info">
-										<span class="si_1">푸딩백곰</span>
-										<span class="si_cir">•</span>
-										<span class="si_2">조회수 34만회</span>
-										<span class="si_cir">•</span>
-										<span class="si_3">2주 전</span>
-									</p>
-									<p class="sl_ct">앨범 : 2nd Mini Album [KILL THIS LOVE] 아티스트 : BLACKPINK (블랙핑크) 발매일 : 2019.04.05.</p>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="javascript:void(0);">
-								<div class="sl_thumbs">
-									<img src="https://i.ytimg.com/vi/7_Kg9MrzOko/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLB1oT_3DetM6gmDDVApWa0iSw0d_Q" alt="">
-								</div>
-								<div class="sl_text">
-									<p class="sl_title">BLACKPINK (블랙핑크) _ Kill This Love 1 Hour Loop (1시간)</p>
-									<p class="sl_info">
-										<span class="si_1">2fzy</span>
-										<span class="si_cir">•</span>
-										<span class="si_2">조회수 27만회</span>
-										<span class="si_cir">•</span>
-										<span class="si_3">2주 전</span>
-									</p>
-									<p class="sl_ct">Original MV: https://www.youtube.com/watch?v=2S24-y0Ij3Y #BLACKPINK #블랙핑크 #KILLTHISLOVE Huge shoutout to my boy ...</p>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="javascript:void(0);">
-								<div class="sl_thumbs">
-									<img src="https://i.ytimg.com/vi/MOwaUlXZxkI/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCS4mRBca2sSajzuhL1t9BmwdRg_g" alt="">
-								</div>
-								<div class="sl_text">
-									<p class="sl_title">BLACKPINK - 'Kill This Love' DANCE PRACTICE VIDEO (MOVING VER.)</p>
-									<p class="sl_info">
-										<span class="si_1">BLACKPINK</span>
-										<span class="si_cir">•</span>
-										<span class="si_2">조회수 4159만회</span>
-										<span class="si_cir">•</span>
-										<span class="si_3">2주 전</span>
-									</p>
-									<p class="sl_ct">BLACKPINK #블랙핑크 #KILLTHISLOVE #DANCE_PRACTICE #MOVING_VERSION #안무영상 #YG.</p>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="javascript:void(0);">
-								<div class="sl_thumbs">
-									<img src="https://i.ytimg.com/vi/6z6uo7_dseQ/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLBLeDywKpAm_jdTBuaNrMW2agaHKQ" alt="">
-								</div>
-								<div class="sl_text">
-									<p class="sl_title">[블랙핑크]씨디 씹어먹은 미친 라이브(블부심)</p>
-									<p class="sl_info">
-										<span class="si_1">행복한 블핑이네</span>
-										<span class="si_cir">•</span>
-										<span class="si_2">조회수 6.3만회</span>
-										<span class="si_cir">•</span>
-										<span class="si_3">1주 전</span>
-									</p>
-									<p class="sl_ct">설명</p>
-								</div>
-							</a>
-						</li>
-					</ul>
-				</div> -->
 				<div class="s_list">
 					<ul v-for="n in data_list">
 						<li v-for="item in n.data.items">
@@ -298,11 +185,15 @@ export default {
 	components: {
 		searchMedia
 	},
-	data: ()=>{
+	data (){
 		return{
-			toggle: true,
 			fbToggle: false,
 			data_list : []
+		}
+	},
+	computed:{
+		toggle(){
+			return this.$store.state.left_toggle;
 		}
 	},
 	mounted(){
@@ -310,9 +201,6 @@ export default {
 
 		this.eventBus.$on('succesSearch', (res)=>{
 			self.data_list = res;
-		});
-		this.eventBus.$on('leftToggle', (flag)=>{
-			self.toggle = flag;
 		});
 	},
 	methods: {

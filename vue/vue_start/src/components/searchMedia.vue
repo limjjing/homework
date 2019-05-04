@@ -1,5 +1,5 @@
 <template>
-	<div class="s_list">
+	<div class="s_list"  v-on:click="movedetail">
 		<ul>
 			<li>
 				<a href="javascript:void(0);">
@@ -103,6 +103,12 @@ export default {
 	},
 	mounted(){
 
+	},
+	methods: {
+		movedetail(){
+			console.log(this.s_data);
+			this.$router.replace({name: 'viewV' , params: this.s_data });
+		}
 	},
 	watch: {
 

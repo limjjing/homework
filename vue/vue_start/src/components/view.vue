@@ -606,5 +606,25 @@
 </style>
 
 <script>
+	export default {
+		name: 'videoDetail',
+	
+		data (){
+			return{
+				
+			}
+		},
+		created() {
+  			console.log('route', this.$router.history.current.params);
+		},
+		computed:{
+			
+		},
+		mounted(){
+			
+		},
 
+	}
 </script>
+
+

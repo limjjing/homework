@@ -189,7 +189,7 @@ export default {
 		},
 		apiCall(search_text){
 			return new Promise ((resolve, reject)=>{
-				this.$http.get(`https://www.googleapis.com/youtube/v3/search?key=${secret.youtubeKey}&q=${search_text}search_text&type=video&part=snippet&maxResults=5`)
+				this.$http.get(`https://www.googleapis.com/youtube/v3/search?key=${secret.youtubeKey}&q=${search_text}&search_text&type=video&part=snippet&maxResults=5`)
 				.then((res)=>{
 					resolve(res);
 				})
@@ -199,8 +199,9 @@ export default {
 			})
 		},
 		leftToggle(){
-			this.left_nav = !this.left_nav;
-			this.eventBus.$emit('leftToggle', this.left_nav);
+			// this.left_nav = !this.left_nav;
+			// this.eventBus.$emit('leftToggle', this.left_nav);
+			this.$store.state.left_toggle = !this.$store.state.left_toggle;
 		},
 		toggleClick: ()=>{
 			this.active = !this.active;
