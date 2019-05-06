@@ -158,17 +158,17 @@
 import { secret } from "../../secret.js";
 
 export default {
-  name: 'headNavi',
-  
-  data: ()=>{
-	  return{
-		search_text : "",
-		left_nav : true,
-	  }
-  },
-  methods: {
-	  search(){
-		  	this.$router.replace('/search');
+	name: 'headNavi',
+
+	data: ()=>{
+		return{
+			search_text : "",
+			left_nav : true,
+		}
+	},
+	methods: {
+		search(){
+			this.$router.replace('/search');
 			console.log("start search!!");
 			
 			var value = this.search_text;
@@ -186,36 +186,37 @@ export default {
 			}).catch((err)=>{
 				console.log(err);
 			})
-	  },
-	  apiCall(search_text){
-			return new Promise ((resolve,reject)=>{
-				this.$http.get('https://www.googleapis.com/youtube/v3/search?key='+secret.youtubeKey+'&q='+search_text + '&type=video&part=snippet&maxResults=5')
-					.then((res)=>{
-						resolve(res);
-					})
-					.catch((err)=>{
-						reject(err);
+		},
+		apiCall(search_text){
+			return new Promise ((resolve, reject)=>{
+				this.$http.get(`https://www.googleapis.com/youtube/v3/search?key=${secret.youtubeKey}&q=${search_text}&search_text&type=video&part=snippet&maxResults=5`)
+				.then((res)=>{
+					resolve(res);
+				})
+				.catch((err)=>{
+					reject(err);
 				});
 			})
-	  },
-	  leftToggle(){
-		  this.left_nav = !this.left_nav;
-		  this.eventBus.$emit('leftToggle', this.left_nav);
-	  },
-	  toggleClick: ()=>{
-		this.active = !this.active;
-		this.text = this.active ? '已点击' : '未点击'
-	  }
-  },
-  render: (h)=>{
-	return h(
-		'button', {
-			attrs: { class: this.active ? 'active' : ''},
-			on: { click: this.toggleClick}
 		},
-		[ this.text ]
-	)
-  }
-  
+		leftToggle(){
+			// this.left_nav = !this.left_nav;
+			// this.eventBus.$emit('leftToggle', this.left_nav);
+			this.$store.state.left_toggle = !this.$store.state.left_toggle;
+		},
+		toggleClick: ()=>{
+			this.active = !this.active;
+			this.text = this.active ? '已点击' : '未点击'
+		}
+	},
+	render: (h)=>{
+		return h(
+			'button', {
+				attrs: { class: this.active ? 'active' : ''},
+				on: { click: this.toggleClick}
+			},
+			[ this.text ]
+		)
+	}
+
 }
 </script>

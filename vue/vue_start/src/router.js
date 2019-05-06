@@ -35,7 +35,10 @@ export default new Router({
     {
       path: '/viewV',
       name: 'viewV',
-      component: viewV
+      component: viewV,
+      props: (route) => ({
+        ...route.params
+      })
     },
   ]
 })

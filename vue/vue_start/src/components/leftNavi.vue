@@ -174,25 +174,19 @@
 export default {
 	name: 'leftNavi',
   
-	data: ()=>{
+	data (){
 		return{
-			toggle: true,
+			
+		}
+	},
+	computed:{
+		toggle(){
+			return this.$store.state.left_toggle;
 		}
 	},
 	mounted(){
-		var self = this;
-		this.eventBus.$on('leftToggle', (flag)=>{
-			self.toggle = flag;
-		});
+		
 	},
-	watch: {
-		toggle: (val)=>{
-			if(val){
-				console.log('on');
-			}else{
-				console.log('off');
-			}
-		}
-	}
+
 }
 </script>

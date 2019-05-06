@@ -121,20 +121,20 @@
 <script>
 
 export default {
-    name: 'mainMedia',
-    
-    props: [
-        'media_data'
-    ],
+	name: 'mainMedia',
+	
+	props: [
+		'media_data'
+	],
 
-    beforeMount(){
-        console.log(this.media_data);
-    },
-  
+	beforeMount(){
+		console.log(this.media_data);
+	},
+
 	data: ()=>{
-        return{
+		return{
 
-	    }
+		}
 	},
 	mounted(){
 
