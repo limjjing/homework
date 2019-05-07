@@ -1,14 +1,16 @@
 <template>
-	<div id="mainMedia" >     
-        <div class="thumbnail"><img :src="media_data.snippet.thumbnails.high.url" alt=""></div>
-        <div class="vt_line">
-            <p class="v_title">{{media_data.snippet.title}}</p>
-            <p class="v_channel">{{media_data.snippet.channelTitle}}</p>
-            <p class="v_info">
-                <span>조회수 22만회</span>
-                <span>18시간 전</span>
-            </p>
-        </div>   
+	<div id="mainMedia" >
+	<a href="javascript:void(0);" v-on:click="movedetail">
+		<div class="thumbnail"><img :src="media_data.snippet.thumbnails.high.url" alt=""></div>
+		<div class="vt_line">
+			<p class="v_title">{{media_data.snippet.title}}</p>
+			<p class="v_channel">{{media_data.snippet.channelTitle}}</p>
+			<p class="v_info">
+				<span>조회수 22만회</span>
+				<span>18시간 전</span>
+			</p>
+		</div>
+	</a>
 	</div>
 </template>
 
@@ -138,6 +140,12 @@ export default {
 	},
 	mounted(){
 
+	},
+	methods: {
+		movedetail(){
+			console.log(this.s_data);
+			this.$router.replace({name: 'viewV' , params: this.s_data });
+		}
 	},
 	watch: {
 

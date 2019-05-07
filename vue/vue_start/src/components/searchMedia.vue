@@ -1,8 +1,8 @@
 <template>
-	<div class="s_list"  v-on:click="movedetail">
+	<div class="s_list">
 		<ul>
 			<li>
-				<a href="javascript:void(0);">
+				<a href="javascript:void(0);" v-on:click="movedetail">
 					<div class="sl_thumbs">
 						<img :src="s_data.snippet.thumbnails.high.url" alt="">
 					</div>
