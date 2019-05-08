@@ -470,6 +470,22 @@
 
 <style lang="scss" scoped>
 
+	@mixin flex {
+		display:-webkit-box;
+		display:-moz-box;
+		display:-ms-flexbox;
+		display:-webkit-flex;
+		display:flex;
+	}
+
+	@mixin flexGrid {
+		-webkit-box-flex:1;
+		-moz-box-flex:1;
+		-webkit-flex:1;
+		-ms-flex:1;
+		flex:1;
+	}
+
 	@mixin oneline {
 		overflow:hidden;
 		text-overflow:ellipsis;
@@ -538,7 +554,7 @@
 						right:0;
 						height:39px;
 						padding:0 18px;
-						background:#ff0000;
+						background:#4d3d3d;
 						border-radius:2px;
 						span {
 							font-size:14px;
@@ -554,41 +570,12 @@
 					}
 				}
 				ul {
+					@include flex;
 					overflow:hidden;
 					margin-bottom:26px;
 					li {
-						float:left;
 						width:210px;
 						margin-right:4px;
-						.thumbnail {
-							img {
-								display:block;
-								width:210px;
-								height:118px;
-							}
-						}
-						.vt_line {
-							padding-right:24px;
-							p.v_title {
-								display:-webkit-box;
-								-webkit-box-orient:vertical;
-								overflow:hidden;
-								text-overflow:ellipsis;
-								white-space:normal;
-								-webkit-line-clamp:2;
-								margin:10px 0;
-								font-size:14px;
-								font-weight:500;
-								line-height:17px;
-							}
-							p.v_channel {
-								@include oneline;
-								margin-bottom:2px;
-							}
-							p.v_info {
-								@include oneline;
-							}
-						}
 					}
 				}
 				.more_link {
