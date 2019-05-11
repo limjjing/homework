@@ -36,9 +36,6 @@ export default new Router({
       path: '/viewV',
       name: 'viewV',
       component: viewV,
-      props: (route) => ({
-        ...route.params
-      })
     },
   ]
 })

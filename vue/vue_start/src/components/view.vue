@@ -7,7 +7,7 @@
 				</div>
 
 				<div class="t_line">
-					<p class="t_title">블랙핑크] LA 콘서트 열광하는 현장 분위기, 해리 스타일스도 관람</p>
+					<p class="t_title">{{v_data.snippet.title}}</p>
 					<div class="t_util">
 						<p>조회수 23,740회</p>
 						<ul>
@@ -611,14 +611,14 @@
 	
 		data (){
 			return{
-				save_left_navi_flag : false
+				save_left_navi_flag : false,
+				v_data: ''
 			}
 		},
 		created() {
-			console.log('route', this.$router.history.current.params);
+			this.v_data = this.$store.state.select_data;
 			this.save_left_navi_flag = this.$store.state.left_toggle;
 			this.$store.state.left_toggle = false;
-			  
 		},
 		destroyed(){
 			this.$store.state.left_toggle = this.save_left_navi_flag;
@@ -629,6 +629,9 @@
 		mounted(){
 			
 		},
+		methods: {
+			
+		}
 
 	}
 </script>
