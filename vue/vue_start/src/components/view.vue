@@ -611,11 +611,17 @@
 	
 		data (){
 			return{
-				
+				save_left_navi_flag : false
 			}
 		},
 		created() {
-  			console.log('route', this.$router.history.current.params);
+			console.log('route', this.$router.history.current.params);
+			this.save_left_navi_flag = this.$store.state.left_toggle;
+			this.$store.state.left_toggle = false;
+			  
+		},
+		destroyed(){
+			this.$store.state.left_toggle = this.save_left_navi_flag;
 		},
 		computed:{
 			
