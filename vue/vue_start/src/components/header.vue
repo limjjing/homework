@@ -204,21 +204,7 @@ export default {
 			// this.left_nav = !this.left_nav;
 			// this.eventBus.$emit('leftToggle', this.left_nav);
 			this.$store.state.left_toggle = !this.$store.state.left_toggle;
-		},
-		toggleClick: ()=>{
-			this.active = !this.active;
-			this.text = this.active ? '已点击' : '未点击'
 		}
-	},
-	render: (h)=>{
-		return h(
-			'button', {
-				attrs: { class: this.active ? 'active' : ''},
-				on: { click: this.toggleClick}
-			},
-			[ this.text ]
-		)
 	}
-
 }
 </script>
