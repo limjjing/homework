@@ -135,8 +135,9 @@ export default {
 	},
 	methods: {
 		movedetail(){
-			console.log(this.s_data);
-			this.$router.push({name: 'viewV' , params: this.s_data });
+			console.log(this.media_data);
+			this.$router.push({name: 'viewV', params: this.media_data});
+			this.$store.state.select_data = this.media_data;
 		}
 	},
 	watch: {

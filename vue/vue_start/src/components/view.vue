@@ -50,8 +50,8 @@
 						<div class="ch_user">
 							<a href="javascript:void(0);"><div class="cu_thumb"></div></a>
 							<div class="cu_info">
-								<p class="ci_1"><a href="javascript:void(0);">치킨먹고가</a></p>
-								<p class="ci_2">게시일: 2019. 4. 19.</p>
+								<p class="ci_1"><a href="javascript:void(0);">{{v_data.snippet.channelTitle}}</a></p>
+								<p class="ci_2">게시일: {{v_data.snippet.publishedAt}}</p>
 							</div>
 						</div>
 						<div class="subscription">
@@ -60,12 +60,7 @@
 					</div>
 
 					<div class="vi_text">
-						<p>이 동영상은 2019.4.17 블랙핑크 LA 콘서트 열광하는 현장 분위기를 팬캠 위주로 재구성했습니다. 
-						로스엔젤레스 공연 현장은 3층까지 관람객으로 가득 차 열기가 아주 뜨거웠습니다. 
-						특히 이날 '해리 스타일스'가 객석에서 관람하는 모습이 발견되어 사진이 소셜미디어에 올려지고, 나중에 해리 스타일스도 인정하기도 했습니다. 
-						2019.4.17 밤 블랙핑크는 미국 LA를 시작으로 본격적인 북미 투어에 들어갔습니다. 블랙핑크는 19일(한국 시각 20일)에는 미국 최대 음악 축제인 '코첼라 페스티벌' 2주차 무대에 오릅니다. 24일 시카고, 27일 해밀턴, 5.1일 뉴어크, 5일 애틀랜타, 8일 포트워스 등 2019 월드투어로 아시아, 북미, 유럽, 오세아니아 등 세계 4대륙 22개 도시에서 29회 공연을 합니다. <br><br>
-
-						블랙핑크, LA 콘서트 뜨거운 현장 분위기, 해리 스타일스도 관람해</p>
+						<p>{{v_data.snippet.description}}</p>
 						<div class="vt_bb">
 							<span class="vb_c1">카테고리</span>
 							<a href="javascript:void(0);">엔터테인먼트</a>
@@ -616,6 +611,7 @@
 			}
 		},
 		created() {
+			console.log('router', this.$router.history.current.params);
 			this.v_data = this.$store.state.select_data;
 			this.save_left_navi_flag = this.$store.state.left_toggle;
 			this.$store.state.left_toggle = false;
