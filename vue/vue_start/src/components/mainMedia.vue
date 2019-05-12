@@ -1,14 +1,16 @@
 <template>
-	<div id="mainMedia" >     
-        <div class="thumbnail"><img :src="media_data.snippet.thumbnails.high.url" alt=""></div>
-        <div class="vt_line">
-            <p class="v_title">{{media_data.snippet.title}}</p>
-            <p class="v_channel">{{media_data.snippet.channelTitle}}</p>
-            <p class="v_info">
-                <span>조회수 22만회</span>
-                <span>18시간 전</span>
-            </p>
-        </div>   
+	<div id="mainMedia" >
+	<a href="javascript:void(0);" v-on:click="movedetail">
+		<div class="thumbnail"><img :src="media_data.snippet.thumbnails.high.url" alt=""></div>
+		<div class="vt_line">
+			<p class="v_title">{{media_data.snippet.title}}</p>
+			<p class="v_channel">{{media_data.snippet.channelTitle}}</p>
+			<p class="v_info">
+				<span>조회수 22만회</span>
+				<span>18시간 전</span>
+			</p>
+		</div>
+	</a>
 	</div>
 </template>
 
@@ -72,42 +74,34 @@
 			}
 		}
 	}
-	ul {
-		overflow:hidden;
-		margin-bottom:26px;
-		li {
-			float:left;
+
+	.thumbnail {
+		img {
+			display:block;
 			width:210px;
-			margin-right:4px;
-			.thumbnail {
-				img {
-					display:block;
-					width:210px;
-					height:118px;
-				}
-			}
-			.vt_line {
-				padding-right:24px;
-				p.v_title {
-					display:-webkit-box;
-					-webkit-box-orient:vertical;
-					overflow:hidden;
-					text-overflow:ellipsis;
-					white-space:normal;
-					-webkit-line-clamp:2;
-					margin:10px 0;
-					font-size:14px;
-					font-weight:500;
-					line-height:17px;
-				}
-				p.v_channel {
-					@include oneline;
-					margin-bottom:2px;
-				}
-				p.v_info {
-					@include oneline;
-				}
-			}
+			height:118px;
+		}
+	}
+	.vt_line {
+		padding-right:24px;
+		p.v_title {
+			display:-webkit-box;
+			-webkit-box-orient:vertical;
+			overflow:hidden;
+			text-overflow:ellipsis;
+			white-space:normal;
+			-webkit-line-clamp:2;
+			margin:10px 0;
+			font-size:14px;
+			font-weight:500;
+			line-height:17px;
+		}
+		p.v_channel {
+			@include oneline;
+			margin-bottom:2px;
+		}
+		p.v_info {
+			@include oneline;
 		}
 	}
 	.more_link {
@@ -138,6 +132,13 @@ export default {
 	},
 	mounted(){
 
+	},
+	methods: {
+		movedetail(){
+			console.log(this.media_data);
+			this.$router.push({name: 'viewV', params: this.media_data});
+			this.$store.state.select_data = this.media_data;
+		}
 	},
 	watch: {
 

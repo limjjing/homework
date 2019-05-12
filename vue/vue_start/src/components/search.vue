@@ -177,6 +177,7 @@ $nmColor:#606060;
 
 <script>
 
+import { secret } from "../../secret.js";
 import searchMedia from '@/components/searchMedia.vue';
 
 export default {
@@ -197,16 +198,45 @@ export default {
 		}
 	},
 	mounted(){
-		var self = this;
+		// var self = this;
 
-		this.eventBus.$on('succesSearch', (res)=>{
-			self.data_list = res;
-		});
+		// this.eventBus.$on('succesSearch', (res)=>{
+		// 	self.data_list = res;
+		// });
+	},
+	created(){
+		this.search();
 	},
 	methods: {
 		filterToggle(){
 			this.fbToggle = !this.fbToggle;
-		}
+		},
+		search(){
+			
+			var call_list = [];
+			var splitData = this.$store.state.search_text;
+
+			for(var k in splitData){
+				call_list.push(this.apiCall(splitData[k]));
+			}
+
+			Promise.all(call_list).then((res)=>{
+				this.data_list = res;
+			}).catch((err)=>{
+				console.log(err);
+			})
+		},
+		apiCall(search_text){
+			return new Promise ((resolve, reject)=>{
+				this.$http.get(`https://www.googleapis.com/youtube/v3/search?key=${secret.youtubeKey}&q=${search_text}&search_text&type=video&part=snippet&maxResults=5`)
+				.then((res)=>{
+					resolve(res);
+				})
+				.catch((err)=>{
+					reject(err);
+				});
+			})
+		},
 	},
 	watch: {
 		data_list : (val) => {

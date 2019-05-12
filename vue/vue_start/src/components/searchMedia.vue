@@ -1,8 +1,8 @@
 <template>
-	<div class="s_list"  v-on:click="movedetail">
+	<div class="s_list">
 		<ul>
 			<li>
-				<a href="javascript:void(0);">
+				<a href="javascript:void(0);" v-on:click="movedetail">
 					<div class="sl_thumbs">
 						<img :src="s_data.snippet.thumbnails.high.url" alt="">
 					</div>
@@ -107,7 +107,8 @@ export default {
 	methods: {
 		movedetail(){
 			console.log(this.s_data);
-			this.$router.replace({name: 'viewV' , params: this.s_data });
+			this.$router.push({name: 'viewV', params: this.s_data});
+			this.$store.state.select_data = this.s_data;
 		}
 	},
 	watch: {
