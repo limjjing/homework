@@ -3,8 +3,11 @@
 		<div class="v_inner">
 			<div class="v_section">
 				<div class="player">
-					<img src="../images/player_sample.png" alt="">
+					<!-- <img src="../images/player_sample.png" alt=""> -->
+					<youtube-media :video-id="v_data.id" :player-width=800 :player-height=700></youtube-media>
+
 				</div>
+
 
 				<div class="t_line">
 					<p class="t_title">{{v_data.snippet.title}}</p>
@@ -601,6 +604,7 @@
 </style>
 
 <script>
+import { secret } from "../../secret.js";
 	export default {
 		name: 'videoDetail',
 	
@@ -615,6 +619,9 @@
 			this.v_data = this.$store.state.select_data;
 			this.save_left_navi_flag = this.$store.state.left_toggle;
 			this.$store.state.left_toggle = false;
+
+
+			this.getComments();
 		},
 		destroyed(){
 			this.$store.state.left_toggle = this.save_left_navi_flag;
@@ -626,7 +633,18 @@
 			
 		},
 		methods: {
-			
+			getComments(){
+				this.$http.get(`https://www.googleapis.com/youtube/v3/commentThreads?key=${secret.youtubeKey}&textFormat=plainText&part=snippet&videoId=${this.v_data.id}&maxResults=10`)
+				.then((res)=>{
+					console.log(res);
+					// resolve(res);
+				})
+				.catch((err)=>{
+					// reject(err);
+				});
+				// https://www.googleapis.com/youtube/v3/commentThreads
+
+			}
 		}
 
 	}

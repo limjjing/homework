@@ -173,7 +173,7 @@ export default {
 			var splitData = value.split('//');
 
 			this.$store.state.search_text = splitData;
-
+			this.eventBus.$emit('searchStart', true);
 
 			// var call_list = [];
 

@@ -196,13 +196,14 @@ export default {
 		toggle(){
 			return this.$store.state.left_toggle;
 		}
+		
 	},
 	mounted(){
 		// var self = this;
 
-		// this.eventBus.$on('succesSearch', (res)=>{
-		// 	self.data_list = res;
-		// });
+		this.eventBus.$on('searchStart', (res)=>{
+			this.search();
+		});
 	},
 	created(){
 		this.search();
