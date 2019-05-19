@@ -1,26 +1,20 @@
 <template>
-	<div class="s_list">
-		<ul>
-			<li>
-				<a href="javascript:void(0);" v-on:click="movedetail">
-					<div class="sl_thumbs">
-						<img :src="s_data.snippet.thumbnails.high.url" alt="">
-					</div>
-					<div class="sl_text">
-						<p class="sl_title">{{s_data.snippet.title}}</p>
-						<p class="sl_info">
-							<span class="si_1">{{s_data.snippet.channelTitle}}</span>
-							<span class="si_cir">•</span>
-							<span class="si_2">조회수 6.3만회</span>
-							<span class="si_cir">•</span>
-							<span class="si_3">1주 전</span>
-						</p>
-						<p class="sl_ct">{{s_data.snippet.description}}</p>
-					</div>
-				</a>
-			</li>
-		</ul>
-	</div>
+	<a href="javascript:void(0);" v-on:click="movedetail">
+		<div class="sl_thumbs">
+			<img :src="s_data.snippet.thumbnails.high.url" alt="">
+		</div>
+		<div class="sl_text">
+			<p class="sl_title">{{s_data.snippet.title}}</p>
+			<p class="sl_info">
+				<span class="si_1">{{s_data.snippet.channelTitle}}</span>
+				<span class="si_cir">•</span>
+				<span class="si_2">조회수 6.3만회</span>
+				<span class="si_cir">•</span>
+				<span class="si_3">1주 전</span>
+			</p>
+			<p class="sl_ct">{{s_data.snippet.description}}</p>
+		</div>
+	</a>
 </template>
 
 <style lang="scss" scoped>

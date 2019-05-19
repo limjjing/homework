@@ -1,11 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import VueYouTubeEmbed from 'vue-youtube-embed'
 // import Home from './views/Home.vue'
 import container from '@/components/container.vue'
 import search from '@/components/search.vue'
 import viewV from '@/components/view.vue'
 
+
 Vue.use(Router)
+Vue.use(VueYouTubeEmbed, { global: true, componentId: "youtube-media" })
+
 
 export default new Router({
   routes: [
