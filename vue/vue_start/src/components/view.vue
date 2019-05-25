@@ -4,7 +4,7 @@
 			<div class="v_section">
 				<div class="player">
 					<!-- <img src="../images/player_sample.png" alt=""> -->
-					<youtube-media :video-id="v_data.id" :player-width=800 :player-height=700></youtube-media>
+					<youtube-media :video-id="v_data.id" :player-width=854 :player-height=480></youtube-media>
 
 				</div>
 
@@ -89,8 +89,24 @@
 					</div>
 
 					<div class="cm_list">
-						<ul>
-							<li>
+						<ul v-for="i in comment_list">
+							<li v-for="item in i.data.items">
+								<div class="cm_user"></div>
+								<div class="cm_tbox">
+									<p class="nick">
+										<span class="n_1">Yeon ‘s</span>
+										<span class="n_2">5일 전</span>
+									</p>
+									<p class="cm_t">섹시 귀욤</p>
+									<div class="cm_util">
+										<span class="cu_1"><span class=""></span> 46</span>
+										<span class="cu_2"><span class=""></span> 10</span>
+										<button type="button">답글</button>
+									</div>
+									<div class="comm_view"><button type="button">답글보기</button></div>
+								</div>
+							</li>
+							<!-- <li>
 								<div class="cm_user"></div>
 								<div class="cm_tbox">
 									<p class="nick">
@@ -137,23 +153,8 @@
 									</div>
 									<div class="comm_view"><button type="button">답글보기</button></div>
 								</div>
-							</li>
-							<li>
-								<div class="cm_user"></div>
-								<div class="cm_tbox">
-									<p class="nick">
-										<span class="n_1">Yeon ‘s</span>
-										<span class="n_2">5일 전</span>
-									</p>
-									<p class="cm_t">무사히 잘끝내서 그것만으로도 다행이네용ㅜㅜ 블핑이들 수고많았고 편히 쉬셨으면...❤️</p>
-									<div class="cm_util">
-										<span class="cu_1"><span class=""></span> 46</span>
-										<span class="cu_2"><span class=""></span> 10</span>
-										<button type="button">답글</button>
-									</div>
-									<div class="comm_view"><button type="button">답글보기</button></div>
-								</div>
-							</li>
+							</li> -->
+							
 						</ul>
 					</div>
 				</div>
@@ -611,7 +612,8 @@ import { secret } from "../../secret.js";
 		data (){
 			return{
 				save_left_navi_flag : false,
-				v_data: ''
+				v_data: '',
+				comment_list: []
 			}
 		},
 		created() {
@@ -619,7 +621,6 @@ import { secret } from "../../secret.js";
 			this.v_data = this.$store.state.select_data;
 			this.save_left_navi_flag = this.$store.state.left_toggle;
 			this.$store.state.left_toggle = false;
-
 
 			this.getComments();
 		},
@@ -630,20 +631,32 @@ import { secret } from "../../secret.js";
 			
 		},
 		mounted(){
-			
+			this.commentList();
 		},
 		methods: {
-			getComments(){
-				this.$http.get(`https://www.googleapis.com/youtube/v3/commentThreads?key=${secret.youtubeKey}&textFormat=plainText&part=snippet&videoId=${this.v_data.id}&maxResults=10`)
-				.then((res)=>{
-					console.log(res);
-					// resolve(res);
-				})
-				.catch((err)=>{
-					// reject(err);
-				});
-				// https://www.googleapis.com/youtube/v3/commentThreads
+			commentList(){
+				var call_list = [];
 
+				call_list.push(this.getComments());
+
+				Promise.all(call_list).then((res)=>{
+					console.log(res);
+					this.comment_list = res;
+				}).catch((err)=>{
+					console.log(err);
+				})
+			},
+			getComments(){
+				return new Promise((resolve, reject)=>{
+					this.$http.get(`https://www.googleapis.com/youtube/v3/commentThreads?key=${secret.youtubeKey}&textFormat=plainText&part=snippet&videoId=${this.v_data.id}&maxResults=10`)
+					.then((res)=>{
+						resolve(res);
+					})
+					.catch((err)=>{
+						reject(err);
+					});
+					// https://www.googleapis.com/youtube/v3/commentThreads
+				});
 			}
 		}
 
