@@ -91,20 +91,7 @@
 					<div class="cm_list">
 						<ul v-for="i in comment_list">
 							<li v-for="item in i.data.items">
-								<div class="cm_user"></div>
-								<div class="cm_tbox">
-									<p class="nick">
-										<span class="n_1">Yeon ‘s</span>
-										<span class="n_2">5일 전</span>
-									</p>
-									<p class="cm_t">섹시 귀욤</p>
-									<div class="cm_util">
-										<span class="cu_1"><span class=""></span> 46</span>
-										<span class="cu_2"><span class=""></span> 10</span>
-										<button type="button">답글</button>
-									</div>
-									<div class="comm_view"><button type="button">답글보기</button></div>
-								</div>
+								<commentMedia :comment_data = item></commentMedia>
 							</li>
 							<!-- <li>
 								<div class="cm_user"></div>
@@ -605,10 +592,14 @@
 </style>
 
 <script>
+import commentMedia from '@/components/commentMedia.vue';
 import { secret } from "../../secret.js";
 	export default {
 		name: 'videoDetail',
-	
+
+		components: {
+			commentMedia,
+		},
 		data (){
 			return{
 				save_left_navi_flag : false,
