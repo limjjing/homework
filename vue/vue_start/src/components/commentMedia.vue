@@ -1,10 +1,10 @@
 <template>
-	<div>
+	<div class="cm_wrap">
 		<div class="cm_user"></div>
 		<div class="cm_tbox">
 			<p class="nick">
-				<span class="n_1">Yeon ‘s</span>
-				<span class="n_2">5일 전</span>
+				<span class="n_1">{{comment_data.snippet.topLevelComment.snippet.authorDisplayName}}</span>
+				<span class="n_2"> 5일 전</span>
 			</p>
 			<p class="cm_t">{{comment_data.snippet.topLevelComment.snippet.textDisplay}}</p>
 			<div class="cm_util">
@@ -58,32 +58,35 @@
 		ul {
 			padding-top:25px;
 			li {
-				@include flex;
 				margin-bottom:25px;
-				.cm_user {
-					width:40px;
-					height:40px;
-					background:#ddd;
-					border-radius:100%;
-				}
-				.cm_tbox {
-					margin:0 0 0 18px;
-					p.nick {
-						span {
+				.cm_wrap {
+					@include flex;
+					.cm_user {
+						width:40px;
+						height:40px;
+						background:#ddd;
+						border-radius:100%;
+					}
+					.cm_tbox {
+						@include flexGrid;
+						margin:0 0 0 18px;
+						p.nick {
+							span {
+								font-size:14px;
+							}
+							span.n_1 {
+								color:#0a0a0a;
+							}
+						}
+						p.cm_t {
+							margin:10px 0 10px 0;
 							font-size:14px;
 						}
-						span.n_1 {
-							color:#0a0a0a;
-						}
-					}
-					p.cm_t {
-						margin:10px 0 10px 0;
-						font-size:14px;
-					}
-					.comm_view {
-						margin-top:10px;
-						button {
-							font-size:14px;
+						.comm_view {
+							margin-top:10px;
+							button {
+								font-size:14px;
+							}
 						}
 					}
 				}

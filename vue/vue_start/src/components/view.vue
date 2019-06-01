@@ -512,35 +512,7 @@
 						ul {
 							padding-top:25px;
 							li {
-								@include flex;
 								margin-bottom:25px;
-								.cm_user {
-									width:40px;
-									height:40px;
-									background:#ddd;
-									border-radius:100%;
-								}
-								.cm_tbox {
-									margin:0 0 0 18px;
-									p.nick {
-										span {
-											font-size:14px;
-										}
-										span.n_1 {
-											color:#0a0a0a;
-										}
-									}
-									p.cm_t {
-										margin:10px 0 10px 0;
-										font-size:14px;
-									}
-									.comm_view {
-										margin-top:10px;
-										button {
-											font-size:14px;
-										}
-									}
-								}
 							}
 						}
 					}
