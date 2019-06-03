@@ -89,8 +89,8 @@
 					</div>
 
 					<div class="cm_list">
-						<ul v-for="i in comment_list">
-							<li v-for="item in i.data.items">
+						<ul >
+							<li v-for="item in comment_list">
 								<commentMedia :comment_data = item></commentMedia>
 							</li>
 							<!-- <li>
@@ -576,7 +576,10 @@ import { secret } from "../../secret.js";
 			return{
 				save_left_navi_flag : false,
 				v_data: '',
-				comment_list: []
+				comment_list: [],
+				lastIndex : 0,
+				bottomOfWindow: false,
+				nextPageToken : '',
 			}
 		},
 		created() {
@@ -585,7 +588,7 @@ import { secret } from "../../secret.js";
 			this.save_left_navi_flag = this.$store.state.left_toggle;
 			this.$store.state.left_toggle = false;
 
-			this.getComments();
+			this.commentList();
 		},
 		destroyed(){
 			this.$store.state.left_toggle = this.save_left_navi_flag;
@@ -594,33 +597,36 @@ import { secret } from "../../secret.js";
 			
 		},
 		mounted(){
-			this.commentList();
+			// this.commentList();
+			this.scroll();
 		},
 		methods: {
 			commentList(){
 				var call_list = [];
 
-				call_list.push(this.getComments());
+				// call_list.push(this.getComments());
 
-				Promise.all(call_list).then((res)=>{
+				this.getComments().then((res)=>{
 					console.log(res);
-					this.comment_list = res;
+					this.comment_list = this.comment_list.concat(res.data.items);
+					this.nextPageToken = res.data.nextPageToken;
+					this.lastIndex += 10;
+					this.bottomOfWindow = false;
 				}).catch((err)=>{
 					console.log(err);
 				})
 			},
 			getComments(){
-				return new Promise((resolve, reject)=>{
-					this.$http.get(`https://www.googleapis.com/youtube/v3/commentThreads?key=${secret.youtubeKey}&textFormat=plainText&part=snippet&videoId=${this.v_data.id}&maxResults=10`)
-					.then((res)=>{
-						resolve(res);
-					})
-					.catch((err)=>{
-						reject(err);
-					});
-					// https://www.googleapis.com/youtube/v3/commentThreads
-				});
-			}
+				return this.$http.get(`https://www.googleapis.com/youtube/v3/commentThreads?key=${secret.youtubeKey}&textFormat=plainText&part=snippet&videoId=${this.v_data.id}&maxResults=${10}&pageToken=${this.nextPageToken}`);
+			},
+			scroll () {
+				window.onscroll = () => {
+				this.bottomOfWindow = Math.abs(document.documentElement.offsetHeight - (document.documentElement.scrollTop+window.innerHeight)) < 5
+					if (this.bottomOfWindow) {
+						this.commentList();
+					}
+				};
+			},
 		}
 
 	}
