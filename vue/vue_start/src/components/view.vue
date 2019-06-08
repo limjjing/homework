@@ -5,10 +5,7 @@
 				<div class="player">
 					<!-- <img src="../images/player_sample.png" alt=""> -->
 					<youtube-media :video-id="v_data.id" :player-width=854 :player-height=480></youtube-media>
-
 				</div>
-
-
 				<div class="t_line">
 					<p class="t_title">{{v_data.snippet.title}}</p>
 					<div class="t_util">

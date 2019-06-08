@@ -8,6 +8,7 @@ Vue.config.productionTip = false
 Vue.prototype.eventBus = new Vue();
 Vue.prototype.$http = axios;
 Vue.prototype.$store = store;
+Vue.use(require('vue-moment'));
 
 new Vue({
   router,
