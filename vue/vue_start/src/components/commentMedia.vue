@@ -147,10 +147,18 @@ export default {
 	},
 	methods: {
 		dateCon(){
-			var date = this.$moment(new Date()).format('YYYYMMDDhhmm');
-			var commentDate = this.$moment(this.comment_data.snippet.topLevelComment.snippet.publishedAt).format('YYYYMMDDhhmm');
-			console.log(date - commentDate);
-			this.$refs.timeC.innerText = date - commentDate + ' 전';
+			// var date = this.$moment().local().format('YYYYMMDDhhmm');
+
+			var date = this.$moment(this.$moment(this.comment_data.snippet.topLevelComment.snippet.publishedAt).format('YYYYMMDDhhmm'),"YYYYMMDDhhmm").local().fromNow();
+			// console.log(date);
+			// console.log(this.$moment(this.comment_data.snippet.topLevelComment.snippet.publishedAt).valueOf());
+			// console.log(parseInt(this.$moment().valueOf()));
+			// console.log(parseInt(this.$moment().valueOf() - this.$moment(this.comment_data.snippet.topLevelComment.snippet.publishedAt).valueOf()));
+			// var k = this.$moment().valueOf() - this.$moment(this.comment_data.snippet.topLevelComment.snippet.publishedAt).valueOf();
+			// console.log(k / 1000);
+			// var commentDate = this.$moment(this.comment_data.snippet.topLevelComment.snippet.publishedAt).format('YYYYMMDDhhmm');
+			// console.log(commentDate);
+			this.$refs.timeC.innerText = date;
 		}
 	},
 	watch: {

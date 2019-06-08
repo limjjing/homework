@@ -135,8 +135,8 @@ export default {
 	},
 	methods: {
 		movedetail(){
-			console.log(this.media_data);
-			this.$router.push({name: 'viewV', params: this.media_data});
+			console.dir(this.media_data.id);
+			this.$router.push({name: 'viewV', query: { 'videoId': this.media_data.id}});
 			this.$store.state.select_data = this.media_data;
 		}
 	},

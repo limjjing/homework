@@ -154,6 +154,7 @@
 </style>
 
 <script>
+import { POINT_CONVERSION_COMPRESSED } from 'constants';
 
 export default {
 	name: 'headNavi',
@@ -173,6 +174,22 @@ export default {
 			var splitData = value.split('//');
 
 			this.$store.state.search_text = splitData;
+			var k = new Date();
+			var history = JSON.parse(localStorage.getItem('searchHis'));
+			if(history != undefined){
+				if(history.length > 3){
+					history[0] = splitData;
+				}else{
+					history.push(splitData);
+				}
+			}else{
+				history = [];
+				history.push(splitData);
+			}
+
+			localStorage.setItem('searchHis',JSON.stringify(history));
+
+
 			this.eventBus.$emit('searchStart', true);
 
 			// var call_list = [];

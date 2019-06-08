@@ -1,6 +1,6 @@
 <template>
 	<div class="v_container">
-		<div class="v_inner">
+		<div v-if="v_data" class="v_inner">
 			<div class="v_section">
 				<div class="player">
 					<!-- <img src="../images/player_sample.png" alt=""> -->
@@ -572,20 +572,24 @@ import { secret } from "../../secret.js";
 		data (){
 			return{
 				save_left_navi_flag : false,
-				v_data: '',
+				v_data: false,
 				comment_list: [],
 				lastIndex : 0,
 				bottomOfWindow: false,
 				nextPageToken : '',
 			}
 		},
+		beforeCreate(){
+			console.log('router', this.$route.query.videoId);
+			this.$http.get(`https://www.googleapis.com/youtube/v3/videos?key=${secret.youtubeKey}&part=snippet&id=${this.$route.query.videoId}`).then((data)=>{
+				this.v_data = data.data.items[0];
+				this.commentList();
+			})
+		},
 		created() {
-			console.log('router', this.$router.history.current.params);
-			this.v_data = this.$store.state.select_data;
+			// this.v_data = this.$store.state.select_data;
 			this.save_left_navi_flag = this.$store.state.left_toggle;
 			this.$store.state.left_toggle = false;
-
-			this.commentList();
 		},
 		destroyed(){
 			this.$store.state.left_toggle = this.save_left_navi_flag;
@@ -615,6 +619,9 @@ import { secret } from "../../secret.js";
 			},
 			getComments(){
 				return this.$http.get(`https://www.googleapis.com/youtube/v3/commentThreads?key=${secret.youtubeKey}&textFormat=plainText&part=snippet&videoId=${this.v_data.id}&maxResults=${10}&pageToken=${this.nextPageToken}`);
+			},
+			getVideo(video_id){
+				return this.$http.get(`https://www.googleapis.com/youtube/v3/videos?key=${secret.youtubeKey}&part=snippet&id=${video_id}`);
 			},
 			scroll () {
 				window.onscroll = () => {

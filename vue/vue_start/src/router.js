@@ -41,7 +41,7 @@ export default new Router({
       name: 'viewV',
 	  component: viewV,
 	  props: (route)=>({
-		...route.params
+		...route.query
 	  })
 	},
   ]
