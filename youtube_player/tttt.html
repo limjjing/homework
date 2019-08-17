@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>sample</title>
+   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+     </script>
+     
+</head>
+<body>
+
+   <div id="ani1" class="balloon" style="background-color: red;width: 200px;height: 200px;display: none"></div>
+   <div id="ani2" class="balloon" style="background-color: red;width: 200px;height: 200px;display: none"></div>
+   <div id="ani3" class="balloon" style="background-color: red;width: 200px;height: 200px;display: none"></div>
+
+   <button id="butt">만나러가기</button>
+   <button id="cancel">취소</button>
+
+   <div style="margin-top:100px;">
+      <div id="keyword1" class="keyword"><a href="javascript:void(0);">키워드1</a></div>
+      <div id="keyword2" class="keyword"><a href="javascript:void(0);">키워드2</a></div>
+      <div id="keyword3" class="keyword"><a href="javascript:void(0);">키워드3</a></div>
+   </div>
+
+   <script type="text/javascript">
+      var animation;
+
+
+      $('#butt').click(function(){
+         animation = gogo();
+      
+      });
+
+      $('#cancel').click(function(){
+         $('.balloon').stop(true).off();
+         $('.balloon').off();
+         $('.balloon').clearQueue();
+         $('.balloon').remove();
+         console.log("ttttt");
+         animation = "";
+      });
+
+
+      function gogo(){
+         return $('#ani1').fadeIn( 2000, function() {
+            var audio = new Audio();
+            audio.src = "sound/cat1.mp3";
+            audio.play();
+            
+            audio.addEventListener('ended', function() {
+               $('#ani2').fadeIn( 2000, function() {
+                  var audio = new Audio();
+                  audio.src = "sound/cat2.mp3";
+                  audio.play();
+
+                  audio.addEventListener('ended', function() {
+               
+                     $('#ani3').fadeIn( 2000, function() {
+                        var audio = new Audio();
+                        audio.src = "sound/cat3.mp3";
+                        audio.play();
+                     } );
+                  })
+               } );
+            });
+         });
+      }
+
+      var $keyWord = $('.keyword');
+      $keyWord.value = false;
+
+      $keyWord.on('click', function(){
+         $(this).addClass('active');
+
+         if($('.keyword.active').length == $keyWord.length){
+            alert('모두클릭함!!!');
+         }
+         
+         console.log($keyWord.length);
+      });
+
+        
+
+   </script>
+
+</body>
+</html>

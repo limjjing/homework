@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>bgm</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js">
+    </script>
+    <script type="text/javascript" src="list.js"></script>
+    <script>       
+        $(()=>{
+            make_list(music_play_list)
+        })
+
+        var play_list = [];
+ 
+
+        function make_list(arr) {
+            let list_string = "";
+            for( k in arr){
+                list_string += ' <tr><td class="thumbs"><img id="img" class="style-scope yt-img-shadow" alt="" width="210" src="'+arr[k].img+'"></td><td class="title">'+arr[k].title+'</td><td class="time">'+arr[k].time+'</td></tr >'
+            }
+
+            $('#musicList').html(list_string);
+            
+        }
+
+        async function list_play() {
+            let arr = music_play_list;
+            for (k in arr) {
+                if(k==0){
+                    play_list.push(arr[k].audio);
+                }
+            }
+
+            for(j in play_list){
+                await play_music(play_list[j]).then((res)=>{
+                    console.log(res);
+                }).catch((err)=>{
+                    console.log(err);
+                });
+            }
+   
+        }
+
+        function play_music(params) {
+            return new Promise((resolve,reject)=>{
+                var audio = new Audio();
+                audio.src = params
+                audio.play();
+                
+                audio.addEventListener('ended', function () {
+                    resolve("succc")
+                });
+            })
+        }
+
+    </script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div><button>전체재생</button></div>
+    <table>
+        <tbody id="musicList">
+
+        </tbody>
+        <button onclick="list_play()">재생</button>
+    </table>
+
+</body>
+
+</html>
